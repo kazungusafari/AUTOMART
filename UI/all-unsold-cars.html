@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AutoMart</title>
+    <link rel="stylesheet" href="./assets/css/users.css">
+    <link rel="stylesheet" href="./assets/css/mediaqueries.css">
+
+</head>
+<script>
+        function openFiltersMenu() {
+          document.getElementById("filters").style.display = "block";
+          
+        }
+        
+        function closeFiltersMenu() {
+          document.getElementById("filters").style.display = "none";
+          
+        }
+        </script>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="left">
+                <a href="javascript:void(0)" class="openfilters" onclick="openFiltersMenu()">Filters</a> 
+            </div>
+            <div class="right">
+                <a href="">Logout</a>
+            </div>
+        </div>
+        <div id="filters" class="filters">
+             <div class="nav">
+                    <div class="close-filter">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeFiltersMenu()">&times;</a>
+                    </div>
+                    <div class="vert-nav">
+                        <a href="all-new-unsold-cars.html">New unsold cars</a>
+                        <a href="all-used-unsold-cars.html">Used unsold cars</a>
+                        <a href="all-unsold-cars-in-given-price-range.html">Add Price range</a>
+                        <a href="all-unsold-cars-of-given-body-type.html">Choose body type</a>
+                        <a href="all-unsold-cars-of-given-make.html">Choose make</a>
+                    </div>
+            </div>
+        </div>
+        <div class="main">
+                <div class="main-left">
+                    <div class="user">
+                        <div class="user-photo">
+                              <img src='https://via.placeholder.com/100' alt='User image'></img>
+                              <h3>Kazungu Safari</h3>
+                         </div>
+                         <div class="nav">
+                             <a href="create-ad.html">Create AD</a>
+                             <a href="my-sale-ads.html">Sale Ads</a>
+                             <a href="my-purchases.html">Purchases</a>
+                             <a href="my-orders.html">Orders</a>
+                         </div>
+                    </div>
+                </div>
+                <div class="main-right">
+                    <div class="all-ads-container">
+                            <div class="ads-description">
+                                <h4>All unsold cars</h4>
+                            </div>
+                            <div class="ads-list">
+                                  <div class="ad"> 
+                                          <div class="left">
+                                              <img src='https://via.placeholder.com/100' alt='User image'></img>
+                                          </div>
+                                          <div class="right">
+                                              <div class="ad-details">
+                                                  <span class="left">New</span>
+                                                  <span class="middle">Available</span>
+                                                  <span class="right">Kshs.100000</span>
+                                              </div>
+                                              <div class="ad-links">
+                                                  <a href="view-sale-ad.html" class="right">View</a>
+                                                  <a href="buy-car.html" class="left">Purchase</a>
+                                              </div>
+                                            </div>
+                                     </div>
+                                     <div class="ad"> 
+                                            <div class="left">
+                                                <img src='https://via.placeholder.com/100' alt='User image'></img>
+                                            </div>
+                                            <div class="right">
+                                                <div class="ad-details">
+                                                    <span class="left">New</span>
+                                                    <span class="middle">Available</span>
+                                                    <span class="right">Kshs.100000</span>
+                                                </div>
+                                                <div class="ad-links">
+                                                    <a href="view-sale-ad.html" class="right">View</a>
+                                                    <a href="buy-car.html" class="left">Purchase</a>
+                                                </div>
+                                              </div>
+                                       </div>
+                                       <div class="ad"> 
+                                            <div class="left">
+                                                <img src='https://via.placeholder.com/100' alt='User image'></img>
+                                            </div>
+                                            <div class="right">
+                                                <div class="ad-details">
+                                                    <span class="left">New</span>
+                                                    <span class="middle">Available</span>
+                                                    <span class="right">Kshs.100000</span>
+                                                </div>
+                                                <div class="ad-links">
+                                                    <a href="view-sale-ad.html" class="right">View</a>
+                                                    <a href="buy-car.html" class="left">Purchase</a>
+                                                </div>
+                                              </div>
+                                       </div>
+                                       <div class="ad"> 
+                                            <div class="left">
+                                                <img src='https://via.placeholder.com/100' alt='User image'></img>
+                                            </div>
+                                            <div class="right">
+                                                <div class="ad-details">
+                                                    <span class="left">New</span>
+                                                    <span class="middle">Available</span>
+                                                    <span class="right">Kshs.100000</span>
+                                                </div>
+                                                <div class="ad-links">
+                                                    <a href="view-sale-ad.html" class="right">View</a>
+                                                    <a href="buy-car.html" class="left">Purchase</a>
+                                                </div>
+                                              </div>
+                                       </div>
+                                </div>
+                           </div>
+                     </div> 
+               </div>
+        <div class="footer">
+        </div>
+    </div>
+</body>
+</html>
