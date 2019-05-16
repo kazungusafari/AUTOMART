@@ -104,3 +104,35 @@
  .main-right > .right-container > .form-container > form > button:hover{
     width:70%;
   }
+
+
+  .container > .main > .main-right > .right-container >.container-list > .order{
+    background-color: white;
+    margin-top: 10px;
+    height:200px;
+}
+.container > .main > .main-right > .right-container >.container-list > .order >.order-details{
+    height: 80%;
+    padding: 10px;
+}
+.container > .main > .main-right > .right-container >.container-list > .order >.order-details > span{
+  display: block;
+  height:25%;
+  padding: 5px 0px 0px 5px;
+  color:#008CBA;
+  background: whitesmoke;
+}
+.container > .main > .main-right > .right-container >.container-list > .order >.order-links{
+    height:20%;
+    text-align: right;
+
+}
+.container > .main > .main-right > .right-container >.container-list > .order >.order-links > a{
+    display: inline-block;
+    height:100%;
+    padding: 5px 5px 0px 0px;
+    color:#008CBA;
+ }
+ .container > .main > .main-right > .right-container >.container-list > .order >.order-links > a:hover{
+    text-decoration: none;
+ }
