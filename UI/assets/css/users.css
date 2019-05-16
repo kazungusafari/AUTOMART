@@ -183,27 +183,27 @@ body{
     background-color: whitesmoke;
 
 } 
-.container > .main > .main-right > .all-ads-container{
+.container > .main > .main-right > .right-container{
     background-color: whitesmoke;
 
 }
-.container > .main > .main-right > .all-ads-container > .ads-description{
+.container > .main > .main-right > .right-container > .container-description{
     margin-bottom: 10px;
     background-color: white;
     height:50px;
     
 }
-.container > .main > .main-right > .all-ads-container > .ads-description > h4{
+.container > .main > .main-right > .right-container > .container-description > h4{
     text-align: center;
     margin: 0px;
     color: #008CBA;
 
 }
-.container > .main > .main-right > .all-ads-container >.ads-list{
+.container > .main > .main-right > .right-container >.container-list{
     
 }
 
-.container > .main > .main-right > .all-ads-container >.ads-list > .ad{
+.container > .main > .main-right > .right-container >.container-list > .ad{
     height: 100px;
     max-width:100%;
     margin:10px 0px 10px 0px;
@@ -211,45 +211,45 @@ body{
     background: white;
         
 }
-.container > .main > .main-right > .all-ads-container >.ads-list > .ad > .right{
+.container > .main > .main-right > .right-container >.container-list > .ad > .right{
     position: absolute;
     right:0px;
     width:79%;
     height:100%;
 }
-.container > .main > .main-right > .all-ads-container >.ads-list > .ad > .right > .ad-details{
+.container > .main > .main-right > .right-container >.container-list > .ad > .right > .ad-details{
     height:50px;
     padding-top: 10px;
     position: relative;
 }
-.container > .main > .main-right > .all-ads-container >.ads-list > .ad > .right > .ad-details > span{
+.container > .main > .main-right > .right-container >.container-list > .ad > .right > .ad-details > span{
     display: inline-block;
     height: 100%;
     margin-right: 10px;
     position: absolute;
 }
-.container > .main > .main-right > .all-ads-container >.ads-list > .ad > .right > .ad-details > span.left{
+.container > .main > .main-right > .right-container >.container-list > .ad > .right > .ad-details > span.left{
     left:0px;
     height:30px;
     width:100px;
     text-align: center;
 }
-.container > .main > .main-right > .all-ads-container >.ads-list > .ad > .right > .ad-details > span.right{
+.container > .main > .main-right > .right-container >.container-list > .ad > .right > .ad-details > span.right{
     right:0px;
     height:30px;
     text-align: center;
 }
-.container > .main > .main-right > .all-ads-container >.ads-list > .ad > .right > .ad-details > span.middle{
+.container > .main > .main-right > .right-container >.container-list > .ad > .right > .ad-details > span.middle{
     height:30px;
     left:100px;
     text-align: center;
     
 }
-.container > .main > .main-right > .all-ads-container >.ads-list > .ad > .right >.ad-links{
+.container > .main > .main-right > .right-container >.container-list > .ad > .right >.ad-links{
     height:50px;
     position: relative;
 }
-.container > .main > .main-right > .all-ads-container >.ads-list > .ad > .right >.ad-links > a.right{
+.container > .main > .main-right > .right-container >.container-list > .ad > .right >.ad-links > a.right{
     display: inline-block;
     position: absolute;
     right:0px;
@@ -264,7 +264,7 @@ body{
     font-size: 16px;
     cursor: pointer;
 }
-.container > .main > .main-right > .all-ads-container >.ads-list > .ad > .right >.ad-links > a.left{
+.container > .main > .main-right > .right-container >.container-list > .ad > .right >.ad-links > a.left{
     display: inline-block;
     position: absolute;
     left:0px;
@@ -279,12 +279,12 @@ body{
     font-size: 16px;
     cursor: pointer;
 }
-.container > .main > .main-right > .all-ads-container >.ads-list > .ad > .right >.ad-links > a.left:hover,
-.container > .main > .main-right > .all-ads-container >.ads-list > .ad > .right >.ad-links > a.right:hover{
+.container > .main > .main-right > .right-container >.container-list > .ad > .right >.ad-links > a.left:hover,
+.container > .main > .main-right > .right-container >.container-list > .ad > .right >.ad-links > a.right:hover{
     text-decoration: underline;
     
 }
-.container > .main > .main-right > .all-ads-container >.ads-list >.ad > .left{
+.container > .main > .main-right > .right-container >.container-list >.ad > .left{
     position: absolute;
     left:0px;
     width:21%;
