@@ -27,6 +27,7 @@
                         <a href="javascript:void(0)" class="closebtn" onclick="closeFiltersMenu()">&times;</a>
                     </div>
                     <div class="vert-nav">
+                        <a href="all-unsold-cars.html">All unsold cars</a>
                         <a href="all-unsold-new-cars.html">New unsold cars</a>
                         <a href="all-unsold-used-cars.html">Used unsold cars</a>
                         <a href="all-unsold-cars-in-given-price-range.html">Add Price range</a>
@@ -78,7 +79,7 @@
                                               </div>
                                               <div class="ad-links">
                                                 <a href="view-sale-ad.html" class="right">View</a>
-                                                <a href="buy-car.html" class="left">Purchase</a>
+                                                <a href="javascript:void(0)" onclick="buyCar()" class="left">Purchase</a>
                                               </div>
                                             </div>
                                      </div>
@@ -94,7 +95,7 @@
                                                 </div>
                                                 <div class="ad-links">
                                                     <a href="view-sale-ad.html" class="right">View</a>
-                                                    <a href="buy-car.html" class="left">Purchase</a>
+                                                    <a href="javascript:void(0)" onclick="buyCar()" class="left">Purchase</a>
                                                 </div>
                                               </div>
                                        </div>
@@ -110,7 +111,7 @@
                                                 </div>
                                                 <div class="ad-links">
                                                     <a href="view-sale-ad.html" class="right">View</a>
-                                                    <a href="buy-car.html" class="left">Purchase</a>
+                                                    <a href="javascript:void(0)" onclick="buyCar()" class="left">Purchase</a>
                                                 </div>
                                               </div>
                                        </div>
@@ -126,7 +127,7 @@
                                                 </div>
                                                 <div class="ad-links">
                                                     <a href="view-sale-ad.html" class="right">View</a>
-                                                    <a href="buy-car.html" class="left">Purchase</a>
+                                                    <a href="javascript:void(0)"onclick="buyCar()" class="left">Purchase</a>
                                                 </div>
                                               </div>
                                        </div>
@@ -134,6 +135,21 @@
                            </div>
                      </div> 
                </div>
+                 <!-- Buy a car modal -->
+                 <div id="buy-car-modal" class="modal">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                             <span onclick="closeBuyCarModal()" class="close">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                             <form>
+                                 <label for="Buyingprice">Buying price</label>
+                                 <input type="text" placeholder="Buying price" id="buyingprice"></input>
+                                 <button type="submit">Order</button>
+                             </form>
+                        </div>
+                       </div>
+                    </div>
         <div class="footer">
        </div>
     </div>
