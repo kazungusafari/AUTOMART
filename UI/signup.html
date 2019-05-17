@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AutoMart</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    </head>
+<body>
+     <div class="container">
+        <div class="header">
+            <div class="left">
+                <h2>AutoMart</h2>
+            </div>
+            <div class="right">
+                <a href="./login.html">Login</a>
+            </div>
+        </div>
+      <div class="main">
+        <div class="form-instruction">
+            <h3>Create an account</h3>
+        </div>
+        <div class="form-container">
+            <form role="signup"  method="POST" id="signup">
+                    <div class="form-group">
+                        <label for="firstname" class="control-label">First name</label>
+                        <input type="text" name="firstname" class="form-control" placeholder="First name" id="firstname">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="control-label">Last name</label>
+                        <input type="text" name="lastname" class="form-control" placeholder="Last name" id="lastname">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email</label>
+                        <input type="text" name="email" class="form-control" placeholder="example@gmail.com" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="control-label">Address</label>
+                        <input type="text" name="phone" class="form-control" placeholder="43844 , 00100 , Nairobi " id="address">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="control-label">Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="*********" id="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password" class="control-label">Confirm Password</label>
+                        <input type="password" name="confirm-password" class="form-control" placeholder="********" id="password-confirm">
+                    </div>
+                    <button class="btn btn-block btn-primary" type="submit" id="signup-btn">Sign Up</button>
+            </form>
+        </div>
+        <div class="other-links">
+                <a href="?admin=true" class="link">Administrator signup</a>
+                <a href="./signup.html" class="link">User signup</a>
+        </div>
+        <div class="errors">
+            <ul></ul>
+        </div>
+       </div>
+     </div>
+ </body>
+</html>

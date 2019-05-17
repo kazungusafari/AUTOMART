@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AutoMart</title>
+    <link rel="stylesheet" href="./assets/css/users.css">
+    <link rel="stylesheet" href="./assets/css/mediaqueries.css">
+    <link rel="stylesheet" href="./assets/css/additionalcss.css">
+    <link rel="stylesheet" href="./assets/css/components.css">
+    <script src="./assets/js/app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="left">
+                <a href="javascript:void(0)" class="openfilters" onclick="openFiltersMenu()">Filters</a> 
+            </div>
+            <div class="right">
+                <a href="">Logout</a>
+            </div>
+        </div>
+        <div id="filters" class="filters">
+             <div class="nav">
+                    <div class="close-filter">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeFiltersMenu()">&times;</a>
+                    </div>
+                    <div class="vert-nav">
+                        <a href="all-unsold-new-cars.html">New unsold cars</a>
+                        <a href="all-unsold-used-cars.html">Used unsold cars</a>
+                        <a href="all-unsold-cars-in-given-price-range.html">Add Price range</a>
+                        <a href="all-unsold-cars-of-given-body-type.html">Choose body type</a>
+                        <a href="all-unsold-cars-of-given-make.html">Choose make</a>
+                   </div>
+             </div>
+        </div>
+        <div class="main">
+                <div class="main-left">
+                    <div class="user">
+                        <div class="user-photo">
+                              <img src='https://via.placeholder.com/100' alt='User image'></img>
+                              <h3>Kazungu Safari</h3>
+                         </div>
+                         <div class="nav">
+                            <a href="create-ad.html">Create AD</a>
+                            <a href="my-sale-ads.html">Sale Ads</a>
+                            <a href="my-purchases.html">Purchases</a>
+                            <a href="my-orders.html">Orders</a>
+                         </div>
+                    </div>
+                </div>
+                <div class="main-right">
+                    <div class="right-container">
+                            <div class="container-description">
+                                <h4>Orders from buyers</h4>
+                            </div>
+                            <div class="container-list">
+                                  <div class="order"> 
+                                         <div class="order-details">
+                                             <span>Status:Pending</span>
+                                             <span>Buyer:Kazungu</span>
+                                             <span>Car:Suzuki van</span>
+                                             <span>Buying Price:Kshs.100000</span>
+                                             <span>Selling Price:Kshs.100000</span>
+                                         </div>
+                                         <div class="order-links">
+                                             <a href="javascript:void(0)" onclick="rejectOrder()" class="right">Reject</a>
+                                             <a href="javascript:void(0)" onclick="acceptOrder()" class="left">Accept</a>
+                                         </div>
+                                 </div>
+                                     <div class="order"> 
+                                         <div class="order-details">
+                                             <span>Status:Pending</span>
+                                             <span>Buyer:Safari</span>
+                                             <span>Car:Ford Mustang</span>
+                                             <span>Buying Price:Kshs.100000</span>
+                                             <span>Selling Price:Kshs.100000</span>
+                                         </div>
+                                         <div class="order-links">
+                                             <a href="javascript:void(0)" onclick="rejectOrder()" class="right">Reject</a>
+                                             <a href="javascript:void(0)" onclick="acceptOrder()" class="left">Accept</a>
+                                        </div>
+                                      </div>
+                                </div>
+                           </div>
+                       </div> 
+                  </div>
+                  <div id="reject-order-modal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span onclick="closeRejectOrderBtn()" class="close">&times;</span>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <label for="rejectorder" class="control-label">Do you want to reject this order</label>
+                                    <input type="radio" name="rejectorder" value="yes" id="yes">Yes
+                                    <input type="radio" name="rejectorder" value="no" id="no">Yes
+                                </form>
+                              </div>
+                          </div>
+                   </div>
+                   <div id="accept-order-modal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span onclick="closeAcceptOrderBtn()" class="close">&times;</span>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <label for="acceptorder" class="control-label">Do you want to accept this order?</label>
+                                    <input type="radio" name="acceptorder" value="yes" id="yes">Yes
+                                    <input type="radio" name="acceptorder" value="no" id="no">No
+                                </form>
+                             </div>
+                       </div>
+                   </div>
+              <div class="footer">
+        </div>
+    </div>
+</body>
+</html>

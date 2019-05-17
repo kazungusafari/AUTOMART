@@ -1,0 +1,138 @@
+.main-right > .right-container > .container-description {
+    margin: 0px;
+    padding: 0px;
+    height:50px;
+    width:100%;
+}
+.main-right > .right-container > .container-description  > form{
+    position: relative;
+}
+.main-right > .right-container > .container-description  > form > select{
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: white;
+    margin: 0px;
+   
+}
+.main-right > .right-container > .container-description  > form > div{
+    position: absolute;
+    width:33%;
+    height:100%;
+}
+.main-right > .right-container > .container-description  > form > div.right{
+   right:0px;
+   text-align: right;
+}
+.main-right > .right-container > .container-description  > form > div.middle{
+   right:33%;
+ }
+.main-right > .right-container > .container-description  > form > div.left{
+   left:0px;
+}
+.main-right > .right-container > .container-description  > form > div > input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+.main-right > .right-container > .container-description  > form > div > button{
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px;
+    cursor: pointer;
+    width:98%;
+}
+
+
+.main-right > .right-container > .form-container {
+    background-color: white;
+    padding: 20px;
+ }
+ .main-right > .right-container > .form-container > form > .form-group {
+     margin-bottom: 10px;
+ }
+ .main-right > .right-container > .form-container > form > .form-group > label {
+    display: block;
+    margin-bottom: 5px;
+    color:#008CBA;
+ }
+ .main-right > .right-container > .form-container > form > .form-group > input[type="text"]{
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 0px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+ }
+ .main-right > .right-container > .form-container > form > .form-group > input[type="radio"]{
+    display: inline-block;
+    margin-bottom: 5px;
+    border: 2px solid red;
+  
+ }
+ .main-right > .right-container > .form-container > form > .form-group > select{
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 4px;
+    background-color: white;
+    margin: 0px;
+  
+ }
+ .main-right > .right-container > .form-container > form > button{
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px;
+    cursor: pointer;
+    width:50%;
+    transition: width 0.5s;
+  
+ }
+ .main-right > .right-container > .form-container > form > button:hover{
+    width:70%;
+  }
+
+
+  .container > .main > .main-right > .right-container >.container-list > .order{
+    background-color: white;
+    margin-top: 10px;
+    height:200px;
+}
+.container > .main > .main-right > .right-container >.container-list > .order >.order-details{
+    height: 80%;
+    padding: 10px;
+}
+.container > .main > .main-right > .right-container >.container-list > .order >.order-details > span{
+  display: block;
+  height:25%;
+  padding: 5px 0px 0px 5px;
+  color:#008CBA;
+  background: whitesmoke;
+}
+.container > .main > .main-right > .right-container >.container-list > .order >.order-links{
+    height:20%;
+    text-align: right;
+
+}
+.container > .main > .main-right > .right-container >.container-list > .order >.order-links > a{
+    display: inline-block;
+    height:100%;
+    padding: 5px 5px 0px 0px;
+    color:#008CBA;
+ }
+ .container > .main > .main-right > .right-container >.container-list > .order >.order-links > a:hover{
+    text-decoration: none;
+ }
