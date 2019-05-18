@@ -145,3 +145,14 @@
     z-index: 20;
     display: none;
 }
+
+
+.success{
+    position: fixed;
+    top:0px;
+    width:100%;
+    height:100px;
+    background-color: green;
+    z-index: 20;
+    display: none;
+}
