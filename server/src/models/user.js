@@ -41,6 +41,7 @@ class User {
       isAdmin: queryData.admin || false,
     };
     this.users.push(newUser);
+    console.log(this.users);
     return newUser;
   }
 
@@ -83,4 +84,6 @@ class User {
     return this.users[index];
   }
 }
+
+
 export default new User();

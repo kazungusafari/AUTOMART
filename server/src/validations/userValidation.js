@@ -49,7 +49,6 @@ export default {
   login: [
     check('email')
       .trim()
-      .normalizeEmail()
       .exists()
       .withMessage('Email must be specified')
       .custom(value => notEmpty(value, 'email field cannot be left blank'))
@@ -63,5 +62,5 @@ export default {
       .matches(/\d/)
       .withMessage('Password must contain a number')
       .custom(value => notEmpty(value, 'Password field cannot be left blank')),
-    ]
+  ],
 };

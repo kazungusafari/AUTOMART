@@ -26,4 +26,30 @@ export default {
       confirmPassword: 'pass',
     },
   },
+  login: {
+    validNormalUser: {
+      email: 'kazungu.safari@gmail.com',
+      password: 'kazungu100',
+    },
+    validAdminUser: {
+      email: 'lili@gmail.com',
+      password: 'pedrolili100',
+    },
+    invalidPasswordFormat: {
+      email: 'kazungu.safari@gmail.com',
+      password: 'kazungu',
+    },
+    invalidEmailFormat: {
+      email: 'kazungu.safari',
+      password: 'kazungu100',
+    },
+    noEmail: {
+      email: '',
+      password: 'kazungu100',
+    },
+    noPassword: {
+      email: 'kazungu.safari@gmail.com',
+      password: '',
+    }
+  }
 };
