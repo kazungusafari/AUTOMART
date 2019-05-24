@@ -3,6 +3,8 @@ import cors from 'cors';
 import { config } from 'dotenv';
 import bodyParser from 'body-parser';
 import 'babel-polyfill';
+import apiRoutes from './routes';
+
 
 
 config();
@@ -18,7 +20,7 @@ app.use(bodyParser.urlencoded({
   extended: false,
 }));
 
-
+app.use('/api', apiRoutes);
 app.use('*', (req, res) => res.status(404).json({
   status: 404,
   error: 'Page Not Found',
