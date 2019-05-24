@@ -129,5 +129,6 @@ const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isE
 
 
 userRoutes.post('/signup', UserValidation.signup, validation, UserController.signup);
+userRoutes.post('/login');
 
 export default userRoutes;
