@@ -33,7 +33,6 @@ class Authorization {
 
     return token;
   }
-  
 }
 
 export default Authorization;

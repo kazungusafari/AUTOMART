@@ -1,9 +1,14 @@
-
 import express from 'express';
-
+import ValidationHandler from '../middlewares/ValidationHandler';
+import UserController from '../controllers/UserController';
+import UserValidation from '../validations/userValidation';
+import Authorization from '../middlewares/Authorization';
+import Trim from '../middlewares/Trim';
 
 const userRoutes = express.Router();
 
-userRoutes.post('/signup', console.log('This is signup endpoint'));
+const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isEmptyReq];
+
+userRoutes.post('/signup', UserValidation.signup, validation, UserController.signup);
 
 export default userRoutes;
