@@ -72,7 +72,7 @@ class User {
     this.users[index].firstname = user.firstname;
     this.users[index].lastname = user.lastname;
     this.users[index].email = user.email;
-    this.users[index].password = hashPassword(['password'], 10);
+    this.users[index].password = hashPassword(data.password, 10);
     this.users[index].isAdmin = user.isAdmin;
     this.users[index].address = {
       boxNumber: user.address.address,

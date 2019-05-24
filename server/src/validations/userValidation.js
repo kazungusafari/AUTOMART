@@ -3,11 +3,11 @@ import notEmpty from '../helpers/notEmpty';
 
 export default {
   signup: [
-    check(['firstname','lastname','email','address','password','confirmPassword'])
-    .trim()
-    .exists()
-    .withMessage('All fields are required')
-    .custom(value => notEmpty(value, 'All fields are required')),
+    check(['firstname', 'lastname', 'email', 'address', 'password', 'confirmPassword'])
+      .trim()
+      .exists()
+      .withMessage('All fields are required')
+      .custom(value => notEmpty(value, 'All fields are required')),
     check(['lastname', 'firstname'])
       .isString()
       .withMessage('Firstname and lastname must be a string')
@@ -19,14 +19,15 @@ export default {
     check('address')
       .custom((value, { req }) => {
         const addressArray = req.body.address.split(',');
-        if (addressArray.length == 1) {
+        const [boxNumber, postalCode, town] = addressArray;
+        if (addressArray.length === 1) {
           throw new Error('Your address must have box number,postal code and town details separated by comma');
-        } else if (addressArray.length == 2) {
+        } else if (addressArray.length === 2) {
           throw new Error('Your address must have box number,postal code and town details separated by comma');
         } else {
-          req.body.boxNumber = parseInt(addressArray[0]);
-          req.body.postalCode = parseInt(addressArray[1]);
-          req.body.town = addressArray[2];
+          req.body.boxNumber = parseInt(boxNumber, 10);
+          req.body.postalCode = parseInt(postalCode, 10);
+          req.body.town = town;
           return true;
         }
       }),

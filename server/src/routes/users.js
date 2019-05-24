@@ -2,7 +2,6 @@ import express from 'express';
 import ValidationHandler from '../middlewares/ValidationHandler';
 import UserController from '../controllers/UserController';
 import UserValidation from '../validations/userValidation';
-import Authorization from '../middlewares/Authorization';
 import Trim from '../middlewares/Trim';
 
 const userRoutes = express.Router();
