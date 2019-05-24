@@ -46,4 +46,22 @@ export default {
 
   ],
 
+  login: [
+    check('email')
+      .trim()
+      .normalizeEmail()
+      .exists()
+      .withMessage('Email must be specified')
+      .custom(value => notEmpty(value, 'email field cannot be left blank'))
+      .isEmail()
+      .withMessage('Please input a valid email address'),
+    check('password')
+      .trim()
+      .exists().withMessage('Password must be specified')
+      .isLength({ min: 6 })
+      .withMessage('Password must be minimum of 6 characters')
+      .matches(/\d/)
+      .withMessage('Password must contain a number')
+      .custom(value => notEmpty(value, 'Password field cannot be left blank')),
+    ]
 };
