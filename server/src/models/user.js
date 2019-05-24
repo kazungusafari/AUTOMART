@@ -27,8 +27,8 @@ class User {
     const newUser = {
       id: this.numberOfUsers + 1,
       email: data.email || '',
-      firstName: data.firstname || '',
-      lastName: data.lastname || '',
+      firstname: data.firstname || '',
+      lastname: data.lastname || '',
       password: hashPassword(data.password, 10) || '',
       address: {
         boxNumber: data.boxNumber || '',
@@ -69,8 +69,8 @@ class User {
   update(email, data) {
     const user = this.findOne(email);
     const index = this.users.indexOf(user);
-    this.users[index].firstName = user.firstName;
-    this.users[index].lastName = user.lastName;
+    this.users[index].firstname = user.firstname;
+    this.users[index].lastname = user.lastname;
     this.users[index].email = user.email;
     this.users[index].password = hashPassword(['password'], 10);
     this.users[index].isAdmin = user.isAdmin;
