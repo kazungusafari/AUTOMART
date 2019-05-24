@@ -9,6 +9,15 @@ const userRoutes = express.Router();
 const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isEmptyReq];
 
 
+
+
+
+userRoutes.post('/signup', UserValidation.signup, validation, UserController.signup);
+userRoutes.post('/login', UserValidation.login, validation, UserController.login);
+
+
+export default userRoutes;
+
 /**
  * @swagger
  * definitions:
@@ -35,20 +44,9 @@ const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isE
  *         type: boolean
  *         default: false
  *       address:
- *         $ref: '#/definitions/AddressInfo'
- *
- *   AddressInfo:
- *     type: object
- *     properties:
- *       boxNunber:
- *         type: int
- *         format: int64
- *       postalCode:
- *         type: int
- *         format: int64
- *       town:
  *         type: string
  *
+ *   
  *   Errors:
  *     type: array
  *     items:
@@ -80,7 +78,6 @@ const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isE
  *     properties:
  *       id:
  *         type: int
- *         format: int64
  *       isAdmin:
  *         type: boolean
  *         default: false
@@ -116,20 +113,66 @@ const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isE
  *           $ref: '#/definitions/NewUser'
  *     responses:
  *       201:
- *         description: return some information about the created user
+ *         description: Created
  *         schema:
  *           $ref: '#/definitions/User'
  *       400:
- *         description: invalid input
+ *         description: Bad request
  *         schema:
  *           $ref: '#/definitions/Errors'
  *
  *
  */
 
+/**
+ * @swagger
+ *
+ * /api/v1/auth/login:
+ *   post:
+ *     description: Login to the application
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: email
+ *         description: Email to use for login.
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: password
+ *         description: User's password.
+ *         in: formData
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           $ref:  '#/definitions/User'
+ *       400:
+ *         description: Bad request
+ *         schema:
+ *           $ref: '#/definitions/Errors'
+ *       401:
+ *         description: Unauthorised
+ *         
+ *       404:
+ *         description: Not found
+ *         
+ */
 
-userRoutes.post('/signup', UserValidation.signup, validation, UserController.signup);
-userRoutes.post('/login', UserValidation.login, validation, UserController.login);
 
 
-export default userRoutes;
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+ 
+ 
