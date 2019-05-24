@@ -40,6 +40,9 @@ export default userRoutes;
  *       password:
  *         type: string
  *         format: password
+ *       confirmPassword:
+ *         type: string
+ *         format: password
  *       isAdmin:
  *         type: boolean
  *         default: false
