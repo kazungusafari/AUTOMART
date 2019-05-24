@@ -18,17 +18,22 @@ export default {
       .withMessage('Please input a valid email address'),
     check('address')
       .custom((value, { req }) => {
-        const addressArray = req.body.address.split(',');
-        const [boxNumber, postalCode, town] = addressArray;
-        if (addressArray.length === 1) {
-          throw new Error('Your address must have box number,postal code and town details separated by comma');
-        } else if (addressArray.length === 2) {
-          throw new Error('Your address must have box number,postal code and town details separated by comma');
+        if (req.body) {
+          const addressArray = req.body.address.split(',');
+          const [boxNumber, postalCode, town] = addressArray;
+
+          if (addressArray.length === 1) {
+            throw new Error('Your address must have box number,postal code and town details separated by comma');
+          } else if (addressArray.length === 2) {
+            throw new Error('Your address must have box number,postal code and town details separated by comma');
+          } else {
+            req.body.boxNumber = parseInt(boxNumber, 10);
+            req.body.postalCode = parseInt(postalCode, 10);
+            req.body.town = town;
+            return true;
+          }
         } else {
-          req.body.boxNumber = parseInt(boxNumber, 10);
-          req.body.postalCode = parseInt(postalCode, 10);
-          req.body.town = town;
-          return true;
+          throw new Error('Address field is required');
         }
       }),
     check('password')
