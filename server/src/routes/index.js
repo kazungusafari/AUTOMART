@@ -15,6 +15,3 @@ apiRoutes.get('/v1', (req, res) => res.json({
 }));
 
 apiRoutes.use('/v1/auth', userRoutes);
-
-
-

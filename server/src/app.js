@@ -5,8 +5,6 @@ import bodyParser from 'body-parser';
 import 'babel-polyfill';
 import apiRoutes from './routes';
 
-
-
 config();
 
 const app = express();
@@ -25,7 +23,6 @@ app.use('*', (req, res) => res.status(404).json({
   status: 404,
   error: 'Page Not Found',
 }));
-
 
 
 app.listen(port, () => {
