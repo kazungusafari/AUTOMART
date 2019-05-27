@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AutoMart</title>
+    <link rel="stylesheet" href="./assets/css/users.css">
+    <link rel="stylesheet" href="./assets/css/mediaqueries.css">
+    <link rel="stylesheet" href="./assets/css/additionalcss.css">
+    <link rel="stylesheet" href="./assets/css/components.css">
+    <script src="./assets/js/app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="left">
+                <a href="javascript:void(0)" class="openfilters" onclick="openFiltersMenu()">Filters</a> 
+            </div>
+            <div class="right">
+                <a href="">Logout</a>
+            </div>
+        </div>
+        <div id="filters" class="filters">
+             <div class="nav">
+                    <div class="close-filter">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeFiltersMenu()">&times;</a>
+                    </div>
+                    <div class="vert-nav">
+                        <a href="all-unsold-cars.html">All unsold cars</a>
+                        <a href="all-unsold-new-cars.html">New unsold cars</a>
+                        <a href="all-unsold-used-cars.html">Used unsold cars</a>
+                        <a href="all-unsold-cars-in-given-price-range.html">Add Price range</a>
+                        <a href="all-unsold-cars-of-given-body-type.html">Choose body type</a>
+                        <a href="all-unsold-cars-of-given-make.html">Choose make</a>
+                    </div>
+            </div>
+        </div>
+        <div class="main">
+                <div class="loader-container">
+                        <div class="loader"></div>
+                </div>
+                <div class="main-left">
+                    <div class="user">
+                        <div class="user-photo">
+                              <img src='https://via.placeholder.com/100' alt='User image'></img>
+                              <h3>Kazungu Safari</h3>
+                         </div>
+                         <div class="nav">
+                            <a href="create-ad.html">Create AD</a>
+                            <a href="my-sale-ads.html">Sale Ads</a>
+                            <a href="my-purchases.html">Purchases</a>
+                            <a href="my-orders.html">Orders</a>
+                         </div>
+                    </div>
+                </div>
+                <div class="main-right">
+                    <div class="right-container">
+                            <div class="container-description">
+                                <h4>All new unsold cars</h4>
+                            </div>
+                            <div class="container-list">
+                                  <div class="ad"> 
+                                          <div class="left">
+                                              <img src='https://via.placeholder.com/100' alt='User image'></img>
+                                          </div>
+                                          <div class="right">
+                                              <div class="ad-details">
+                                                  <span class="left">New</span>
+                                                  <span class="middle">Available</span>
+                                                  <span class="right">Kshs.100000</span>
+                                              </div>
+                                              <div class="ad-links">
+                                                <a href="view-sale-ad.html" class="right">View</a>
+                                                <a href="javascript:void(0)" onclick="buyCar()" class="left">Purchase</a>
+                                              </div>
+                                            </div>
+                                     </div>
+                                     <div class="ad"> 
+                                            <div class="left">
+                                                <img src='https://via.placeholder.com/100' alt='User image'></img>
+                                            </div>
+                                            <div class="right">
+                                                <div class="ad-details">
+                                                    <span class="left">New</span>
+                                                    <span class="middle">Available</span>
+                                                    <span class="right">Kshs.100000</span>
+                                                </div>
+                                                <div class="ad-links">
+                                                    <a href="view-sale-ad.html" class="right">View</a>
+                                                    <a href="javascript:void(0)" onclick="buyCar()" class="left">Purchase</a>
+                                                </div>
+                                              </div>
+                                       </div>
+                                       <div class="ad"> 
+                                            <div class="left">
+                                                <img src='https://via.placeholder.com/100' alt='User image'></img>
+                                            </div>
+                                            <div class="right">
+                                                <div class="ad-details">
+                                                    <span class="left">New</span>
+                                                    <span class="middle">Available</span>
+                                                    <span class="right">Kshs.100000</span>
+                                                </div>
+                                                <div class="ad-links">
+                                                    <a href="view-sale-ad.html" class="right">View</a>
+                                                    <a href="javascript:void(0)" onclick="buyCar()" class="left">Purchase</a>
+                                                </div>
+                                              </div>
+                                       </div>
+                                       <div class="ad"> 
+                                            <div class="left">
+                                                <img src='https://via.placeholder.com/100' alt='User image'></img>
+                                            </div>
+                                            <div class="right">
+                                                <div class="ad-details">
+                                                    <span class="left">New</span>
+                                                    <span class="middle">Available</span>
+                                                    <span class="right">Kshs.100000</span>
+                                                </div>
+                                                <div class="ad-links">
+                                                    <a href="view-sale-ad.html" class="right">View</a>
+                                                    <a href="javascript:void(0)" onclick="buyCar()" class="left">Purchase</a>
+                                                </div>
+                                              </div>
+                                       </div>
+                                </div>
+                           </div>
+                     </div> 
+               </div>
+                 <!-- Buy a car modal -->
+                 <div id="buy-car-modal" class="modal">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                             <span onclick="closeBuyCarModal()" class="close">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                             <form>
+                                 <label for="Buyingprice">Buying price</label>
+                                 <input type="text" placeholder="Buying price" id="buyingprice"></input>
+                                 <button type="submit">Order</button>
+                             </form>
+                        </div>
+                       </div>
+                    </div>
+                    <!--Error container-->
+                    <div class="errors">
+                        <ul></ul>
+                    </div>
+                    <div class="success">
+                        <p></p>
+                    </div>
+        <div class="footer">
+       </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AutoMart</title>
+    <link rel="stylesheet" href="./assets/css/users.css">
+    <link rel="stylesheet" href="./assets/css/mediaqueries.css">
+    <link rel="stylesheet" href="./assets/css/additionalcss.css">
+    <link rel="stylesheet" href="./assets/css/components.css">
+    <script src="./assets/js/app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="left">
+                <a href="javascript:void(0)" class="openfilters" onclick="openFiltersMenu()">Filters</a> 
+            </div>
+            <div class="right">
+                <a href="">Logout</a>
+            </div>
+        </div>
+        <div id="filters" class="filters">
+             <div class="nav">
+                    <div class="close-filter">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeFiltersMenu()">&times;</a>
+                    </div>
+                    <div class="vert-nav">
+                        <a href="all-unsold-new-cars.html">New unsold cars</a>
+                        <a href="all-unsold-used-cars.html">Used unsold cars</a>
+                        <a href="all-unsold-cars-in-given-price-range.html">Add Price range</a>
+                        <a href="all-unsold-cars-of-given-body-type.html">Choose body type</a>
+                        <a href="all-unsold-cars-of-given-make.html">Choose make</a>
+                    </div>
+            </div>
+        </div>
+        <div class="main">
+                <div class="main-left">
+                    <div class="user">
+                        <div class="user-photo">
+                              <img src='https://via.placeholder.com/100' alt='User image'></img>
+                              <h3>Kazungu Safari</h3>
+                         </div>
+                         <div class="nav">
+                            <a href="create-ad.html">Create AD</a>
+                            <a href="my-sale-ads.html">Sale Ads</a>
+                            <a href="my-purchases.html">Purchases</a>
+                            <a href="my-orders.html">Orders</a>
+                         </div>
+                    </div>
+                </div>
+                <div class="main-right">
+                    <div class="right-container">
+                            <div class="container-description">
+                                <h4>Create a sale AD</h4>
+                            </div>
+                            <div class="form-container">
+                                 <form role="createad"   method="POST" id="createad">
+                                            <div class="form-group">
+                                                <label for="price" class="control-label ">Price</label>
+                                                <input type="text" name="price" class="form-control" placeholder="price" id="price">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="state" class="control-label">State of the car</label>
+                                                <input type="radio" name="state" value="new" id="new">New
+                                                <input type="radio" name="state" value="used" id="used">Used
+                                           </div>
+                                           <div class="form-group">
+                                                <label for="make" class="control-label">Car Make</label>
+                                                <select id="car-make" onchange="getCarModels()">
+                                                    <option value="Choose car make">Choose car make</option>
+                                                    <option value="Toyota">Toyota</option>
+                                                    <option value="Suzuki">Suzuki</option>
+                                                    <option value="Audi">Audi</option>
+                                                    <option value="BMW">BMW</option>
+                                                    <option value="Land Rover">Land Rover</option>
+                                                    <option value="Ford">Ford</option>
+                                                    <option value="Honda">Honda</option>
+                                                </select>
+                                           </div>
+                                           <div class="form-group">
+                                                <label for="model" class="control-label">Car Model</label>
+                                                <select id="car-model">
+                                                    <option value="Choose car model">Choose car model</option>
+                                                </select>
+                                           </div>
+                                           <div class="form-group">
+                                                <label for="body type" class="control-label">Car body type</label>
+                                                <select>
+                                                    <option value="Choose car model">Choose car body type</option>
+                                                    <option value="car">car</option>
+                                                    <option value="van">van</option>
+                                                    <option value="suv">suv</option>
+                                                    <option value="sedan">sedan</option>
+                                                    <option value="truck">truck</option>
+                                                    <option value="trailer">trailer</option>
+                                                </select>
+                                           </div>
+                                            <button class="btn" type="submit">Create</button>
+                                       </form>
+                                     </div>
+                              </div>
+                       </div> 
+               </div>
+               <!--Error container-->
+               <div class="errors">
+                <ul></ul>
+               </div>
+               <div class="success">
+                <p></p>
+              </div>
+        <div class="footer">
+      </div>
+ </div>
+</body>
+</html>
