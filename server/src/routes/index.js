@@ -1,5 +1,6 @@
 import express from 'express';
 import userRoutes from './users';
+import carRoutes from './cars';
 
 
 const apiRoutes = express.Router();
@@ -15,6 +16,8 @@ apiRoutes.get('/v1', (req, res) => res.json({
 }));
 
 apiRoutes.use('/v1/auth', userRoutes);
+apiRoutes.use('/v1/car', carRoutes);
+
 
 
 export default apiRoutes;

@@ -18,7 +18,7 @@ class CarController {
    * @returns { Object }
    * @memberof UserController
    */
-  static async signup(req, res) {
+  static async createSaleAd(req, res) {
     const user = User.findOne(req.body.user.id);
 
     if (user) {
