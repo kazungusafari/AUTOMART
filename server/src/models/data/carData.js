@@ -1,10 +1,12 @@
+import moment from 'moment';
+
 export default {
 
   registeredSaleAds: [
     {
       id: 1,
       owner: 1,
-      createdOn: 'Safari',
+      createdOn: moment.now(),
       state: 'used',
       status: 'available',
       price: 1550000,
@@ -15,7 +17,7 @@ export default {
     {
       id: 1,
       owner: 1,
-      createdOn: 'Safari',
+      createdOn: moment.now(),
       state: 'new',
       status: 'available',
       price: 1910000,
@@ -26,7 +28,7 @@ export default {
     {
       id: 1,
       owner: 1,
-      createdOn: 'Safari',
+      createdOn: moment.now(),
       state: 'new',
       status: 'available',
       price: 2000000,
@@ -37,7 +39,7 @@ export default {
     {
       id: 1,
       owner: 1,
-      createdOn: 'Safari',
+      createdOn: moment.now(),
       state: 'used',
       status: 'available',
       price: 1910000,
@@ -48,7 +50,7 @@ export default {
     {
       id: 1,
       owner: 1,
-      createdOn: 'Safari',
+      createdOn: moment.now(),
       state: 'new',
       status: 'available',
       price: 3000000,
@@ -59,7 +61,7 @@ export default {
     {
       id: 1,
       owner: 1,
-      createdOn: 'Safari',
+      createdOn: moment.now(),
       state: 'new',
       status: 'available',
       price: 1200000,
