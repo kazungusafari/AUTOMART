@@ -18,14 +18,14 @@ class Car {
   }
 
   /**
-   * @param {object} queryData
+   * @param {integer} userId
    * @param {object} data
    * @returns {object} user object
    */
-  create(queryData, data) {
+  create(userId, data) {
     const newCar = {
       id: this.numberOfCars + 1,
-      owner: data.id || '',
+      owner: userId || '',
       createdOn: moment.now() || '',
       state: data.state || '',
       status: data.status || '',
@@ -63,12 +63,12 @@ class Car {
     return this.cars.filter(this.cars, car => car.status === status);
   }
 
-   /**
+  /**
    * @returns {array} returns all unsold cars within a given price range
    */
   findAllByPriceRange(minPrice, maxPrice) {
     const unsoldCars = this.cars.filter(this.cars, car => car.status === 'available');
-    return unsoldCars.filter(this.cars, car => car.price >= minPrice && car.price <= maxPrice);
+    return unsoldCars.filter(unsoldCars, car => car.price >= minPrice && car.price <= maxPrice);
   }
 
   /**
