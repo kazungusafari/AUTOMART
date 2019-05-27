@@ -16,7 +16,7 @@ export default {
       isAdmin: false,
       password: hashPassword('kazungu100', 10),
     },
-     {
+    {
       id: 2,
       firstname: 'Pedro',
       lastname: 'Lili',
@@ -28,6 +28,6 @@ export default {
       },
       isAdmin: true,
       password: hashPassword('pedrolili100', 10),
-    }
+    },
   ],
 };

@@ -138,6 +138,8 @@ body{
 .container > .main > .main-left >.user{
     width:100%;
     background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
 
 }
 .container > .main > .main-left >.user > .user-photo{
@@ -209,6 +211,7 @@ body{
     margin:10px 0px 10px 0px;
     position: relative;
     background: white;
+    
         
 }
 .container > .main > .main-right > .right-container >.container-list > .ad > .right{

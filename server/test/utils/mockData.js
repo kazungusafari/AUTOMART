@@ -50,6 +50,6 @@ export default {
     noPassword: {
       email: 'kazungu.safari@gmail.com',
       password: '',
-    }
-  }
+    },
+  },
 };

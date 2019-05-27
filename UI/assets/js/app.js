@@ -69,7 +69,7 @@ const getCarModels = () =>{
         makeOptions(carModels[make]);
     }
           
-    append(carMakeSelectedValue);
+  append(carMakeSelectedValue);
 
     
 

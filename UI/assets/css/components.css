@@ -1,6 +1,7 @@
 .modal{
     display: none; 
     position: fixed; 
+    padding-top:60px;
     z-index: 1;
     left: 0;
     top: 0;
@@ -14,7 +15,7 @@
     background-color: #fefefe;
     margin: auto;
     border: 1px solid #888;
-    width: 80%; 
+    max-width: 450px; 
     height: 80%;
     
 
