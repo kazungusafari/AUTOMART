@@ -81,6 +81,30 @@ class CarController {
       message: 'Sale Ad Not Found',
     });
   }
+
+  /**
+     * Get all unsold car Ads
+     * @static
+     * @param {*} req
+     * @param {*} res
+     * @returns { Array } Returns an array of Objects
+     * @memberof CarController
+     */
+  static async getAllUnsoldAds(req, res) {
+    const allUnsolds = await Car.findAllByStatus('available');
+
+    if (allUnsolds) {
+      return res.status(200).json({
+        status: res.statusCode,
+        data: allUnsolds,
+
+      });
+    }
+    return res.status(404).json({
+      status: res.statusCode,
+      error: 'No unsolds car Ads',
+    });
+  }
 }
 
 export default CarController;
