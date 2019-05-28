@@ -2,16 +2,16 @@ import express from 'express';
 import ValidationHandler from '../middlewares/ValidationHandler';
 import CarController from '../controllers/CarController';
 import CarValidation from '../validations/carValidation';
-import Trim from '../middlewares/Trim';
 import Authorization from '../middlewares/Authorization';
 
 const carRoutes = express.Router();
 
-const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isEmptyReq];
+const validation = [ValidationHandler.validate, ValidationHandler.isEmptyReq];
 
 
 carRoutes.post('/', Authorization.authenticate, CarValidation.createSaleAd, validation, CarController.createSaleAd);
 carRoutes.get('/:id/', Authorization.authenticate, CarValidation.getSaleAdById, validation, CarController.getSaleAdById);
+carRoutes.get('/car?status=available', Authorization.authenticate, CarValidation.getSaleAdById, validation, CarController.getSaleAdById);
 
 export default carRoutes;
 

@@ -91,7 +91,7 @@ class CarController {
      * @memberof CarController
      */
   static async getAllUnsoldAds(req, res) {
-    const allUnsolds = await Car.findAllByStatus('available');
+    const allUnsolds = await Car.findAllByStatus(req.params.status);
 
     if (allUnsolds) {
       return res.status(200).json({
