@@ -139,8 +139,8 @@ describe('Car Routes: create a new a sale Ad', () => {
         done();
       });
   });
-  
-/*
+
+  /*
   it('should return error for invalid user token', (done) => {
     request(app)
       .post('/api/v1/car/')
@@ -155,6 +155,4 @@ describe('Car Routes: create a new a sale Ad', () => {
       });
   });
   */
-
 });
-

@@ -42,7 +42,7 @@ class Car {
 
   /**
    *
-   * @param {string} email
+   * @param {string} id
    * @returns {object} user object
    */
   findOne(id) {

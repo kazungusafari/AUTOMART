@@ -46,7 +46,7 @@ export default userRoutes;
  *       address:
  *         type: string
  *
- *
+ *   
  *   Errors:
  *     type: array
  *     items:
@@ -154,8 +154,8 @@ export default userRoutes;
  *           $ref: '#/definitions/Errors'
  *       401:
  *         description: Unauthorised
- *
+ *         
  *       404:
  *         description: Not found
- *
+ *         
  */
