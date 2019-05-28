@@ -39,9 +39,9 @@ class CarController {
         },
       );
     }
-    return res.status(400).send({
+    return res.status(404).send({
       status: res.statusCode,
-      error: 'User is not  registered',
+      error: 'User is not registered',
     });
   }
 }
