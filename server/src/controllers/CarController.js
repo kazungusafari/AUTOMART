@@ -55,8 +55,7 @@ class CarController {
      * @memberof CarController
    */
 
-  static async getSaleAdByID(req, res) {
-
+  static async getSaleAdById(req, res) {
     const user = await User.findOne(req.user.email);
     const saleAd = await Car.findOne(req.params.id);
 

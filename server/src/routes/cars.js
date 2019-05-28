@@ -11,6 +11,7 @@ const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isE
 
 
 carRoutes.post('/', Authorization.authenticate, CarValidation.createSaleAd, validation, CarController.createSaleAd);
+carRoutes.get('/<:id>/', Authorization.authenticate, CarValidation.getSaleAdById, validation, CarController.getSaleAdById);
 
 export default carRoutes;
 

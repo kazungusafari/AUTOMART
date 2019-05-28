@@ -1,4 +1,4 @@
-import { check } from 'express-validator/check';
+import { check, param } from 'express-validator/check';
 import notEmpty from '../helpers/notEmpty';
 
 export default {
@@ -14,5 +14,14 @@ export default {
     check('price')
       .isInt()
       .withMessage('Price can only be in the form of integers'),
+  ],
+  getSaleAdById: [
+    param('id')
+      .trim()
+      .exists()
+      .withMessage('Car id is required')
+      .custom(value => notEmpty(value, 'Car id is required'))
+      .isInt()
+      .withMessage('Car id  can only be in the form of integers'),
   ],
 };
