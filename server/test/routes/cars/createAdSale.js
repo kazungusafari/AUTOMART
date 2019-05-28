@@ -16,7 +16,7 @@ const {
   missingCarState,
 } = mockData.createSaleAd;
 
-const { validUserToken, invalidUserToken } = tokens;
+const { validUserToken } = tokens;
 
 describe('Car Routes: create a new a sale Ad', () => {
   it('should add a new sale AD', (done) => {

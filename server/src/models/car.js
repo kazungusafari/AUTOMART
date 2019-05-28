@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import moment from 'moment';
 import { config } from 'dotenv';
 import carData from './data/carData';
@@ -42,11 +43,12 @@ class Car {
 
   /**
    *
-   * @param {string} id
-   * @returns {object} user object
+   * @param {integer} id
+   * @returns {object} car object
    */
   findOne(id) {
-    return this.cars.find(car => car.id === id);
+    // eslint-disable-next-line radix
+    return this.cars.find(car => parseInt(car.id) === id);
   }
 
   /**
