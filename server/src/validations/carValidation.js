@@ -1,4 +1,4 @@
-import { check,param } from 'express-validator/check';
+import { check, param } from 'express-validator/check';
 import notEmpty from '../helpers/notEmpty';
 
 export default {

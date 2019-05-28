@@ -142,6 +142,45 @@ export default carRoutes;
 
 /**
  * @swagger
+ *
+ * /api/v1/car/<:id>/:
+ *   get:
+ *     description: Returns a single sale Ad
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: Id of the sale Ad to return
+ *         in: path
+ *         required: true
+ *         type: int
+ *         schema:
+ *           $ref: '#/definitions/Car'
+ *       - name : authorization
+ *         description: Access token for authentication
+ *         in : header
+ *         type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           $ref: '#/definitions/Car'
+ *       400:
+ *         description: Bad request
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Not found
+ *     security:
+ *       - apiKey : []
+ *
+ *
+ */
+
+
+/**
+ * @swagger
  * Securitydefinitions:
  *   APIKeyHeader:
  *     type: apiKey

@@ -59,7 +59,7 @@ class CarController {
     const user = await User.findOne(req.user.email);
     // eslint-disable-next-line radix
     const saleAd = await Car.findOne(parseInt(req.params.id));
-    
+
 
     if (saleAd) {
       return res.status(200).json({
