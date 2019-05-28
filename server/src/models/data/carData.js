@@ -15,7 +15,7 @@ export default {
       bodyType: 'saloon',
     },
     {
-      id: 1,
+      id: 2,
       owner: 1,
       createdOn: moment.now(),
       state: 'new',
@@ -26,7 +26,7 @@ export default {
       bodyType: 'saloon',
     },
     {
-      id: 1,
+      id: 3,
       owner: 1,
       createdOn: moment.now(),
       state: 'new',
@@ -37,7 +37,7 @@ export default {
       bodyType: 'car',
     },
     {
-      id: 1,
+      id: 4,
       owner: 1,
       createdOn: moment.now(),
       state: 'used',
@@ -48,7 +48,7 @@ export default {
       bodyType: 'car',
     },
     {
-      id: 1,
+      id: 5,
       owner: 1,
       createdOn: moment.now(),
       state: 'new',
@@ -59,7 +59,7 @@ export default {
       bodyType: 'car',
     },
     {
-      id: 1,
+      id: 6,
       owner: 1,
       createdOn: moment.now(),
       state: 'new',
