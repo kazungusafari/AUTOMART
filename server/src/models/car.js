@@ -59,10 +59,11 @@ class Car {
   }
 
   /**
-   * @returns {array} returns all unsold cars
+   * @param {string} status
+   * @returns {Array} returns an array of all unsold cars
    */
   findAllByStatus(status) {
-    return this.cars.filter(this.cars, car => car.status === status);
+    return this.cars.filter(car => car.status === status);
   }
 
   /**

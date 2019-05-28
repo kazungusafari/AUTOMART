@@ -5,8 +5,8 @@ import { expect } from 'chai';
 import app from '../../../src/app';
 import tokens from '../../utils/tokens';
 
-const validID = 1;
-const invalidID = 30;
+// const validID = 1;
+// const invalidID = 30;
 
 const { validUserToken } = tokens;
 
