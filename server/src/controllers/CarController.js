@@ -19,10 +19,10 @@ class CarController {
    * @memberof UserController
    */
   static async createSaleAd(req, res) {
-    const user = User.findOne(req.body.user.id);
+    const user = User.findOne(req.user.email);
 
     if (user) {
-      const saleAd = Car.create(req.body.user.id, req.body);
+      const saleAd = Car.create(req.user.id, req.body);
       return res.status(201).send(
         {
           status: res.statusCode,

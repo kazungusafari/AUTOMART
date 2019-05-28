@@ -12,24 +12,7 @@ export default {
       .isString()
       .withMessage('All fields except price are suppose to be strings'),
     check('price')
-      .custom((value, { req }) => {
-        if (req.body) {
-          const addressArray = req.body.address.split(',');
-          const [boxNumber, postalCode, town] = addressArray;
-
-          if (addressArray.length === 1) {
-            throw new Error('Your address must have box number,postal code and town details separated by comma');
-          } else if (addressArray.length === 2) {
-            throw new Error('Your address must have box number,postal code and town details separated by comma');
-          } else {
-            req.body.boxNumber = parseInt(boxNumber, 10);
-            req.body.postalCode = parseInt(postalCode, 10);
-            req.body.town = town;
-            return true;
-          }
-        } else {
-          throw new Error('Address field is required');
-        }
-      }),
-    ],
+      .isInt()
+      .withMessage('Price can only be in the form of integers'),
+  ],
 };

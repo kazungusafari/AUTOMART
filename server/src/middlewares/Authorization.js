@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import User from '../models/user';
 
 /**
  * @exports
@@ -32,6 +33,37 @@ class Authorization {
       });
 
     return token;
+  }
+
+  // eslint-disable-next-line consistent-return
+  static async authenticate(req, res, next) {
+    try {
+      const token = Authorization.getToken(req);
+      if (!token) {
+        return res.status(401).json({
+          status: 401,
+          error: 'Unauthorized user',
+        });
+      }
+      const decoded = await jwt.verify(token, process.env.SECRET);
+      const user = User.findOne(decoded.user.email);
+
+      if (!user) {
+        return res.status(400).json({
+          status: 400,
+          message: 'Token is invalid',
+        });
+      }
+      req.user = decoded.user;
+      next();
+    } catch (error) {
+      if (error.name === 'TokenExpiredError') {
+        return res.status(401).json({
+          status: 401,
+          error: 'Token Expired',
+        });
+      }
+    }
   }
 }
 
