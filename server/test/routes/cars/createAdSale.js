@@ -4,7 +4,37 @@ import request from 'supertest';
 import { expect } from 'chai';
 import mockData from '../../utils/mockData';
 import app from '../../../src/app';
-import tokens from '../../utils/tokens';
+import authorization from '../../../src/middlewares/Authorization';
+import hashPassword from '../../../src/helpers/hashPassword';
+
+
+// eslint-disable-next-line no-unused-vars
+const adminToken = authorization.generateToken({
+  id: 2,
+  firstname: 'Pedro',
+  lastname: 'Lili',
+  email: 'lili@gmail.com',
+  address: {
+    boxNumber: 60,
+    postalCode: 10101,
+    town: 'Kericho',
+  },
+  isAdmin: true,
+  password: hashPassword('pedrolili100', 10),
+});
+const userToken = authorization.generateToken({
+  id: 1,
+  firstname: 'Kazungu',
+  lastname: 'Safari',
+  email: 'kazungu.safari@gmail.com',
+  address: {
+    boxNumber: 66,
+    postalCode: 10101,
+    town: 'Nairobi',
+  },
+  isAdmin: false,
+  password: hashPassword('kazungu100', 10),
+});
 
 const {
   validSaleAd,
@@ -16,14 +46,13 @@ const {
   missingCarState,
 } = mockData.createSaleAd;
 
-const { validUserToken } = tokens;
 
 describe('Car Routes: create a new a sale Ad', () => {
   it('should add a new sale AD', (done) => {
     request(app)
       .post('/api/v1/car/')
       .set('Accept', 'application/json')
-      .set('authorization', validUserToken)
+      .set('authorization', `Bearer ${userToken}`)
       .send({ ...validSaleAd })
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
@@ -54,7 +83,7 @@ describe('Car Routes: create a new a sale Ad', () => {
     request(app)
       .post('/api/v1/car/')
       .set('Accept', 'application/json')
-      .set('authorization', validUserToken)
+      .set('authorization', `Bearer ${userToken}`)
       .send({ ...missingCarPrice })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
@@ -68,7 +97,7 @@ describe('Car Routes: create a new a sale Ad', () => {
     request(app)
       .post('/api/v1/car/')
       .set('Accept', 'application/json')
-      .set('authorization', validUserToken)
+      .set('authorization', `Bearer ${userToken}`)
       .send({ ...invalidCarPriceFormat })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
@@ -83,7 +112,7 @@ describe('Car Routes: create a new a sale Ad', () => {
     request(app)
       .post('/api/v1/car/')
       .set('Accept', 'application/json')
-      .set('authorization', validUserToken)
+      .set('authorization', `Bearer ${userToken}`)
       .send({ ...invalidCarStateFormat })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
@@ -98,7 +127,7 @@ describe('Car Routes: create a new a sale Ad', () => {
     request(app)
       .post('/api/v1/car/')
       .set('Accept', 'application/json')
-      .set('authorization', validUserToken)
+      .set('authorization', `Bearer ${userToken}`)
       .send({ ...missingCarBodyType })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
@@ -113,7 +142,7 @@ describe('Car Routes: create a new a sale Ad', () => {
     request(app)
       .post('/api/v1/car/')
       .set('Accept', 'application/json')
-      .set('authorization', validUserToken)
+      .set('authorization', `Bearer ${userToken}`)
       .send({ ...missingCarState })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
@@ -128,7 +157,7 @@ describe('Car Routes: create a new a sale Ad', () => {
     request(app)
       .post('/api/v1/car/')
       .set('Accept', 'application/json')
-      .set('authorization', validUserToken)
+      .set('authorization', `Bearer ${userToken}`)
       .send({ ...missingCarStatus })
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
@@ -139,20 +168,5 @@ describe('Car Routes: create a new a sale Ad', () => {
         done();
       });
   });
-
-  /*
-  it('should return error for invalid user token', (done) => {
-    request(app)
-      .post('/api/v1/car/')
-      .set('Accept', 'application/json')
-      .set('authorization', invalidUserToken)
-      .send({ ...validSaleAd })
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(400);
-        expect(res.body.error).to.equal('Token is invalid');
-
-        done(err);
-      });
-  });
-  */
+  
 });

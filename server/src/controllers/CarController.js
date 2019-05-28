@@ -102,7 +102,7 @@ class CarController {
       }
       return res.status(404).json({
         status: res.statusCode,
-        error: 'No unsolds car Ads',
+        error: 'Not found',
       });
     }
     return res.status(400).json({
