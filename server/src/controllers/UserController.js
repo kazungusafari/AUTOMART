@@ -60,8 +60,8 @@ class UserController {
 
   static async login(req, res) {
     const { email, password } = req.body;
-    const userFound =  User.findOne(email);
-    
+    const userFound = User.findOne(email);
+
 
     if (!userFound) {
       return res.status(404).send({

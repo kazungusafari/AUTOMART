@@ -19,5 +19,4 @@ apiRoutes.use('/v1/auth', userRoutes);
 apiRoutes.use('/v1/car', carRoutes);
 
 
-
 export default apiRoutes;

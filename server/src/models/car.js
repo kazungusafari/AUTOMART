@@ -84,7 +84,7 @@ class Car {
     this.cars[index].createdOn = car.createdOn;
     this.cars[index].modifiedDate = moment.now();
     this.cars[index].state = car.state;
-    this.cars[index].status = data.status || car.status ;
+    this.cars[index].status = data.status || car.status;
     this.cars[index].price = data.price || car.price;
     this.cars[index].model = car.model;
     this.cars[index].manufacturer = car.manufacturer;
