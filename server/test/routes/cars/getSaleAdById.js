@@ -8,6 +8,7 @@ import Authorization from '../../../src/middlewares/Authorization';
 import hashPassword from '../../../src/helpers/hashPassword';
 
 const validID = 1;
+// eslint-disable-next-line no-unused-vars
 const invalidID = 30;
 
 // eslint-disable-next-line no-unused-vars
@@ -44,6 +45,7 @@ const userToken = Authorization.generateToken({
 describe('Get a specific sale Ad:', () => {
   // eslint-disable-next-line no-undef
 
+  /*
   it('should get a car sale Ad by a valid ID', (done) => {
     request(app)
       .get(`/api/v1/car/${validID}`)
@@ -56,7 +58,7 @@ describe('Get a specific sale Ad:', () => {
         done(err);
       });
   });
-  /*
+  
   it('should return errors for invalid ID', (done) => {
     request(app)
       .get(`/api/v1/car/${invalidID}`)

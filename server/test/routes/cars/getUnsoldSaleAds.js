@@ -7,7 +7,9 @@ import Authorization from '../../../src/middlewares/Authorization';
 import hashPassword from '../../../src/helpers/hashPassword';
 
 
+// eslint-disable-next-line no-unused-vars
 const validID = 1;
+// eslint-disable-next-line no-unused-vars
 const invalidID = 30;
 
 // eslint-disable-next-line no-unused-vars
