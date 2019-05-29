@@ -39,7 +39,7 @@ describe('Car Routes: unsold cars', () => {
         done();
       });
   });
-  
+ 
   it('should return error for unauthorized access', (done) => {
     request(app)
       .patch(`/api/v1/car/${validId}/status`)

@@ -153,10 +153,7 @@ export default carRoutes;
  *       - name: id
  *         description: Id of the specific car to return
  *         in: path
- *         required: true
  *         type: int
- *         schema:
- *           $ref: '#/definitions/Car'
  *       - name : authorization
  *         description: Access token for authentication
  *         in : header
@@ -235,7 +232,40 @@ export default carRoutes;
  *       - apiKey : []
  */
 
-
+/**
+ * @swagger
+ *
+ * /api/v1/car/<:id>/status:
+ *   patch:
+ *     description: Mark a posted car Ad as sold.
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: Id of the specific car to update
+ *         in: path
+ *         type: int
+ *       - name : authorization
+ *         description: Access token for authentication
+ *         in : header
+ *         type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           $ref: '#/definitions/Car'
+ *       400:
+ *         description: Bad request
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Not found
+ *     security:
+ *       - apiKey : []
+ *
+ *
+ */
 /**
  * @swagger
  * Securitydefinitions:
