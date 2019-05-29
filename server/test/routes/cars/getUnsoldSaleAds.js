@@ -5,17 +5,13 @@ import { expect } from 'chai';
 import app from '../../../src/app';
 
 
-
 // eslint-disable-next-line no-unused-vars
 const validID = 1;
 // eslint-disable-next-line no-unused-vars
 const invalidID = 30;
 
 
-
-
 describe('Car Routes: unsold cars', () => {
-  
   /*
   it('get all unsold sale Ads', (done) => {
     request(app)
@@ -40,7 +36,7 @@ describe('Car Routes: unsold cars', () => {
       });
   });
   */
- 
+
   it('should return errors for unauthorized access', (done) => {
     request(app)
       .get('/api/v1/car?status=available')
@@ -55,5 +51,4 @@ describe('Car Routes: unsold cars', () => {
         done();
       });
   });
- 
 });

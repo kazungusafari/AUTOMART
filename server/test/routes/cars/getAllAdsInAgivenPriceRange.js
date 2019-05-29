@@ -10,7 +10,6 @@ const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJm
 
 
 describe('Car Routes: unsold cars', () => {
-  
 /*
   it('get all  unsold cars within a price range.', (done) => {
     request(app)

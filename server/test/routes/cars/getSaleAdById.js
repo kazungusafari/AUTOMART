@@ -31,7 +31,7 @@ describe('Get a specific sale Ad:', () => {
         done(err);
       });
   });
-  
+
   it('should return errors for invalid ID', (done) => {
     request(app)
       .get('/api/v1/car/45')
