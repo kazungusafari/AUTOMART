@@ -176,7 +176,33 @@ export default carRoutes;
  *
  *
  */
-
+/**
+ * @swagger
+ * /api/v1/car?status=available:
+ *   get:
+ *     description: Returns a list of all unsold car sale Ads
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           type: object
+ *           properties:
+ *             data:
+ *               type: array
+ *               description: All unsold car sale Ads
+ *               items:
+ *                 type: object
+ *                 proprties:
+ *                     $ref: '#/definitions/Car'
+ *       404:
+ *         description: Not Found
+ *       400:
+ *         description: Bad Request
+ *       401:
+ *         description: Unauthorized
+ *     security:
+ *       - apiKey : []
+ */
 
 /**
  * @swagger
