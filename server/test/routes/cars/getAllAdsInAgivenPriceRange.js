@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-irregular-whitespace */
 /* eslint-disable no-undef */
 /* eslint-disable import/no-extraneous-dependencies */
 import request from 'supertest';
@@ -10,7 +12,7 @@ const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJm
 
 
 describe('Car Routes: unsold cars', () => {
-/*
+
   it('get all  unsold cars within a price range.', (done) => {
     request(app)
       .get(encodeURI('/api/v1/car?status=available&min_price=​1000000​&max_price=​1500000'))
@@ -24,6 +26,7 @@ describe('Car Routes: unsold cars', () => {
   });
   it('should return error if no unsold cars within a given range is found', (done) => {
     request(app)
+      // eslint-disable-next-line no-irregular-whitespace
       .get(encodeURI('/api/v1/car?status=available&min_price=​10000000​&max_price=​15000000'))
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
@@ -33,7 +36,7 @@ describe('Car Routes: unsold cars', () => {
         done();
       });
   });
-*/
+
   it('should return error for unauthorized access', (done) => {
     request(app)
       .get(encodeURI('/api/v1/car?status=available&min_price=​100000​&max_price=​1500000'))

@@ -7,11 +7,12 @@ import Authorization from '../middlewares/Authorization';
 
 const carRoutes = express.Router();
 
-const validation = [ValidationHandler.validate, ValidationHandler.isEmptyReq];
+const validation = [ValidationHandler.validate];
 
 carRoutes.post('/', Authorization.authenticate, CarValidation.createSaleAd, validation, CarController.createSaleAd);
 carRoutes.get('/:id', Authorization.authenticate, CarValidation.getSaleAdById, validation, CarController.getSaleAdById);
 carRoutes.get('/', Authorization.authenticate, CarValidation.getAllSaleAds, validation, CarController.getAllSaleAds);
+carRoutes.patch('/:id/status', Authorization.authenticate, validation, CarController.markAdAsSold);
 
 export default carRoutes;
 

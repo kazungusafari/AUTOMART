@@ -79,14 +79,13 @@ class Car {
   /**
    *
    * @param {integer} id
-   * @param {string} status
    * @returns {object} car object
    */
-  updateStatus(id, status) {
+  updateStatus(id) {
     const car = this.findOne(id);
     const index = this.cars.indexOf(car);
     this.cars[index].modifiedDate = moment.now();
-    this.cars[index].status = status;
+    this.cars[index].status = 'sold';
     return this.cars[index];
   }
 

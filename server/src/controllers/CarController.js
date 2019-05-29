@@ -163,11 +163,10 @@ class CarController {
      * @memberof CarController
      */
   static async markAdAsSold(req, res) {
-    const car = await Car.findOne(req.query.id);
-
+    const car = await Car.findOne(parseInt(req.params.id, 10));
     if (car) {
       if (car.owner === req.user.id) {
-        const updatedCar = Car.updateStatus(req.query.id,req.query.status);
+        const updatedCar = Car.updateStatus(parseInt(req.params.id, 10));
         return res.status(200).json({
           status: res.statusCode,
           data: {
@@ -179,6 +178,7 @@ class CarController {
             price: updatedCar.price,
             state: updatedCar.state,
             status: updatedCar.status,
+            modifiedOn: updatedCar.modifiedOn,
           },
         });
       }
