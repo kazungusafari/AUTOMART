@@ -1,4 +1,4 @@
-import { check, param } from 'express-validator/check';
+import { check, param, query } from 'express-validator/check';
 import notEmpty from '../helpers/notEmpty';
 
 export default {
@@ -17,11 +17,16 @@ export default {
   ],
   getSaleAdById: [
     param('id')
-      .trim()
       .exists()
       .withMessage('Car id is required')
       .custom(value => notEmpty(value, 'Car id is required'))
       .isInt()
       .withMessage('Car id  can only be in the form of integers'),
+  ],
+  getAllSaleAds: [
+    query(['status', 'max_price', 'max_price'])
+      .isString()
+      .withMessage('Your query  should be of type string')
+      .optional(),
   ],
 };

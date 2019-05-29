@@ -1,8 +1,40 @@
-const tokens = {
-  adminToken: 'Bearer ',
-  invalidUserToken: 'Bearer VCJ9.eyJ1c2VyIjp7ImlkIjoxLCJmaXJzdG5hbWUiOiJLYXp1bmd1IiwibGFzdG5hbWUiOiJTYWZhcmkiLCJlbWFpbCI6ImthenVuZ3Uuc2FmYXJpQGdtYWlsLmNvbSIsImFkZHJlc3MiOnsiYm94TnVtYmVyIjo2NiwicG9zdGFsQ29kZSI6MTAxMDEsInRvd24iOiJOY2JpIn0sImlzQWRtaW4iOmZhbHNlLCJwYXNzd29yZCI6IiQyYiQxMCRRRGt5Wmw2TWtvMGxSUUowdE5TREcubUxSS3pvNUJTQmpxUks2REVtTDBlYVpUT1h5allRbSJ9LCJpYXQiOjE1NTkwMjg4MTEsImV4cCI6MTU1OTExNTIxMX0.qzylQK77T10ekWuxfqTd8THkG-8TcioRJgmAXgHrrJU ',
-  validUserToken: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJmaXJzdG5hbWUiOiJLYXp1bmd1IiwibGFzdG5hbWUiOiJTYWZhcmkiLCJlbWFpbCI6ImthenVuZ3Uuc2FmYXJpQGdtYWlsLmNvbSIsImFkZHJlc3MiOnsiYm94TnVtYmVyIjo2NiwicG9zdGFsQ29kZSI6MTAxMDEsInRvd24iOiJOYWlyb2JpIn0sImlzQWRtaW4iOmZhbHNlLCJwYXNzd29yZCI6IiQyYiQxMCQvWkVCNzBBTS5BS0piOG5JY1lNTDBPcHZRUnlacTA5MEdZQm10YUsyclJNSk5SZkxIZ1ZiQyJ9LCJpYXQiOjE1NTkwNDg1NjMsImV4cCI6MTU1OTEzNDk2M30.F7KDB_FOp5lQLbDaAzSsJt_pwDNMOLWaeJuhykbnVEQ',
-};
 
+import Authorization from '../../src/middlewares/Authorization';
+
+import hashPassword from '../../src/helpers/hashPassword';
+
+
+const adminToken = Authorization.generateToken({
+  id: 2,
+  firstname: 'Pedro',
+  lastname: 'Lili',
+  email: 'lili@gmail.com',
+  address: {
+    boxNumber: 60,
+    postalCode: 10101,
+    town: 'Kericho',
+  },
+  isAdmin: true,
+  password: hashPassword('pedrolili100', 10),
+});
+const userToken = Authorization.generateToken({
+  id: 1,
+  firstname: 'Kazungu',
+  lastname: 'Safari',
+  email: 'kazungu.safari@gmail.com',
+  address: {
+    boxNumber: 66,
+    postalCode: 10101,
+    town: 'Nairobi',
+  },
+  isAdmin: false,
+  password: hashPassword('kazungu100', 10),
+});
+
+
+const tokens = {
+  adminToken: `Bearer ${adminToken} `,
+  userToken: `Bearer ${userToken} `,
+};
 
 export default tokens;

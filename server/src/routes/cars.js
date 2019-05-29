@@ -2,16 +2,15 @@ import express from 'express';
 import ValidationHandler from '../middlewares/ValidationHandler';
 import CarController from '../controllers/CarController';
 import CarValidation from '../validations/carValidation';
-import Trim from '../middlewares/Trim';
 import Authorization from '../middlewares/Authorization';
 
 const carRoutes = express.Router();
 
-const validation = [ValidationHandler.validate, Trim.trim, ValidationHandler.isEmptyReq];
-
+const validation = [ValidationHandler.validate, ValidationHandler.isEmptyReq];
 
 carRoutes.post('/', Authorization.authenticate, CarValidation.createSaleAd, validation, CarController.createSaleAd);
 carRoutes.get('/:id/', Authorization.authenticate, CarValidation.getSaleAdById, validation, CarController.getSaleAdById);
+carRoutes.get('/', Authorization.authenticate, CarValidation.getAllSaleAds, validation, CarController.getAllSaleAds);
 
 export default carRoutes;
 
@@ -177,7 +176,33 @@ export default carRoutes;
  *
  *
  */
-
+/**
+ * @swagger
+ * /api/v1/car?status=available:
+ *   get:
+ *     description: Returns a list of all unsold car sale Ads
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           type: object
+ *           properties:
+ *             data:
+ *               type: array
+ *               description: All unsold car sale Ads
+ *               items:
+ *                 type: object
+ *                 proprties:
+ *                     $ref: '#/definitions/Car'
+ *       404:
+ *         description: Not Found
+ *       400:
+ *         description: Bad Request
+ *       401:
+ *         description: Unauthorized
+ *     security:
+ *       - apiKey : []
+ */
 
 /**
  * @swagger
