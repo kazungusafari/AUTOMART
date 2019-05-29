@@ -13,6 +13,7 @@ export default {
       manufacturer: 'BMW',
       model: '1 series',
       bodyType: 'saloon',
+      modifiedDate: null,
     },
     {
       id: 2,
@@ -24,6 +25,7 @@ export default {
       manufacturer: 'BMW',
       model: '1 series',
       bodyType: 'saloon',
+      modifiedDate: null,
     },
     {
       id: 3,
@@ -35,6 +37,7 @@ export default {
       manufacturer: 'Ford',
       model: 'Mustang',
       bodyType: 'car',
+      modifiedDate: null,
     },
     {
       id: 4,
@@ -46,6 +49,7 @@ export default {
       manufacturer: 'Ford',
       model: 'Mustang',
       bodyType: 'car',
+      modifiedDate: null,
     },
     {
       id: 5,
@@ -57,6 +61,7 @@ export default {
       manufacturer: 'Honda',
       model: '1300',
       bodyType: 'car',
+      modifiedDate: null,
     },
     {
       id: 6,
@@ -68,6 +73,7 @@ export default {
       manufacturer: 'Toyota',
       model: '86',
       bodyType: 'car',
+      modifiedDate: null,
     },
   ],
 };

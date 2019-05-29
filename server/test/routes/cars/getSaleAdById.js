@@ -18,7 +18,7 @@ const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJm
 describe('Get a specific sale Ad:', () => {
   // eslint-disable-next-line no-undef
 
-  /*
+  
   it('should get a car sale Ad by a valid ID', (done) => {
     request(app)
       .get(`/api/v1/car/${validID}`)
@@ -43,7 +43,7 @@ describe('Get a specific sale Ad:', () => {
         done(err);
       });
   });
-  */
+  
   it('should return errors for invalid ID', (done) => {
     request(app)
       .get('/api/v1/car/hhhh')

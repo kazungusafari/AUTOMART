@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import { config } from 'dotenv';
 import bcrypt from 'bcrypt';
 import User from '../models/user';

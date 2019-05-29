@@ -144,12 +144,52 @@ class CarController {
       return CarController.response(allUnsolds, res);
     }
     if (req.query.min_price && req.query.max_price) {
+      // eslint-disable-next-line max-len
       const allUnsolds = CarController.getAllSaleAdsWithinApriceRange(req.query.min_price, req.query.max_price);
       return CarController.response(allUnsolds, res);
     }
     return res.status(400).json({
       status: res.statusCode,
       error: 'Bad request',
+    });
+  }
+
+  /**
+     * Mark posted car as sold
+     * @static
+     * @param {*} req
+     * @param {*} res
+     * @returns { Object } Returns the updated car Object
+     * @memberof CarController
+     */
+  static async markAdAsSold(req, res) {
+    const car = await Car.findOne(parseInt(req.params.id, 10));
+    if (car) {
+      if (car.owner === req.user.id) {
+        const updatedCar = Car.updateStatus(parseInt(req.params.id, 10));
+        return res.status(200).json({
+          status: res.statusCode,
+          data: {
+            id: updatedCar.id,
+            owner: updatedCar.owner,
+            createdOn: updatedCar.createdOn,
+            manufacturer: updatedCar.manufacturer,
+            model: updatedCar.model,
+            price: updatedCar.price,
+            state: updatedCar.state,
+            status: updatedCar.status,
+            modifiedOn: updatedCar.modifiedOn,
+          },
+        });
+      }
+      return res.status(401).json({
+        status: res.statusCode,
+        error: 'Unauthorised User',
+      });
+    }
+    return res.status(404).json({
+      status: res.statusCode,
+      error: 'Not Found',
     });
   }
 }

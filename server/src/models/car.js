@@ -21,7 +21,7 @@ class Car {
   /**
    * @param {integer} userId
    * @param {object} data
-   * @returns {object} user object
+   * @returns {object} car object
    */
   create(userId, data) {
     const newCar = {
@@ -78,22 +78,14 @@ class Car {
 
   /**
    *
-   * @param {string} id
-   * @param {object} data
+   * @param {integer} id
+   * @returns {object} car object
    */
-  update(id, data) {
+  updateStatus(id) {
     const car = this.findOne(id);
     const index = this.cars.indexOf(car);
-    this.cars[index].id = car.id;
-    this.cars[index].owner = car.owner;
-    this.cars[index].createdOn = car.createdOn;
     this.cars[index].modifiedDate = moment.now();
-    this.cars[index].state = car.state;
-    this.cars[index].status = data.status || car.status;
-    this.cars[index].price = data.price || car.price;
-    this.cars[index].model = car.model;
-    this.cars[index].manufacturer = car.manufacturer;
-    this.cars[index].bodyType = car.bodyType;
+    this.cars[index].status = 'sold';
     return this.cars[index];
   }
 

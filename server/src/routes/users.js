@@ -5,7 +5,7 @@ import UserValidation from '../validations/userValidation';
 
 const userRoutes = express.Router();
 
-const validation = [ValidationHandler.validate, ValidationHandler.isEmptyReq];
+const validation = [ValidationHandler.validate];
 
 
 userRoutes.post('/signup', UserValidation.signup, validation, UserController.signup);
