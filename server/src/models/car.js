@@ -67,11 +67,13 @@ class Car {
   }
 
   /**
+   * @param {string} minPrice
+   * @param {string} maxPrice
    * @returns {array} returns all unsold cars within a given price range
    */
   findAllByPriceRange(minPrice, maxPrice) {
-    const unsoldCars = this.cars.filter(this.cars, car => car.status === 'available');
-    return unsoldCars.filter(unsoldCars, car => car.price >= minPrice && car.price <= maxPrice);
+    const unsoldCars = this.cars.filter(car => car.status === 'available');;
+    return unsoldCars.filter(car => car.price >= minPrice && car.price <= maxPrice);
   }
 
   /**
