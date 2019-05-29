@@ -33,8 +33,8 @@ const userToken = Authorization.generateToken({
 
 
 const tokens = {
-  adminToken: `Bearer ${adminToken} `,
-  userToken: `Bearer ${userToken} `,
+  adminToken,
+  userToken,
 };
 
 export default tokens;

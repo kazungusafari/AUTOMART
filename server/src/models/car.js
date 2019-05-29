@@ -78,7 +78,7 @@ class Car {
 
   /**
    *
-   * @param {string} id
+   * @param {integer} id
    * @param {string} status
    * @returns {object} car object
    */
