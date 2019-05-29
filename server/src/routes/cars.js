@@ -232,7 +232,40 @@ export default carRoutes;
  *     security:
  *       - apiKey : []
  */
-
+/**
+ * @swagger
+ *
+ * /api/v1/car/<:id>/price:
+ *   patch:
+ *     description: Update the price of a car..
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: Id of the specific car to update
+ *         in: path
+ *         type: int
+ *       - name : authorization
+ *         description: Access token for authentication
+ *         in : header
+ *         type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           $ref: '#/definitions/Car'
+ *       400:
+ *         description: Bad request
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Not found
+ *     security:
+ *       - apiKey : []
+ *
+ *
+ */
 /**
  * @swagger
  *
