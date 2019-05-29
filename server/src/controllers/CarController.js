@@ -157,9 +157,18 @@ class CarController {
       const allUnsolds = CarController.getAllSaleAdsWithinApriceRange(req.query.min_price, req.query.max_price);
       return CarController.response(allUnsolds, res);
     }
-    return res.status(400).json({
+    if (req.query.status == null && req.query.min_price == null && req.query.max_price == null) {
+      if (req.user.isAdmin === true) {
+        return CarController.getAllCars();
+      }
+      return res.status(403).json({
+        status: res.statusCode,
+        error: 'Forbidden',
+      });
+    }
+    return res.status(404).json({
       status: res.statusCode,
-      error: 'Bad request',
+      error: 'Not found',
     });
   }
 
