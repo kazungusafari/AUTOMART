@@ -20,6 +20,7 @@ describe('Car Routes: unsold cars', () => {
       .patch(`/api/v1/car/${validId}/price`)
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
+      .send({ price: 15000000 })
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.a('object');
@@ -32,6 +33,7 @@ describe('Car Routes: unsold cars', () => {
       .patch(`/api/v1/car/${invalidId}/price`)
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
+      .send({ price: 1500000 })
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
         expect(res.body.error).to.equal('Not Found');
@@ -45,6 +47,7 @@ describe('Car Routes: unsold cars', () => {
       .patch(`/api/v1/car/${validId}/price`)
       .set('Accept', 'application/json')
       .set('authorization', '')
+      .send({ price: 15000000 })
       .end((err, res) => {
         expect(res.statusCode).to.equal(401);
         expect(res.body).to.be.a('object');
@@ -60,6 +63,7 @@ describe('Car Routes: unsold cars', () => {
       .patch(`/api/v1/car/${invalidDataType}/price`)
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
+      .send({ price: 15000000 })
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
         expect(res.body.error).to.equal('Not Found');
