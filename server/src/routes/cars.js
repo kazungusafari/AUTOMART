@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 import express from 'express';
 import ValidationHandler from '../middlewares/ValidationHandler';
 import CarController from '../controllers/CarController';
@@ -9,7 +10,7 @@ const carRoutes = express.Router();
 const validation = [ValidationHandler.validate, ValidationHandler.isEmptyReq];
 
 carRoutes.post('/', Authorization.authenticate, CarValidation.createSaleAd, validation, CarController.createSaleAd);
-carRoutes.get('/:id/', Authorization.authenticate, CarValidation.getSaleAdById, validation, CarController.getSaleAdById);
+carRoutes.get('/:id', Authorization.authenticate, CarValidation.getSaleAdById, validation, CarController.getSaleAdById);
 carRoutes.get('/', Authorization.authenticate, CarValidation.getAllSaleAds, validation, CarController.getAllSaleAds);
 
 export default carRoutes;
@@ -144,12 +145,12 @@ export default carRoutes;
  *
  * /api/v1/car/<:id>/:
  *   get:
- *     description: Returns a single sale Ad
+ *     description: Return  a specific car
  *     produces:
  *       - application/json
  *     parameters:
  *       - name: id
- *         description: Id of the sale Ad to return
+ *         description: Id of the specific car to return
  *         in: path
  *         required: true
  *         type: int
@@ -180,7 +181,7 @@ export default carRoutes;
  * @swagger
  * /api/v1/car?status=available:
  *   get:
- *     description: Returns a list of all unsold car sale Ads
+ *     description: Returns a list of all unsold cars.
  *     responses:
  *       200:
  *         description: Success
@@ -189,7 +190,7 @@ export default carRoutes;
  *           properties:
  *             data:
  *               type: array
- *               description: All unsold car sale Ads
+ *               description: All unsold cars.
  *               items:
  *                 type: object
  *                 proprties:
@@ -203,6 +204,36 @@ export default carRoutes;
  *     security:
  *       - apiKey : []
  */
+
+
+/**
+ * @swagger
+ * /api/v1/car?status=available&min_price=XXXValue​&max_price=XXXValue:
+ *   get:
+ *     description: Returns a list of all unsold cars within a price range
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           type: object
+ *           properties:
+ *             data:
+ *               type: array
+ *               description: all unsold cars within a price range
+ *               items:
+ *                 type: object
+ *                 proprties:
+ *                     $ref: '#/definitions/Car'
+ *       404:
+ *         description: Not Found
+ *       400:
+ *         description: Bad Request
+ *       401:
+ *         description: Unauthorized
+ *     security:
+ *       - apiKey : []
+ */
+
 
 /**
  * @swagger

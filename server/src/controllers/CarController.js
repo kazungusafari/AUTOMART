@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import { config } from 'dotenv';
 import User from '../models/user';
 import Car from '../models/car';
@@ -58,7 +59,7 @@ class CarController {
   static async getSaleAdById(req, res) {
     const user = await User.findOne(req.user.email);
     // eslint-disable-next-line radix
-    const saleAd = await Car.findOne(parseInt(req.params.id));
+    const saleAd = await Car.findOne(parseInt(req.params.id, 10));
 
 
     if (saleAd) {
@@ -83,6 +84,53 @@ class CarController {
   }
 
   /**
+     * Get all available unsold car Ads
+     * @static
+     * @param {*} req
+     * @param {*} res
+     * @returns { Array } Returns an array of Objects
+     * @memberof CarController
+     */
+  // eslint-disable-next-line class-methods-use-this
+  static getAllSaleAdsByStatus(status) {
+    return Car.findAllByStatus(status);
+  }
+
+  /**
+     * Get all unsold car Ads within a price range
+     * @static
+     * @param {*} req
+     * @param {*} res
+     * @returns { Array } Returns an array of Objects
+     * @memberof CarController
+     */
+  static getAllSaleAdsWithinApriceRange(min, max) {
+    // eslint-disable-next-line no-return-assign
+    return Car.findAllByPriceRange(min, max);
+  }
+
+  /**
+     * Return a custom response
+     * @static
+     * @param {*} req
+     * @param {*} res
+     * @returns { Array } Returns an array of Objects
+     * @memberof CarController
+     */
+  static response(arr, res) {
+    if (arr.length > 0) {
+      return res.status(200).json({
+        status: res.statusCode,
+        data: arr,
+      });
+    }
+    return res.status(404).json({
+      status: res.statusCode,
+      error: 'Not found',
+    });
+  }
+
+  /**
      * Get all unsold car Ads
      * @static
      * @param {*} req
@@ -92,18 +140,12 @@ class CarController {
      */
   static async getAllSaleAds(req, res) {
     if (req.query.status) {
-      const allUnsolds = await Car.findAllByStatus(req.query.status);
-
-      if (allUnsolds.length > 0) {
-        return res.status(200).json({
-          status: res.statusCode,
-          data: allUnsolds,
-        });
-      }
-      return res.status(404).json({
-        status: res.statusCode,
-        error: 'Not found',
-      });
+      const allUnsolds = CarController.getAllSaleAdsByStatus(req.query.status);
+      return CarController.response(allUnsolds, res);
+    }
+    if (req.query.min_price && req.query.max_price) {
+      const allUnsolds = CarController.getAllSaleAdsWithinApriceRange(req.query.min_price, req.query.max_price);
+      return CarController.response(allUnsolds, res);
     }
     return res.status(400).json({
       status: res.statusCode,
