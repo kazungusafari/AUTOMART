@@ -52,7 +52,7 @@ class Car {
   }
 
   /**
-   * @returns {array} returns all cars
+   * @returns { Array } returns all cars
    */
   findAll() {
     return this.cars;

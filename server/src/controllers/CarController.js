@@ -190,6 +190,28 @@ class CarController {
   }
 
   /**
+     * Return all posted ads whether sold or available.
+     * @static
+     * @param {*} req
+     * @param {*} res
+     * @returns { Array } Returns an array of all posted ads
+     * @memberof CarController
+     */
+  static async getAllCars(req, res) {
+    const allCars = await Car.findAll();
+    if (allCars) {
+      return res.status(200).json({
+        status: res.statusCode,
+        data: allCars,
+      });
+    }
+    return res.status(404).json({
+      status: res.statusCode,
+      error: 'Not Found',
+    });
+  }
+
+  /**
      * Update the price of a car.
      * @static
      * @param {*} req
