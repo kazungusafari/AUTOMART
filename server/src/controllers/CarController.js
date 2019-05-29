@@ -59,7 +59,7 @@ class CarController {
   static async getSaleAdById(req, res) {
     const user = await User.findOne(req.user.email);
     // eslint-disable-next-line radix
-    const saleAd = await Car.findOne(parseInt(req.params.id));
+    const saleAd = await Car.findOne(parseInt(req.params.id, 10));
 
 
     if (saleAd) {
@@ -104,7 +104,7 @@ class CarController {
      * @returns { Array } Returns an array of Objects
      * @memberof CarController
      */
- static getAllSaleAdsWithinApriceRange(min, max) {
+  static getAllSaleAdsWithinApriceRange(min, max) {
     // eslint-disable-next-line no-return-assign
     return Car.findAllByPriceRange(min, max);
   }

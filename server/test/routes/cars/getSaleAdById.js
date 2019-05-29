@@ -4,41 +4,14 @@
 import request from 'supertest';
 import { expect } from 'chai';
 import app from '../../../src/app';
-import Authorization from '../../../src/middlewares/Authorization';
-import hashPassword from '../../../src/helpers/hashPassword';
+// import tokens from '../../utils/tokens';
 
+// eslint-disable-next-line no-unused-vars
 const validID = 1;
 // eslint-disable-next-line no-unused-vars
 const invalidID = 30;
 
-// eslint-disable-next-line no-unused-vars
-const adminToken = Authorization.generateToken({
-  id: 2,
-  firstname: 'Pedro',
-  lastname: 'Lili',
-  email: 'lili@gmail.com',
-  address: {
-    boxNumber: 60,
-    postalCode: 10101,
-    town: 'Kericho',
-  },
-  isAdmin: true,
-  password: hashPassword('pedrolili100', 10),
-});
-// eslint-disable-next-line no-unused-vars
-const userToken = Authorization.generateToken({
-  id: 1,
-  firstname: 'Kazungu',
-  lastname: 'Safari',
-  email: 'kazungu.safari@gmail.com',
-  address: {
-    boxNumber: 66,
-    postalCode: 10101,
-    town: 'Nairobi',
-  },
-  isAdmin: false,
-  password: hashPassword('kazungu100', 10),
-});
+const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJmaXJzdG5hbWUiOiJLYXp1bmd1IiwibGFzdG5hbWUiOiJTYWZhcmkiLCJlbWFpbCI6ImthenVuZ3Uuc2FmYXJpQGdtYWlsLmNvbSIsImFkZHJlc3MiOnsiYm94TnVtYmVyIjo2NiwicG9zdGFsQ29kZSI6MTAxMDEsInRvd24iOiJOYWlyb2JpIn0sImlzQWRtaW4iOmZhbHNlLCJwYXNzd29yZCI6IiQyYiQxMCRvLmRxUHhQdmJHQ24wTnk2R3Jsbi8uR3hnbjlwbzdIVXMzLzVmQVhVeGRLS0dwZ2JsYUdrLiJ9LCJpYXQiOjE1NTkxMDgyMDYsImV4cCI6MTU1OTE5NDYwNn0.CpBjTCdwJjnKmy7frSjqef9sJlhzvLZasla4aT2rN2E';
 
 
 // eslint-disable-next-line no-undef
@@ -49,7 +22,7 @@ describe('Get a specific sale Ad:', () => {
   it('should get a car sale Ad by a valid ID', (done) => {
     request(app)
       .get(`/api/v1/car/${validID}`)
-      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
@@ -61,9 +34,9 @@ describe('Get a specific sale Ad:', () => {
   
   it('should return errors for invalid ID', (done) => {
     request(app)
-      .get(`/api/v1/car/${invalidID}`)
+      .get('/api/v1/car/45')
       .set('authorization', `Bearer ${userToken}`)
-      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
         expect(res.body.message).to.equal('Sale Ad Not Found');
@@ -74,7 +47,7 @@ describe('Get a specific sale Ad:', () => {
   it('should return errors for invalid ID', (done) => {
     request(app)
       .get('/api/v1/car/hhhh')
-      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);

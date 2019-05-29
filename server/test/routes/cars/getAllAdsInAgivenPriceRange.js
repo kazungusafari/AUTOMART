@@ -3,23 +3,18 @@
 import request from 'supertest';
 import { expect } from 'chai';
 import app from '../../../src/app';
+// import tokens from '../../utils/tokens';
 
 
-
-// eslint-disable-next-line no-unused-vars
-const validID = 1;
-// eslint-disable-next-line no-unused-vars
-const invalidID = 30;
-
-
+const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJmaXJzdG5hbWUiOiJLYXp1bmd1IiwibGFzdG5hbWUiOiJTYWZhcmkiLCJlbWFpbCI6ImthenVuZ3Uuc2FmYXJpQGdtYWlsLmNvbSIsImFkZHJlc3MiOnsiYm94TnVtYmVyIjo2NiwicG9zdGFsQ29kZSI6MTAxMDEsInRvd24iOiJOYWlyb2JpIn0sImlzQWRtaW4iOmZhbHNlLCJwYXNzd29yZCI6IiQyYiQxMCRvLmRxUHhQdmJHQ24wTnk2R3Jsbi8uR3hnbjlwbzdIVXMzLzVmQVhVeGRLS0dwZ2JsYUdrLiJ9LCJpYXQiOjE1NTkxMDgyMDYsImV4cCI6MTU1OTE5NDYwNn0.CpBjTCdwJjnKmy7frSjqef9sJlhzvLZasla4aT2rN2E';
 
 
 describe('Car Routes: unsold cars', () => {
   
-  /*
-  it('get all unsold sale Ads', (done) => {
+/*
+  it('get all  unsold cars within a price range.', (done) => {
     request(app)
-      .get('/api/v1/car?status=available')
+      .get(encodeURI('/api/v1/car?status=available&min_price=​1000000​&max_price=​1500000'))
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
@@ -28,9 +23,9 @@ describe('Car Routes: unsold cars', () => {
         done();
       });
   });
-  it('should return errors for wrong car sale Ad status', (done) => {
+  it('should return error if no unsold cars within a given range is found', (done) => {
     request(app)
-      .get('/api/v1/car?status=sold')
+      .get(encodeURI('/api/v1/car?status=available&min_price=​10000000​&max_price=​15000000'))
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
@@ -39,11 +34,10 @@ describe('Car Routes: unsold cars', () => {
         done();
       });
   });
-  */
- 
-  it('should return errors for unauthorized access', (done) => {
+*/
+  it('should return error for unauthorized access', (done) => {
     request(app)
-      .get('/api/v1/car?status=available')
+      .get(encodeURI('/api/v1/car?status=available&min_price=​100000​&max_price=​1500000'))
       .set('Accept', 'application/json')
       .set('authorization', '')
       .end((err, res) => {
@@ -55,5 +49,4 @@ describe('Car Routes: unsold cars', () => {
         done();
       });
   });
- 
 });

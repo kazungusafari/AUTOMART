@@ -9,7 +9,7 @@ const carRoutes = express.Router();
 const validation = [ValidationHandler.validate, ValidationHandler.isEmptyReq];
 
 carRoutes.post('/', Authorization.authenticate, CarValidation.createSaleAd, validation, CarController.createSaleAd);
-carRoutes.get('/:id/', Authorization.authenticate, CarValidation.getSaleAdById, validation, CarController.getSaleAdById);
+carRoutes.get('/:id', Authorization.authenticate, CarValidation.getSaleAdById, validation, CarController.getSaleAdById);
 carRoutes.get('/', Authorization.authenticate, CarValidation.getAllSaleAds, validation, CarController.getAllSaleAds);
 
 export default carRoutes;
