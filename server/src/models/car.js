@@ -89,6 +89,19 @@ class Car {
     return this.cars[index];
   }
 
+  /**
+   *
+   * @param {integer} id id of the car
+   * @param {integer} price new selling price
+   * @returns {object} car object
+   */
+  updateSellingPrice(id, price) {
+    const car = this.findOne(id);
+    const index = this.cars.indexOf(car);
+    this.cars[index].modifiedDate = moment.now();
+    this.cars[index].price = price;
+    return this.cars[index];
+  }
 
   /**
    *

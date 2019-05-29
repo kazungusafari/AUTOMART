@@ -13,6 +13,7 @@ carRoutes.post('/', Authorization.authenticate, CarValidation.createSaleAd, vali
 carRoutes.get('/:id', Authorization.authenticate, CarValidation.getSaleAdById, validation, CarController.getSaleAdById);
 carRoutes.get('/', Authorization.authenticate, CarValidation.getAllSaleAds, validation, CarController.getAllSaleAds);
 carRoutes.patch('/:id/status', Authorization.authenticate, validation, CarController.markAdAsSold);
+carRoutes.patch('/:id/price', Authorization.authenticate, validation, CarController.UpdatePrice);
 
 export default carRoutes;
 
@@ -231,7 +232,40 @@ export default carRoutes;
  *     security:
  *       - apiKey : []
  */
-
+/**
+ * @swagger
+ *
+ * /api/v1/car/<:id>/price:
+ *   patch:
+ *     description: Update the price of a car..
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: Id of the specific car to update
+ *         in: path
+ *         type: int
+ *       - name : authorization
+ *         description: Access token for authentication
+ *         in : header
+ *         type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           $ref: '#/definitions/Car'
+ *       400:
+ *         description: Bad request
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Not found
+ *     security:
+ *       - apiKey : []
+ *
+ *
+ */
 /**
  * @swagger
  *

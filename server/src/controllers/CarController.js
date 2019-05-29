@@ -21,7 +21,6 @@ class CarController {
    */
   static async createSaleAd(req, res) {
     const user = User.findOne(req.user.email);
-
     if (user) {
       const saleAd = Car.create(req.user.id, req.body);
       return res.status(201).send(
@@ -57,25 +56,10 @@ class CarController {
    */
 
   static async getSaleAdById(req, res) {
-    const user = await User.findOne(req.user.email);
     // eslint-disable-next-line radix
     const saleAd = await Car.findOne(parseInt(req.params.id, 10));
-
-
     if (saleAd) {
-      return res.status(200).json({
-        status: res.statusCode,
-        data: {
-          id: saleAd.id,
-          owner: user.id,
-          createdOn: saleAd.createdOn,
-          manufacturer: saleAd.manufacturer,
-          model: saleAd.model,
-          price: saleAd.price,
-          state: saleAd.state,
-          status: saleAd.status,
-        },
-      });
+      return CarController.customResponse(saleAd, res);
     }
     return res.status(404).json({
       status: res.statusCode,
@@ -131,6 +115,31 @@ class CarController {
   }
 
   /**
+     * Return a custom response
+     * @static
+     * @param {Object} obj the car object
+     * @param {*} res the HTTP response object
+     * @returns { Object } Returns a car Object
+     * @memberof CarController
+     */
+  static customResponse(obj, res) {
+    return res.status(200).json({
+      status: res.statusCode,
+      data: {
+        id: obj.id,
+        owner: obj.owner,
+        createdOn: obj.createdOn,
+        manufacturer: obj.manufacturer,
+        model: obj.model,
+        price: obj.price,
+        state: obj.state,
+        status: obj.status,
+        modifiedOn: obj.modifiedOn,
+      },
+    });
+  }
+
+  /**
      * Get all unsold car Ads
      * @static
      * @param {*} req
@@ -167,20 +176,33 @@ class CarController {
     if (car) {
       if (car.owner === req.user.id) {
         const updatedCar = Car.updateStatus(parseInt(req.params.id, 10));
-        return res.status(200).json({
-          status: res.statusCode,
-          data: {
-            id: updatedCar.id,
-            owner: updatedCar.owner,
-            createdOn: updatedCar.createdOn,
-            manufacturer: updatedCar.manufacturer,
-            model: updatedCar.model,
-            price: updatedCar.price,
-            state: updatedCar.state,
-            status: updatedCar.status,
-            modifiedOn: updatedCar.modifiedOn,
-          },
-        });
+        return CarController.customResponse(updatedCar, res);
+      }
+      return res.status(401).json({
+        status: res.statusCode,
+        error: 'Unauthorised User',
+      });
+    }
+    return res.status(404).json({
+      status: res.statusCode,
+      error: 'Not Found',
+    });
+  }
+
+  /**
+     * Update the price of a car.
+     * @static
+     * @param {*} req
+     * @param {*} res
+     * @returns { Object } Returns the updated car Object
+     * @memberof CarController
+     */
+  static async UpdatePrice(req, res) {
+    const car = await Car.findOne(parseInt(req.params.id, 10));
+    if (car) {
+      if (car.owner === req.user.id) {
+        const updatedCar = Car.updateSellingPrice(parseInt(req.params.id, 10), req.body.price);
+        return CarController.customResponse(updatedCar, res);
       }
       return res.status(401).json({
         status: res.statusCode,
