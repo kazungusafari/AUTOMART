@@ -14,6 +14,7 @@ carRoutes.get('/:id', Authorization.authenticate, CarValidation.getSaleAdById, v
 carRoutes.get('/', Authorization.authenticate, CarValidation.getAllSaleAds, validation, CarController.getAllSaleAds);
 carRoutes.patch('/:id/status', Authorization.authenticate, validation, CarController.markAdAsSold);
 carRoutes.patch('/:id/price', Authorization.authenticate, validation, CarController.UpdatePrice);
+carRoutes.delete('/:id', Authorization.authenticate, CarValidation.getSaleAdById, validation, CarController.deleteSaleAdById);
 
 export default carRoutes;
 
@@ -140,7 +141,40 @@ export default carRoutes;
  *
  *
  */
-
+/**
+ * @swagger
+ *
+ * /api/v1/car/<:id>/:
+ *   delete: 
+ *     description: Delete a specific car Ad.
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: Id of the specific car to delete
+ *         in: path
+ *         type: int
+ *       - name : authorization
+ *         description: Access token for authentication
+ *         in : header
+ *         type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Success
+ *       400:
+ *         description: Bad request
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Not found
+ *       403:
+ *         description: Forbidden
+ *     security:
+ *       - apiKey : []
+ *
+ *
+ */
 
 /**
  * @swagger
