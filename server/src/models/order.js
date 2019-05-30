@@ -24,14 +24,14 @@ class Order {
   }
 
   /**
-   * @param {integer} orderId id of the order
+   * @param {integer} orderId id of the car
    * @param {object} data the order details
    * @returns {object} order object
    */
-  create(orderId, data) {
+  create(carId, data) {
     const newOrder = {
       id: this.numberOforders + 1,
-      orderID: orderId || '',
+      carID: carId || '',
       createdOn: dateTime || '',
       status: data.status || '',
       price: data.price || '',
