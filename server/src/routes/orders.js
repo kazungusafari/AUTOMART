@@ -131,7 +131,7 @@ export default orderRoutes;
  *       200:
  *         description: Success
  *         schema:
- *           $ref: '#/definitions/Car'
+ *           $ref: '#/definitions/Order'
  *       400:
  *         description: Bad request
  *       401:
