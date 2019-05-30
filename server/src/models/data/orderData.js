@@ -9,6 +9,7 @@ export default {
     {
       id: 1,
       carId: 1,
+      owner: 1,
       createdOn: dateTime,
       state: 'used',
       status: 'available',
@@ -19,6 +20,7 @@ export default {
     {
       id: 2,
       carId: 1,
+      owner: 1,
       createdOn: dateTime,
       state: 'new',
       status: 'available',
@@ -29,6 +31,7 @@ export default {
     {
       id: 3,
       carId: 1,
+      owner: 1,
       createdOn: dateTime,
       state: 'new',
       status: 'available',
@@ -39,6 +42,7 @@ export default {
     {
       id: 4,
       carId: 1,
+      owner: 1,
       createdOn: dateTime,
       state: 'used',
       status: 'sold',
@@ -49,6 +53,7 @@ export default {
     {
       id: 5,
       carId: 1,
+      owner: 1,
       createdOn: dateTime,
       state: 'new',
       status: 'sold',
@@ -59,6 +64,7 @@ export default {
     {
       id: 6,
       carId: 1,
+      owner: 1,
       createdOn: dateTime,
       state: 'new',
       status: 'available',
