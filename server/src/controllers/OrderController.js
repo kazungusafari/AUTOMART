@@ -20,9 +20,9 @@ class OrderController {
    * @memberof UserController
    */
   static async createOrder(req, res) {
-    const car = Car.findOne(req.body.carId);
+    const car = await Car.findOne(req.body.carId);
     if (car) {
-      const order = Order.create(req.body.carId, req.body);
+      const order = await Order.create(req.body.carId, req.body);
       return res.status(201).send(
         {
           status: res.statusCode,
@@ -42,10 +42,6 @@ class OrderController {
       error: 'Car not found',
     });
   }
-  
-
-  
-  
 }
 
 export default OrderController;
