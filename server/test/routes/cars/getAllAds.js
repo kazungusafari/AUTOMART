@@ -11,12 +11,13 @@ const { adminToken, userToken } = tokens;
 
 
 describe('Car Routes: All cars', () => {
-  it('get all cars within .', (done) => {
+  it('get all cars', (done) => {
     request(app)
       .get('/api/v1/car/')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${adminToken}`)
       .end((err, res) => {
+        console.log(res)
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.a('object');
         done();
@@ -29,8 +30,21 @@ describe('Car Routes: All cars', () => {
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
-        expect(res.statusCode).to.equal(404);
-        expect(res.body.errors[0].msg).to.equal('Not Found');
+        expect(res.statusCode).to.equal(403);
+        expect(res.body.error).to.equal('Forbidden');
+        done();
+      });
+  });
+
+  it('should return error no token is provided', (done) => {
+    request(app)
+      // eslint-disable-next-line no-irregular-whitespace
+      .get('/api/v1/car/')
+      .set('Accept', 'application/json')
+      .set('authorization', '')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        expect(res.body.error).to.equal('Unauthorized user');
         done();
       });
   });

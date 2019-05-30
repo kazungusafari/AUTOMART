@@ -7,7 +7,7 @@ import { matchedData } from 'express-validator/filter';
  * @class ValidationHandler
  */
 class ValidationHandler {
-   /**
+  /**
      * Sends validation errors if existent, passes it on to the next middleware if not
      * @method validate
      * @memberof ValidationHandler

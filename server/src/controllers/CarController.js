@@ -68,53 +68,6 @@ class CarController {
   }
 
   /**
-     * Get all available unsold car Ads
-     * @static
-     * @param {*} req
-     * @param {*} res
-     * @returns { Array } Returns an array of Objects
-     * @memberof CarController
-     */
-  // eslint-disable-next-line class-methods-use-this
-  static getAllSaleAdsByStatus(status) {
-    return Car.findAllByStatus(status);
-  }
-
-  /**
-     * Get all unsold car Ads within a price range
-     * @static
-     * @param {*} req
-     * @param {*} res
-     * @returns { Array } Returns an array of Objects
-     * @memberof CarController
-     */
-  static getAllSaleAdsWithinApriceRange(min, max) {
-    // eslint-disable-next-line no-return-assign
-    return Car.findAllByPriceRange(min, max);
-  }
-
-  /**
-     * Return a custom response
-     * @static
-     * @param {*} req
-     * @param {*} res
-     * @returns { Array } Returns an array of Objects
-     * @memberof CarController
-     */
-  static response(arr, res) {
-    if (arr.length > 0) {
-      return res.status(200).json({
-        status: res.statusCode,
-        data: arr,
-      });
-    }
-    return res.status(404).json({
-      status: res.statusCode,
-      error: 'Not found',
-    });
-  }
-
-  /**
      * Return a custom response
      * @static
      * @param {Object} obj the car object
@@ -148,23 +101,33 @@ class CarController {
      * @memberof CarController
      */
   static async getAllSaleAds(req, res) {
-    if (req.query.status) {
-      const allUnsolds = CarController.getAllSaleAdsByStatus(req.query.status);
-      return CarController.response(allUnsolds, res);
-    }
-    if (req.query.min_price && req.query.max_price) {
-      // eslint-disable-next-line max-len
-      const allUnsolds = CarController.getAllSaleAdsWithinApriceRange(req.query.min_price, req.query.max_price);
-      return CarController.response(allUnsolds, res);
-    }
-    if (req.query.status == null && req.query.min_price == null && req.query.max_price == null) {
+    // eslint-disable-next-line radix
+    const queryLength = parseInt(Object.keys(req.query).length);
+    // eslint-disable-next-line no-empty
+    if (queryLength === 0) {
       if (req.user.isAdmin === true) {
-        return CarController.getAllCars();
+        return CarController.getAllCars(res);
       }
       return res.status(403).json({
         status: res.statusCode,
         error: 'Forbidden',
       });
+    }
+    if (queryLength === 1 && req.query.status) {
+      if (req.query.status === 'available') {
+        const allUnsolds = Car.findAllByStatus(req.query.status);
+        return CarController.response(allUnsolds, res);
+      }
+      return res.status(404).json({
+        status: res.statusCode,
+        error: 'Not found',
+      });
+    }
+    if (queryLength === 3 && req.query.min_price && req.query.max_price && req.query.status) {
+      const minPrice = req.query.min_price;
+      const maxPrice = req.query.max_price;
+      const allUnsolds = Car.findAllByPriceRange(minPrice, maxPrice, req.query.status);
+      return CarController.response(allUnsolds, res);
     }
     return res.status(404).json({
       status: res.statusCode,
@@ -206,17 +169,28 @@ class CarController {
      * @returns { Array } Returns an array of all posted ads
      * @memberof CarController
      */
-  static async getAllCars(req, res) {
+  static async getAllCars(res) {
     const allCars = await Car.findAll();
-    if (allCars) {
+    return CarController.response(allCars, res);
+  }
+
+  /**
+     * Return a custom response
+     * @static
+     * @param {*} res the HTTP response object
+     * @returns { Array } Returns an array of Objects
+     * @memberof CarController
+     */
+  static response(arr, res) {
+    if (arr.length > 0) {
       return res.status(200).json({
         status: res.statusCode,
-        data: allCars,
+        data: arr,
       });
     }
     return res.status(404).json({
       status: res.statusCode,
-      error: 'Not Found',
+      error: 'Not found',
     });
   }
 

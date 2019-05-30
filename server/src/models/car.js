@@ -1,3 +1,4 @@
+/* eslint-disable no-tabs */
 /* eslint-disable eqeqeq */
 import moment from 'moment';
 import { config } from 'dotenv';
@@ -67,13 +68,18 @@ class Car {
   }
 
   /**
-   * @param {string} minPrice
-   * @param {string} maxPrice
+   * @param {integer} minPrice
+   * @param {integer} maxPrice
+   * @param {string} status
    * @returns {array} returns all unsold cars within a given price range
    */
-  findAllByPriceRange(minPrice, maxPrice) {
-    const unsoldCars = this.cars.filter(car => car.status === 'available');
-    return unsoldCars.filter(car => car.price >= minPrice && car.price <= maxPrice);
+  findAllByPriceRange(minPrice, maxPrice, status) {
+    const cars = [];
+    this.cars.forEach((car) => {
+      // eslint-disable-next-line max-len
+      if ((car.status === status) && (car.price >= minPrice && car.price <= maxPrice)) cars.push(car);
+    });
+    return cars;
   }
 
   /**
