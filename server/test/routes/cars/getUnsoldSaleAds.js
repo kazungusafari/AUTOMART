@@ -41,8 +41,6 @@ describe('Car Routes: unsold cars', () => {
         done();
       });
   });
-  
-
   it('should return errors for unauthorized access', (done) => {
     request(app)
       .get('/api/v1/car?status=available')

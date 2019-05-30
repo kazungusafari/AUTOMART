@@ -300,6 +300,34 @@ export default carRoutes;
  *
  *
  */
+
+ /**
+ * @swagger
+ * /api/v1/car/:
+ *   get:
+ *     description: Returns a list of all posted ads whether sold or available.
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           type: object
+ *           properties:
+ *             data:
+ *               type: array
+ *               description: all posted ads whether sold or available.
+ *               items:
+ *                 type: object
+ *                 proprties:
+ *                     $ref: '#/definitions/Car'
+ *       404:
+ *         description: Not Found
+ *       400:
+ *         description: Bad Request
+ *       401:
+ *         description: Unauthorized
+ *     security:
+ *       - apiKey : []
+ */
 /**
  * @swagger
  * Securitydefinitions:
