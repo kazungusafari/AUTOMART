@@ -58,7 +58,7 @@ class OrderController {
 
     if (order) {
       if (order.owner === req.user.id && order.status === 'pending') {
-        const updatedOrder = Order.update(parseInt(req.params.id, 10), req.body.price);
+        const updatedOrder = await Order.update(parseInt(req.params.id, 10), req.body.price);
         return res.status(200).send(
           {
             status: res.statusCode,
