@@ -4,21 +4,19 @@
 import request from 'supertest';
 import { expect } from 'chai';
 import app from '../../../src/app';
-// import tokens from '../../utils/tokens';
+import tokens from '../../utils/tokens';
+
+const { userToken } = tokens;
 
 // eslint-disable-next-line no-unused-vars
 const validID = 1;
 // eslint-disable-next-line no-unused-vars
 const invalidID = 30;
 
-const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJmaXJzdG5hbWUiOiJLYXp1bmd1IiwibGFzdG5hbWUiOiJTYWZhcmkiLCJlbWFpbCI6ImthenVuZ3Uuc2FmYXJpQGdtYWlsLmNvbSIsImFkZHJlc3MiOnsiYm94TnVtYmVyIjo2NiwicG9zdGFsQ29kZSI6MTAxMDEsInRvd24iOiJOYWlyb2JpIn0sImlzQWRtaW4iOmZhbHNlLCJwYXNzd29yZCI6IiQyYiQxMCRvLmRxUHhQdmJHQ24wTnk2R3Jsbi8uR3hnbjlwbzdIVXMzLzVmQVhVeGRLS0dwZ2JsYUdrLiJ9LCJpYXQiOjE1NTkxMDgyMDYsImV4cCI6MTU1OTE5NDYwNn0.CpBjTCdwJjnKmy7frSjqef9sJlhzvLZasla4aT2rN2E';
-
 
 // eslint-disable-next-line no-undef
 describe('Get a specific sale Ad:', () => {
   // eslint-disable-next-line no-undef
-
-  
   it('should get a car sale Ad by a valid ID', (done) => {
     request(app)
       .get(`/api/v1/car/${validID}`)
@@ -43,7 +41,6 @@ describe('Get a specific sale Ad:', () => {
         done(err);
       });
   });
-  
   it('should return errors for invalid ID', (done) => {
     request(app)
       .get('/api/v1/car/hhhh')
