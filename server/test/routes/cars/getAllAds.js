@@ -17,7 +17,6 @@ describe('Car Routes: All cars', () => {
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${adminToken}`)
       .end((err, res) => {
-        console.log(res)
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.a('object');
         done();

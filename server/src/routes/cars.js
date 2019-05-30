@@ -145,7 +145,7 @@ export default carRoutes;
  * @swagger
  *
  * /api/v1/car/<:id>/:
- *   delete: 
+ *   delete:
  *     description: Delete a specific car Ad.
  *     produces:
  *       - application/json
@@ -335,7 +335,7 @@ export default carRoutes;
  *
  */
 
- /**
+/**
  * @swagger
  * /api/v1/car/:
  *   get:

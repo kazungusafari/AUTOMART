@@ -61,7 +61,6 @@ describe('Car Routes: unsold cars', () => {
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
-        console.log(res);
         expect(res.statusCode).to.equal(404);
         expect(res.body.error).to.equal('Not Found');
 
