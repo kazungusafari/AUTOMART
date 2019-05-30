@@ -284,6 +284,11 @@ export default carRoutes;
  *         in : header
  *         type: string
  *         required: true
+ *       - name : price
+ *         description: New  price
+ *         in : body
+ *         type: int
+ *         required: true
  *     responses:
  *       200:
  *         description: Success
@@ -295,6 +300,8 @@ export default carRoutes;
  *         description: Unauthorized
  *       404:
  *         description: Not found
+ *       403:
+ *         description: Forbidden
  *     security:
  *       - apiKey : []
  *

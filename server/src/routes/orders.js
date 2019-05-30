@@ -122,10 +122,16 @@ export default orderRoutes;
  *         description: Id of the specific order to update
  *         in: path
  *         type: int
+ *         required: true
  *       - name : authorization
  *         description: Access token for authentication
  *         in : header
  *         type: string
+ *         required: true
+ *       - name : price
+ *         description: New offered price
+ *         in : body
+ *         type: int
  *         required: true
  *     responses:
  *       200:
