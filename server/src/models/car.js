@@ -112,12 +112,15 @@ class Car {
   /**
    *
    * @param {integer} id
+   * @returns {boolean} true if success or false if not deleted
    */
   delete(id) {
     const car = this.findOne(id);
     const index = this.cars.indexOf(car);
-    this.cars.splice(index, 1);
-    return {};
+    if (this.cars.splice(index, 1)) {
+      return true;
+    }
+    return false;
   }
 }
 

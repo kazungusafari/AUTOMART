@@ -219,6 +219,36 @@ class CarController {
       error: 'Not Found',
     });
   }
+
+
+  /**
+     * Delete a specific car Ad
+     * @static
+     * @param {*} req
+     * @param {*} res
+     * @memberof CarController
+   */
+
+  static async deleteSaleAdById(req, res) {
+    // eslint-disable-next-line radix
+    if (req.user.isAdmin === true) {
+      const isDeleted = await Car.delete(parseInt(req.params.id, 10));
+      if (isDeleted) {
+        return res.status(200).json({
+          status: res.statusCode,
+          data: 'Car Ad successfully deleted',
+        });
+      }
+      return res.status(404).json({
+        status: res.statusCode,
+        message: 'Sale Ad Not Found',
+      });
+    }
+    return res.status(403).json({
+      status: res.statusCode,
+      error: 'Forbidden',
+    });
+  }
 }
 
 export default CarController;
