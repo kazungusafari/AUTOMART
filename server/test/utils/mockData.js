@@ -60,6 +60,7 @@ export default {
         status: 'availabe',
         price: 1100000,
         offeredPrice: 1100000,
+        owner: 1,
 
 
       },
@@ -69,6 +70,7 @@ export default {
         status: 'availabe',
         price: 1100000,
         offeredPrice: 1100000,
+        owner: 1,
 
 
       },

@@ -5,14 +5,13 @@ import OrderValidation from '../validations/orderValidation';
 import Authorization from '../middlewares/Authorization';
 
 const orderRoutes = express.Router();
-
 const validation = [ValidationHandler.validate];
+orderRoutes.use(Authorization.authenticate);
 
-
-orderRoutes.post('/', Authorization.authenticate, OrderValidation.createOrder, validation, OrderController.createOrder);
+orderRoutes.post('/', OrderValidation.createOrder, validation, OrderController.createOrder);
+orderRoutes.patch('/:id/price', OrderValidation.updateOrderPrice, validation, OrderController.UpdatePrice);
 
 export default orderRoutes;
-
 
 /**
  * @swagger
@@ -106,6 +105,49 @@ export default orderRoutes;
  *       status:
  *         type: string
  *
+ *
+ *
+ */
+
+/**
+ * @swagger
+ *
+ * /api/v1/order/<:id>/price:
+ *   patch:
+ *     description: Update the price of a purchase order.
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: Id of the specific order to update
+ *         in: path
+ *         type: int
+ *         required: true
+ *       - name : authorization
+ *         description: Access token for authentication
+ *         in : header
+ *         type: string
+ *         required: true
+ *       - name : price
+ *         description: New offered price
+ *         in : body
+ *         type: int
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           $ref: '#/definitions/Order'
+ *       400:
+ *         description: Bad request
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Not found
+ *       403:
+ *         description: Forbidden
+ *     security:
+ *       - apiKey : []
  *
  *
  */

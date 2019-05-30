@@ -28,10 +28,11 @@ class Order {
    * @param {object} data the order details
    * @returns {object} order object
    */
-  create(carId, data) {
+  create(userId, data) {
     const newOrder = {
       id: this.numberOfOrders + 1,
-      carID: carId || '',
+      carID: data.carID || '',
+      owner: userId,
       createdOn: dateTime || '',
       status: data.status || '',
       price: data.price || '',
@@ -63,7 +64,7 @@ class Order {
   update(id, price) {
     const order = this.findOne(id);
     const index = this.orders.indexOf(order);
-    this.orders[index].modifiedDate = dateTime;
+    this.orders[index].modifiedOn = dateTime;
     this.orders[index].offeredPrice = price;
     return this.orders[index];
   }

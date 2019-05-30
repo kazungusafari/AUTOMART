@@ -23,7 +23,7 @@ const {
 } = mockData.createOrder;
 
 
-describe('Car Routes: create purchase order', () => {
+describe('Orders Routes: create purchase order', () => {
   it('should create a new purchase order', (done) => {
     request(app)
       .post('/api/v1/order/')
