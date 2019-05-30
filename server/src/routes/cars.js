@@ -141,7 +141,40 @@ export default carRoutes;
  *
  *
  */
-
+/**
+ * @swagger
+ *
+ * /api/v1/car/<:id>/:
+ *   delete: 
+ *     description: Delete a specific car Ad.
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: Id of the specific car to delete
+ *         in: path
+ *         type: int
+ *       - name : authorization
+ *         description: Access token for authentication
+ *         in : header
+ *         type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Success
+ *       400:
+ *         description: Bad request
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Not found
+ *       403:
+ *         description: Forbidden
+ *     security:
+ *       - apiKey : []
+ *
+ *
+ */
 
 /**
  * @swagger
