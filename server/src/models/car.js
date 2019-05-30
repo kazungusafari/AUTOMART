@@ -114,11 +114,15 @@ class Car {
    * @param {integer} id
    * @returns {boolean} true if success or false if not deleted
    */
+  // eslint-disable-next-line consistent-return
   delete(id) {
     const car = this.findOne(id);
-    const index = this.cars.indexOf(car);
-    if (this.cars.splice(index, 1)) {
-      return true;
+    if (car !== undefined) {
+      const index = this.cars.indexOf(car);
+      if (this.cars.splice(index, 1)) {
+        return true;
+      }
+      return false;
     }
     return false;
   }

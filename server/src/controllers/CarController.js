@@ -233,7 +233,7 @@ class CarController {
     // eslint-disable-next-line radix
     if (req.user.isAdmin === true) {
       const isDeleted = await Car.delete(parseInt(req.params.id, 10));
-      if (isDeleted) {
+      if (isDeleted === true) {
         return res.status(200).json({
           status: res.statusCode,
           data: 'Car Ad successfully deleted',
@@ -241,7 +241,7 @@ class CarController {
       }
       return res.status(404).json({
         status: res.statusCode,
-        message: 'Sale Ad Not Found',
+        error: 'Sale Ad Not Found',
       });
     }
     return res.status(403).json({
