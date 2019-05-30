@@ -9,6 +9,6 @@ const validation = [ValidationHandler.validate];
 orderRoutes.use(Authorization.authenticate);
 
 orderRoutes.post('/', OrderValidation.createOrder, validation, OrderController.createOrder);
-orderRoutes.post('/:id/price', OrderValidation.updateOrderPrice, validation, OrderController.UpdatePrice);
+orderRoutes.patch('/:id/price', OrderValidation.updateOrderPrice, validation, OrderController.UpdatePrice);
 
 export default orderRoutes;

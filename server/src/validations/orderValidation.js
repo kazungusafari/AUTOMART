@@ -1,4 +1,6 @@
-import { check, param, body ,header } from 'express-validator/check';
+import {
+ check, param, body , header 
+} from 'express-validator/check';
 import notEmpty from '../helpers/notEmpty';
 
 export default {
@@ -14,7 +16,7 @@ export default {
     check('status')
       .isString()
       .withMessage('Status can only be of type string'),
-   
+
   ],
   updateOrderPrice: [
     param('id')
@@ -29,6 +31,6 @@ export default {
       .custom(value => notEmpty(value, 'Price is required'))
       .isInt()
       .withMessage('Price can only be in the form of integers'),
-    
+
   ],
 };
