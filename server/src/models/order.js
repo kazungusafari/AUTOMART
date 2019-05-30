@@ -30,7 +30,7 @@ class Order {
    */
   create(carId, data) {
     const newOrder = {
-      id: this.numberOforders + 1,
+      id: this.numberOfOrders + 1,
       carID: carId || '',
       createdOn: dateTime || '',
       status: data.status || '',

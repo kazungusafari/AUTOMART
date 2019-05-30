@@ -53,6 +53,49 @@ export default {
     },
   },
 
+  createOrder: {
+    validOrder:
+      {
+        carId: 5,
+        status: 'availabe',
+        price: 1100000,
+        offeredPrice: 1100000,
+
+
+      },
+    wrongCarId:
+      {
+        carId: 50,
+        status: 'availabe',
+        price: 1100000,
+        offeredPrice: 1100000,
+
+
+      },
+    missingCarPrice:
+      {
+
+        carId: 5,
+        status: 'availabe',
+        offeredPrice: 1100000,
+
+
+      },
+
+    missingCarId:
+      {
+
+
+        status: 'availabe',
+        price: 110000,
+        offeredPrice: 110000,
+
+
+      },
+
+
+  },
+
   createSaleAd: {
     validSaleAd:
       {
