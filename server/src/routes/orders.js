@@ -114,12 +114,12 @@ export default orderRoutes;
  *
  * /api/v1/order/<:id>/price:
  *   patch:
- *     description: Update the price of a car..
+ *     description: Update the price of a purchase order.
  *     produces:
  *       - application/json
  *     parameters:
  *       - name: id
- *         description: Id of the specific car to update
+ *         description: Id of the specific order to update
  *         in: path
  *         type: int
  *       - name : authorization
@@ -138,6 +138,8 @@ export default orderRoutes;
  *         description: Unauthorized
  *       404:
  *         description: Not found
+ *       403:
+ *         description: Forbidden
  *     security:
  *       - apiKey : []
  *
