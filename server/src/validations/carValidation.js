@@ -24,9 +24,6 @@ export default {
       .withMessage('Car id  can only be in the form of integers'),
   ],
   getAllSaleAds: [
-    query(['status', 'max_price', 'max_price'])
-      .isString()
-      .withMessage('Your query  should be of type string')
-      .optional(),
+    
   ],
 };

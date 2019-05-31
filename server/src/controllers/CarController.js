@@ -103,7 +103,7 @@ class CarController {
   static async getAllSaleAds(req, res) {
     // eslint-disable-next-line radix
     const queryLength = parseInt(Object.keys(req.query).length);
-    // eslint-disable-next-line no-empty
+    console.log(req.query);
     if (queryLength === 0) {
       if (req.user.isAdmin === true) {
         return CarController.getAllCars(res);
@@ -118,9 +118,9 @@ class CarController {
         const allUnsolds = Car.findAllByStatus(req.query.status);
         return CarController.response(allUnsolds, res);
       }
-      return res.status(404).json({
+      return res.status(403).json({
         status: res.statusCode,
-        error: 'Not found',
+        error: 'Forbidden',
       });
     }
     if (queryLength === 3 && req.query.min_price && req.query.max_price && req.query.status) {
@@ -129,9 +129,9 @@ class CarController {
       const allUnsolds = Car.findAllByPriceRange(minPrice, maxPrice, req.query.status);
       return CarController.response(allUnsolds, res);
     }
-    return res.status(404).json({
+    return res.status(400).json({
       status: res.statusCode,
-      error: 'Not found',
+      error: 'Not Found',
     });
   }
 
@@ -190,7 +190,7 @@ class CarController {
     }
     return res.status(404).json({
       status: res.statusCode,
-      error: 'Not found',
+      error: 'Not Found',
     });
   }
 

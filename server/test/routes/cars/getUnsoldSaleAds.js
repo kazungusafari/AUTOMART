@@ -36,8 +36,8 @@ describe('Car Routes: unsold cars', () => {
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
-        expect(res.statusCode).to.equal(404);
-        expect(res.body.error).to.equal('Not found');
+        expect(res.statusCode).to.equal(403);
+        expect(res.body.error).to.equal('Forbidden');
         done();
       });
   });
