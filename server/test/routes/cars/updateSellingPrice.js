@@ -16,7 +16,7 @@ const invalidId = 40;
 const invalidDataType = 'jjjj';
 
 
-describe('Car Routes: unsold cars', () => {
+describe('Car Routes: Update sale Ad price', () => {
   it('should update price of the car.', (done) => {
     request(app)
       .patch(`/api/v1/car/${validId}/price`)
@@ -67,8 +67,8 @@ describe('Car Routes: unsold cars', () => {
       .set('authorization', `Bearer ${userToken}`)
       .send({ price: 15000000 })
       .end((err, res) => {
-        expect(res.statusCode).to.equal(404);
-        expect(res.body.error).to.equal('Not Found');
+        expect(res.statusCode).to.equal(400);
+
 
         done();
       });

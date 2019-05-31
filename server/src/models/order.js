@@ -49,9 +49,9 @@ class Order {
    * @param {integer} id
    * @returns {object} order object
    */
-  findOne(id) {
+  findOneOrder(id) {
     // eslint-disable-next-line radix
-    return this.orders.find(order => parseInt(order.id) === id);
+    return this.orders.find(order => order.id === id);
   }
 
 

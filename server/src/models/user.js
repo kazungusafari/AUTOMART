@@ -2,6 +2,7 @@ import moment from 'moment';
 import { config } from 'dotenv';
 import hashPassword from '../helpers/hashPassword';
 import userData from './data/userData';
+
 const dateTime = moment().format('YYYY-MM-DD h:m:s');
 
 

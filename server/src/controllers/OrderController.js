@@ -21,7 +21,7 @@ class OrderController {
    * @memberof UserController
    */
   static async createOrder(req, res) {
-    const car = await Car.findOne(req.body.carId);
+    const car = await Car.findOneCar(req.body.carId);
     if (car) {
       const order = await Order.create(req.user.id, req.body);
       return Response.customResponse(order, res, 201);
@@ -39,11 +39,11 @@ class OrderController {
      * @memberof CarController
      */
   static async UpdatePrice(req, res) {
-    const order = await Order.findOne(parseInt(req.params.id, 10));
+    const order = await Order.findOneOrder(req.params.id);
 
     if (order) {
       if (order.owner === req.user.id && order.status === 'pending') {
-        const updatedOrder = await Order.update(parseInt(req.params.id, 10), req.body.price);
+        const updatedOrder = await Order.update(req.params.id, req.body.price);
         return Response.customResponse(updatedOrder, res, 200);
       }
       return Response.errorResponse(res, 'Forbidden', 403);

@@ -41,7 +41,7 @@ class CarController {
 
   static async getSaleAdById(req, res) {
     // eslint-disable-next-line radix
-    const saleAd = await Car.findOne(parseInt(req.params.id, 10));
+    const saleAd = await Car.findOneCar(req.params.id);
     if (saleAd) {
       return Response.customResponse(saleAd, res, 200);
     }
@@ -91,13 +91,13 @@ class CarController {
      * @memberof CarController
      */
   static async markAdAsSold(req, res) {
-    const car = await Car.findOne(parseInt(req.params.id, 10));
+    const car = await Car.findOneCar(req.params.id);
     if (car) {
       if (car.owner === req.user.id) {
-        const updatedCar = Car.updateStatus(parseInt(req.params.id, 10));
+        const updatedCar = Car.updateStatus(req.params.id);
         return Response.customResponse(updatedCar, res, 200);
       }
-      return Response.errorResponse(res, 'Unauthorised User');
+      return Response.errorResponse(res, 'Unauthorised User', 401);
     }
     return Response.errorResponse(res, 'Not Found', 404);
   }
@@ -124,10 +124,10 @@ class CarController {
      * @memberof CarController
      */
   static async UpdatePrice(req, res) {
-    const car = await Car.findOne(parseInt(req.params.id, 10));
+    const car = await Car.findOneCar(req.params.id);
     if (car) {
       if (car.owner === req.user.id) {
-        const updatedCar = Car.updateSellingPrice(parseInt(req.params.id, 10), req.body.price);
+        const updatedCar = Car.updateSellingPrice(req.params.id, req.body.price);
         return Response.customResponse(updatedCar, res, 200);
       }
       return Response.errorResponse(res, 'Unauthorised User', 401);
@@ -147,7 +147,7 @@ class CarController {
   static async deleteSaleAdById(req, res) {
     // eslint-disable-next-line radix
     if (req.user.isAdmin === true) {
-      const isDeleted = await Car.delete(parseInt(req.params.id, 10));
+      const isDeleted = await Car.delete(req.params.id);
       if (isDeleted === true) {
         return res.status(200).json({
           status: res.statusCode,

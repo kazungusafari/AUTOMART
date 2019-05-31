@@ -2,6 +2,8 @@ import express from 'express';
 import ValidationHandler from '../middlewares/ValidationHandler';
 import OrderController from '../controllers/OrderController';
 import OrderValidation from '../validations/orderValidation';
+import idValidation from '../validations/idValidation';
+
 import Authorization from '../middlewares/Authorization';
 
 const orderRoutes = express.Router();
@@ -9,7 +11,7 @@ const validation = [ValidationHandler.validate];
 orderRoutes.use(Authorization.authenticate);
 
 orderRoutes.post('/', OrderValidation.createOrder, validation, OrderController.createOrder);
-orderRoutes.patch('/:id/price', OrderValidation.updateOrderPrice, validation, OrderController.UpdatePrice);
+orderRoutes.patch('/:id/price', idValidation.verifyId, OrderValidation.updateOrderPrice, validation, OrderController.UpdatePrice);
 
 export default orderRoutes;
 

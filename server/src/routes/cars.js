@@ -4,17 +4,19 @@ import ValidationHandler from '../middlewares/ValidationHandler';
 import CarController from '../controllers/CarController';
 import CarValidation from '../validations/carValidation';
 import Authorization from '../middlewares/Authorization';
+import idValidation from '../validations/idValidation';
+
 
 const carRoutes = express.Router();
 const validation = [ValidationHandler.validate];
 carRoutes.use(Authorization.authenticate);
 
 carRoutes.post('/', CarValidation.createSaleAd, validation, CarController.createSaleAd);
-carRoutes.get('/:id', CarValidation.getSaleAdById, validation, CarController.getSaleAdById);
-carRoutes.get('/', CarValidation.getAllSaleAds, validation, CarController.getAllSaleAds);
-carRoutes.patch('/:id/status', validation, CarController.markAdAsSold);
-carRoutes.patch('/:id/price', validation, CarController.UpdatePrice);
-carRoutes.delete('/:id', CarValidation.getSaleAdById, validation, CarController.deleteSaleAdById);
+carRoutes.get('/:id', idValidation.verifyId, validation, CarController.getSaleAdById);
+carRoutes.get('/', validation, CarController.getAllSaleAds);
+carRoutes.patch('/:id/status', idValidation.verifyId, validation, CarController.markAdAsSold);
+carRoutes.patch('/:id/price', idValidation.verifyId, validation, CarController.UpdatePrice);
+carRoutes.delete('/:id', idValidation.verifyId, validation, CarController.deleteSaleAdById);
 
 export default carRoutes;
 

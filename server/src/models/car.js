@@ -50,9 +50,9 @@ class Car {
    * @param {integer} id
    * @returns {object} car object
    */
-  findOne(id) {
+  findOneCar(id) {
     // eslint-disable-next-line radix
-    return this.cars.find(car => parseInt(car.id) === id);
+    return this.cars.find(car => car.id === id);
   }
 
   /**

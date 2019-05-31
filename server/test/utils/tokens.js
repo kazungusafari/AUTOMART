@@ -1,7 +1,9 @@
 
+import moment from 'moment';
 import Authorization from '../../src/middlewares/Authorization';
-
 import hashPassword from '../../src/helpers/hashPassword';
+
+const dateTime = moment().format('YYYY-MM-DD h:m:s');
 
 
 const adminToken = Authorization.generateToken({
@@ -16,6 +18,8 @@ const adminToken = Authorization.generateToken({
   },
   isAdmin: true,
   password: hashPassword('pedrolili100', 10),
+  createdOn: dateTime,
+  modifiedOn: null,
 });
 const userToken = Authorization.generateToken({
   id: 1,
@@ -29,6 +33,8 @@ const userToken = Authorization.generateToken({
   },
   isAdmin: false,
   password: hashPassword('kazungu100', 10),
+  createdOn: dateTime,
+  modifiedOn: null,
 });
 
 
