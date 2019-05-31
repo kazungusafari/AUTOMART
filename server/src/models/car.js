@@ -91,7 +91,7 @@ class Car {
    * @returns {object} car object
    */
   updateStatus(id) {
-    const car = this.findOne(id);
+    const car = this.findOneCar(id);
     const index = this.cars.indexOf(car);
     this.cars[index].modifiedDate = dateTime;
     this.cars[index].status = 'sold';
@@ -105,21 +105,21 @@ class Car {
    * @returns {object} car object
    */
   updateSellingPrice(id, price) {
-    const car = this.findOne(id);
+    const car = this.findOneCar(id);
     const index = this.cars.indexOf(car);
-    this.cars[index].modifiedDate = moment.now();
+    this.cars[index].modifiedDate = dateTime;
     this.cars[index].price = price;
     return this.cars[index];
   }
 
   /**
    *
-   * @param {integer} id
+   * @param {integer} id id of the car
    * @returns {boolean} true if success or false if not deleted
    */
   // eslint-disable-next-line consistent-return
   delete(id) {
-    const car = this.findOne(id);
+    const car = this.findOneCar(id);
     if (car !== undefined) {
       const index = this.cars.indexOf(car);
       if (this.cars.splice(index, 1)) {

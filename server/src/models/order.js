@@ -62,7 +62,7 @@ class Order {
    * @returns {object} order object
    */
   update(id, price) {
-    const order = this.findOne(id);
+    const order = this.findOneOrder(id);
     const index = this.orders.indexOf(order);
     this.orders[index].modifiedOn = dateTime;
     this.orders[index].offeredPrice = price;
