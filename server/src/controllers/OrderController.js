@@ -2,6 +2,7 @@
 import { config } from 'dotenv';
 import Order from '../models/order';
 import Car from '../models/car';
+import Response from './utils/responseFormatter';
 
 config();
 
@@ -23,25 +24,9 @@ class OrderController {
     const car = await Car.findOne(req.body.carId);
     if (car) {
       const order = await Order.create(req.user.id, req.body);
-      return res.status(201).send(
-        {
-          status: res.statusCode,
-          data: {
-            id: order.id,
-            carId: order.carId,
-            owner: order.owner,
-            createdOn: order.createdOn,
-            price: order.price,
-            offeredPrice: order.offeredPrice,
-            status: order.status,
-          },
-        },
-      );
+      return Response.customResponse(order, res, 201);
     }
-    return res.status(404).send({
-      status: res.statusCode,
-      error: 'Car not found',
-    });
+    return Response.errorResponse(res, 'Car not found', 404);
   }
 
 
@@ -59,30 +44,11 @@ class OrderController {
     if (order) {
       if (order.owner === req.user.id && order.status === 'pending') {
         const updatedOrder = await Order.update(parseInt(req.params.id, 10), req.body.price);
-        return res.status(200).send(
-          {
-            status: res.statusCode,
-            data: {
-              id: updatedOrder.id,
-              carId: updatedOrder.carId,
-              owner: updatedOrder.owner,
-              modifiedOn: updatedOrder.modifiedOn,
-              oldOfferedPrice: updatedOrder.price,
-              newOfferedPrice: updatedOrder.offeredPrice,
-              status: order.status,
-            },
-          },
-        );
+        return Response.customResponse(updatedOrder, res, 200);
       }
-      return res.status(403).json({
-        status: res.statusCode,
-        error: 'Forbidden',
-      });
+      return Response.errorResponse(res, 'Forbidden', 403);
     }
-    return res.status(404).json({
-      status: res.statusCode,
-      error: 'Not Found',
-    });
+    return Response.errorResponse(res, 'Not Found', 404);
   }
 }
 

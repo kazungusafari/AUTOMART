@@ -4,6 +4,9 @@ import moment from 'moment';
 import { config } from 'dotenv';
 import carData from './data/carData';
 
+const dateTime = moment().format('YYYY-MM-DD h:m:s');
+
+
 config();
 
 const { registeredSaleAds } = carData;
@@ -28,14 +31,14 @@ class Car {
     const newCar = {
       id: this.numberOfCars + 1,
       owner: userId || '',
-      createdOn: moment.now() || '',
+      createdOn: dateTime || '',
       state: data.state || '',
       status: data.status || '',
-      address: data.price || '',
+      price: data.price || '',
       manufacturer: data.manufacturer || '',
       model: data.model || '',
       bodyType: data.bodyType || '',
-      modifiedDate: moment.now(),
+      modifiedDate: null,
     };
     this.cars.push(newCar);
     return newCar;
@@ -90,7 +93,7 @@ class Car {
   updateStatus(id) {
     const car = this.findOne(id);
     const index = this.cars.indexOf(car);
-    this.cars[index].modifiedDate = moment.now();
+    this.cars[index].modifiedDate = dateTime;
     this.cars[index].status = 'sold';
     return this.cars[index];
   }

@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 import bcrypt from 'bcrypt';
 import User from '../models/user';
 import Authorization from '../middlewares/Authorization';
-
+import Response from './utils/responseFormatter';
 
 config();
 
@@ -27,26 +27,10 @@ class UserController {
     if (!isUserRegistered) {
       const isUserRegistered = User.create(req.query, req.body);
       const token = Authorization.generateToken(isUserRegistered);
-      return res.status(201).send(
-        {
-          status: res.statusCode,
-          data: {
-            token,
-            id: isUserRegistered.id,
-            email: isUserRegistered.email,
-            firstname: isUserRegistered.firstname,
-            lastname: isUserRegistered.lastname,
-            isAdmin: JSON.parse(isUserRegistered.isAdmin),
-          },
-        },
-      );
+      isUserRegistered.token = token;
+      return Response.customResponse(isUserRegistered, res, 201);
     }
-
-
-    return res.status(400).send({
-      status: res.statusCode,
-      error: 'Email is already registered',
-    });
+    return Response.errorResponse(res, 'Email is already registered', 400);
   }
 
 
@@ -65,33 +49,16 @@ class UserController {
 
 
     if (!userFound) {
-      return res.status(404).send({
-        status: res.statusCode,
-        error: 'Email is not registered',
-      });
+      return Response.errorResponse(res, 'Email is not registered', 404);
     }
     const isPasswordValid = UserController.verifyPassword(password, userFound.password);
 
     if (!isPasswordValid) {
-      return res.status(401).send({
-        status: res.statusCode,
-        error: 'Password is wrong',
-      });
+      return Response.errorResponse(res, 'Password is wrong', 401);
     }
     const token = Authorization.generateToken(userFound);
-    return res.status(200).send(
-      {
-        status: res.statusCode,
-        data: {
-          token,
-          id: userFound.id,
-          email: userFound.email,
-          firstname: userFound.firstname,
-          lastname: userFound.lastname,
-          isAdmin: JSON.parse(userFound.isAdmin),
-        },
-      },
-    );
+    userFound.token = token;
+    return Response.customResponse(userFound, res, 200);
   }
 
   /**

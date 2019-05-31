@@ -2,6 +2,8 @@ import moment from 'moment';
 import { config } from 'dotenv';
 import hashPassword from '../helpers/hashPassword';
 import userData from './data/userData';
+const dateTime = moment().format('YYYY-MM-DD h:m:s');
+
 
 config();
 
@@ -36,8 +38,8 @@ class User {
         postalCode: data.postalCode || '',
 
       },
-      createdDate: moment.now(),
-      modifiedDate: moment.now(),
+      createdDate: dateTime,
+      modifiedDate: null,
       isAdmin: queryData.admin || false,
     };
     this.users.push(newUser);
@@ -79,7 +81,7 @@ class User {
       town: user.address.town,
       postalCode: user.address.postalCode,
     };
-    this.users[index].modifiedDate = moment.now();
+    this.users[index].modifiedDate = dateTime;
     return this.users[index];
   }
 }
