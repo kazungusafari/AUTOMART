@@ -30,7 +30,7 @@ describe('Auth routes:', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
         expect(res.body).to.be.a('object');
-        expect(res.body.data.isAdmin).to.equal('true');
+        expect(res.body.data.isAdmin).to.equal(true);
 
         done(err);
       });

@@ -1,3 +1,6 @@
+/* eslint-disable block-scoped-var */
+/* eslint-disable no-var */
+/* eslint-disable vars-on-top */
 import moment from 'moment';
 import { config } from 'dotenv';
 import hashPassword from '../helpers/hashPassword';
@@ -27,6 +30,8 @@ class User {
    * @returns {object} user object
    */
   create(queryData, data) {
+    const { admin } = queryData;
+  
     const newUser = {
       id: this.numberOfUsers + 1,
       email: data.email || '',
@@ -41,7 +46,7 @@ class User {
       },
       createdDate: dateTime,
       modifiedDate: null,
-      isAdmin: queryData.admin || false,
+      isAdmin: admin || false,
     };
     this.users.push(newUser);
     return newUser;

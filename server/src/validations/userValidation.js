@@ -47,6 +47,10 @@ export default {
       .custom((value, { req }) => value === req.body.password),
 
   ],
+  changeToBoolean: [
+    check('admin')
+      .toBoolean(),
+  ],
 
   login: [
     check('email')
