@@ -11,6 +11,8 @@ export default {
     check(['lastname', 'firstname'])
       .isString()
       .withMessage('Firstname and lastname must be a string')
+      .isAlpha()
+      .withMessage('Only letters are allowed as names')
       .isLength({ min: 3 })
       .withMessage('Firstname and lastname must be minimum of 3 characters'),
     check('email')
@@ -44,6 +46,10 @@ export default {
     check('confirmPassword', 'Passwords don\'t match')
       .custom((value, { req }) => value === req.body.password),
 
+  ],
+  changeToBoolean: [
+    check('admin')
+      .toBoolean(),
   ],
 
   login: [

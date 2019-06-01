@@ -37,7 +37,7 @@ describe('Get a specific sale Ad:', () => {
       .set('Content-Type', 'application/json')
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
-        expect(res.body.message).to.equal('Sale Ad Not Found');
+        expect(res.body.error).to.equal('Sale Ad Not Found');
         done(err);
       });
   });
@@ -49,7 +49,7 @@ describe('Get a specific sale Ad:', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body.errors[0].param).to.equal('id');
-        expect(res.body.errors[0].msg).to.equal('Car id  can only be in the form of integers');
+        expect(res.body.errors[0].msg).to.equal('Id can only be in the form of integers');
 
         done(err);
       });

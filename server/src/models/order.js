@@ -31,7 +31,7 @@ class Order {
   create(userId, data) {
     const newOrder = {
       id: this.numberOfOrders + 1,
-      carID: data.carID || '',
+      carId: data.carId || '',
       owner: userId,
       createdOn: dateTime || '',
       status: data.status || '',
@@ -49,9 +49,9 @@ class Order {
    * @param {integer} id
    * @returns {object} order object
    */
-  findOne(id) {
+  findOneOrder(id) {
     // eslint-disable-next-line radix
-    return this.orders.find(order => parseInt(order.id) === id);
+    return this.orders.find(order => order.id === id);
   }
 
 
@@ -62,7 +62,7 @@ class Order {
    * @returns {object} order object
    */
   update(id, price) {
-    const order = this.findOne(id);
+    const order = this.findOneOrder(id);
     const index = this.orders.indexOf(order);
     this.orders[index].modifiedOn = dateTime;
     this.orders[index].offeredPrice = price;

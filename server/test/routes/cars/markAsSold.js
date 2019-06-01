@@ -14,7 +14,7 @@ const validId = 2;
 const invalidId = 40;
 const invalidDataType = 'jjjj';
 
-describe('Car Routes: unsold cars', () => {
+describe('Car Routes: Mark as sold', () => {
   it('should mark car as sold.', (done) => {
     request(app)
       .patch(`/api/v1/car/${validId}/status`)
@@ -61,8 +61,8 @@ describe('Car Routes: unsold cars', () => {
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
-        expect(res.statusCode).to.equal(404);
-        expect(res.body.error).to.equal('Not Found');
+        expect(res.statusCode).to.equal(400);
+
 
         done();
       });

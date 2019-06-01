@@ -17,7 +17,6 @@ const { userToken } = tokens;
 
 
 describe('Car Routes: unsold cars', () => {
-
   it('get all unsold sale Ads', (done) => {
     request(app)
       .get('/api/v1/car?status=available')

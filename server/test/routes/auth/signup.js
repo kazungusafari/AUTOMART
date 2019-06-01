@@ -23,9 +23,10 @@ describe('Auth routes:', () => {
 
   it('should add a new Admin user', (done) => {
     request(app)
-      .post('/api/v1/auth/signup?admin=true')
+      .post('/api/v1/auth/signup')
       .set('Accept', 'application/json')
       .send({ ...adminUserDetails })
+      .query({ admin: true })
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
         expect(res.body).to.be.a('object');

@@ -1,7 +1,8 @@
 import {
- check, param, body , header 
+  check, body,
 } from 'express-validator/check';
 import notEmpty from '../helpers/notEmpty';
+
 
 export default {
   createOrder: [
@@ -19,18 +20,12 @@ export default {
 
   ],
   updateOrderPrice: [
-    param('id')
+    body(['price'])
       .exists()
-      .withMessage('Order id is required')
-      .custom(value => notEmpty(value, 'Order id is required'))
+      .withMessage('price is required')
+      .custom(value => notEmpty(value, 'price is required'))
       .isInt()
-      .withMessage('Order id  can only be in the form of integers'),
-    body('price')
-      .exists()
-      .withMessage('Price is required')
-      .custom(value => notEmpty(value, 'Price is required'))
-      .isInt()
-      .withMessage('Price can only be in the form of integers'),
-
+      .withMessage('Price can only be in the form of integers')
+      .toInt(),
   ],
 };

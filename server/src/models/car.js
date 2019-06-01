@@ -4,6 +4,9 @@ import moment from 'moment';
 import { config } from 'dotenv';
 import carData from './data/carData';
 
+const dateTime = moment().format('YYYY-MM-DD h:m:s');
+
+
 config();
 
 const { registeredSaleAds } = carData;
@@ -28,14 +31,14 @@ class Car {
     const newCar = {
       id: this.numberOfCars + 1,
       owner: userId || '',
-      createdOn: moment.now() || '',
+      createdOn: dateTime || '',
       state: data.state || '',
       status: data.status || '',
-      address: data.price || '',
+      price: data.price || '',
       manufacturer: data.manufacturer || '',
       model: data.model || '',
       bodyType: data.bodyType || '',
-      modifiedDate: moment.now(),
+      modifiedDate: null,
     };
     this.cars.push(newCar);
     return newCar;
@@ -47,9 +50,9 @@ class Car {
    * @param {integer} id
    * @returns {object} car object
    */
-  findOne(id) {
+  findOneCar(id) {
     // eslint-disable-next-line radix
-    return this.cars.find(car => parseInt(car.id) === id);
+    return this.cars.find(car => car.id === id);
   }
 
   /**
@@ -88,9 +91,9 @@ class Car {
    * @returns {object} car object
    */
   updateStatus(id) {
-    const car = this.findOne(id);
+    const car = this.findOneCar(id);
     const index = this.cars.indexOf(car);
-    this.cars[index].modifiedDate = moment.now();
+    this.cars[index].modifiedDate = dateTime;
     this.cars[index].status = 'sold';
     return this.cars[index];
   }
@@ -102,21 +105,21 @@ class Car {
    * @returns {object} car object
    */
   updateSellingPrice(id, price) {
-    const car = this.findOne(id);
+    const car = this.findOneCar(id);
     const index = this.cars.indexOf(car);
-    this.cars[index].modifiedDate = moment.now();
+    this.cars[index].modifiedDate = dateTime;
     this.cars[index].price = price;
     return this.cars[index];
   }
 
   /**
    *
-   * @param {integer} id
+   * @param {integer} id id of the car
    * @returns {boolean} true if success or false if not deleted
    */
   // eslint-disable-next-line consistent-return
   delete(id) {
-    const car = this.findOne(id);
+    const car = this.findOneCar(id);
     if (car !== undefined) {
       const index = this.cars.indexOf(car);
       if (this.cars.splice(index, 1)) {

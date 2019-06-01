@@ -8,7 +8,7 @@ const userRoutes = express.Router();
 const validation = [ValidationHandler.validate];
 
 
-userRoutes.post('/signup', UserValidation.signup, validation, UserController.signup);
+userRoutes.post('/signup', UserValidation.changeToBoolean, UserValidation.signup, validation, UserController.signup);
 userRoutes.post('/login', UserValidation.login, validation, UserController.login);
 
 

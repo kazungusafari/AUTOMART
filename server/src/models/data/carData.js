@@ -1,12 +1,15 @@
 import moment from 'moment';
 
+const dateTime = moment().format('YYYY-MM-DD h:m:s');
+
+
 export default {
 
   registeredSaleAds: [
     {
       id: 1,
       owner: 1,
-      createdOn: moment.now(),
+      createdOn: dateTime,
       state: 'used',
       status: 'available',
       price: 1550000,
@@ -18,7 +21,7 @@ export default {
     {
       id: 2,
       owner: 1,
-      createdOn: moment.now(),
+      createdOn: dateTime,
       state: 'new',
       status: 'available',
       price: 1910000,
@@ -30,7 +33,7 @@ export default {
     {
       id: 3,
       owner: 1,
-      createdOn: moment.now(),
+      createdOn: dateTime,
       state: 'new',
       status: 'available',
       price: 2000000,
@@ -42,7 +45,7 @@ export default {
     {
       id: 4,
       owner: 1,
-      createdOn: moment.now(),
+      createdOn: dateTime,
       state: 'used',
       status: 'sold',
       price: 1910000,
@@ -54,7 +57,7 @@ export default {
     {
       id: 5,
       owner: 1,
-      createdOn: moment.now(),
+      createdOn: dateTime,
       state: 'new',
       status: 'sold',
       price: 3000000,
@@ -66,7 +69,7 @@ export default {
     {
       id: 6,
       owner: 1,
-      createdOn: moment.now(),
+      createdOn: dateTime,
       state: 'new',
       status: 'available',
       price: 1200000,
