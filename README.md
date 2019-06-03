@@ -1,6 +1,6 @@
 # AutoMart
 [![Build Status](https://travis-ci.org/kazungusafari/AUTOMART.svg?branch=feature)](https://travis-ci.org/kazungusafari/AUTOMART)
-![Coverage Status](https://coveralls.io/repos/github/kazungusafari/AUTOMART/badge.svg?branch=feature)]
+![Coverage Status](https://coveralls.io/repos/github/kazungusafari/AUTOMART/badge.svg?branch=feature)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c4b809acd8c65de039bc/maintainability)](https://codeclimate.com/github/kazungusafari/AUTOMART/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c4b809acd8c65de039bc/test_coverage)](https://codeclimate.com/github/kazungusafari/AUTOMART/test_coverage)
 
@@ -90,7 +90,7 @@ To have this application running on your computer, follow the following steps
 - [Mocha](https://www.npmjs.com/package/mocha)
 - [Chai](https://www.npmjs.com/package/chai)
 - [nyc](https://www.npmjs.com/package/nyc)
-- [Istanbul](https://www.npmjs.com/package/istanbul
+- [Istanbul](https://www.npmjs.com/package/istanbul)
 
 
 
