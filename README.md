@@ -1,6 +1,6 @@
 # AutoMart
 [![Build Status](https://travis-ci.org/kazungusafari/AUTOMART.svg?branch=feature)](https://travis-ci.org/kazungusafari/AUTOMART)
-![Coverage Status](https://coveralls.io/repos/github/kazungusafari/AUTOMART/badge.svg?branch=feature)](https://coveralls.io/github/kazungusafari/AUTOMART?branch=feature)
+![Coverage Status](https://coveralls.io/repos/github/kazungusafari/AUTOMART/badge.svg?branch=feature)]
 [![Maintainability](https://api.codeclimate.com/v1/badges/c4b809acd8c65de039bc/maintainability)](https://codeclimate.com/github/kazungusafari/AUTOMART/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c4b809acd8c65de039bc/test_coverage)](https://codeclimate.com/github/kazungusafari/AUTOMART/test_coverage)
 
@@ -34,8 +34,8 @@ Auto Mart is an online marketplace for automobiles of diverse makes, model or bo
 
 ## Links
 - UI Templates can be found [here]( https://kazungusafari.github.io/AUTOMART/UI/login.html)
-- APIs are hosted on Heroku [here](https://cheki.herokuapp.com)
-- API documentation can be found [here](https://cheki.herokuapp.com/docs)
+- APIs are hosted on Heroku [here](https://cheki.herokuapp.com/api)
+- API documentation can be found [here](https://cheki.herokuapp.com/api/v1/docs)
 - This project is managed with Pivotal Tracker [here](https://www.pivotaltracker.com/n/projects/2346662)
 
 
@@ -57,7 +57,7 @@ To have this application running on your computer, follow the following steps
   
     - `SECRET_KEY` - A random string used for generation authorization tokens.
   
-    - `APPLICATION_URL` - It should be formated thus:  http(s)://(host)(:port)(TLD)/api/v1 
+    - `BASE_URL` - It should be formated thus:  http(s)://(host)(:port)(TLD)/api/v1 
        Example:
 
  ```
@@ -76,7 +76,7 @@ To have this application running on your computer, follow the following steps
 
 #### Testing With Postman
 - Install [Postman](https://getpostman.com).
-- View the api endpoints [here](cheki.herokuapp.com/docs).
+- View the api endpoints [here](cheki.herokuapp.com/api/v1/docs).
    
 	 
    
