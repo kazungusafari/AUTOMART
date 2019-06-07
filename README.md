@@ -34,7 +34,7 @@ Auto Mart is an online marketplace for automobiles of diverse makes, model or bo
 
 
 ## Links
-- UI Templates can be found [here]( https://kazungusafari.github.io/AUTOMART/UI/login.html)
+- UI Templates can be found [here]( https://kazungusafari.github.io/AUTOMART/UI/index.html)
 - APIs are hosted on Heroku [here](https://cheki.herokuapp.com/api)
 - API documentation can be found [here](https://cheki.herokuapp.com/api/v1/docs)
 - This project is managed with Pivotal Tracker [here](https://www.pivotaltracker.com/n/projects/2346662)
