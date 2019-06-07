@@ -50,6 +50,124 @@ export default {
     noPassword: {
       email: 'kazungu.safari@gmail.com',
       password: '',
-    }
-  }
+    },
+  },
+
+  createOrder: {
+    validOrder:
+      {
+        carId: 5,
+        status: 'availabe',
+        price: 1100000,
+        offeredPrice: 1100000,
+        owner: 1,
+
+
+      },
+    wrongCarId:
+      {
+        carId: 50,
+        status: 'availabe',
+        price: 1100000,
+        offeredPrice: 1100000,
+        owner: 1,
+
+
+      },
+    missingCarPrice:
+      {
+
+        carId: 5,
+        status: 'availabe',
+        offeredPrice: 1100000,
+
+
+      },
+
+    missingCarId:
+      {
+
+
+        status: 'availabe',
+        price: 110000,
+        offeredPrice: 110000,
+
+
+      },
+
+
+  },
+
+  createSaleAd: {
+    validSaleAd:
+      {
+        state: 'used',
+        status: 'availabe',
+        price: 1100000,
+        manufacturer: 'ford',
+        model: 'mustang',
+        bodyType: 'saloon',
+
+      },
+    missingCarPrice:
+      {
+        state: 'used',
+        status: 'availabe',
+        price: ' ',
+        manufacturer: 'ford',
+        model: 'mustang',
+        bodyType: 'saloon',
+
+      },
+    missingCarState:
+      {
+        state: ' ',
+        status: 'availabe',
+        price: 1100000,
+        manufacturer: 'toyota',
+        model: 'mustang',
+        bodyType: 'saloon',
+
+      },
+    missingCarBodyType:
+      {
+        state: 'used',
+        status: 'availabe',
+        price: 110000,
+        manufacturer: 'bmw',
+        model: '1 series',
+        bodyType: '',
+
+      },
+    missingCarStatus:
+      {
+        state: 'used',
+        status: ' ',
+        price: 1100000,
+        manufacturer: 'honda',
+        model: '1300',
+        bodyType: 'saloon',
+
+      },
+    invalidCarPriceFormat:
+      {
+        state: 'used',
+        status: 'availabe',
+        price: null,
+        manufacturer: 'honda',
+        model: '1300',
+        bodyType: 'saloon',
+
+      },
+    invalidCarStateFormat:
+      {
+        state: 1100,
+        status: 'availabe',
+        price: '1100000',
+        manufacturer: 'honda',
+        model: '1300',
+        bodyType: 'saloon',
+
+      },
+  },
 };

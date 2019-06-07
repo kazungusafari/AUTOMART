@@ -13,11 +13,9 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
-
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: false,
+  extended: true,
 }));
 
 swaggerDoc(app);
@@ -30,7 +28,6 @@ app.use('*', (req, res) => res.status(404).json({
 
 
 app.use(ErrorHandler.sendError);
-
 app.listen(port, () => {
   console.log(`Listening from port ${port}`);
 });

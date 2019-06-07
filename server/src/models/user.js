@@ -1,7 +1,13 @@
+/* eslint-disable block-scoped-var */
+/* eslint-disable no-var */
+/* eslint-disable vars-on-top */
 import moment from 'moment';
 import { config } from 'dotenv';
 import hashPassword from '../helpers/hashPassword';
 import userData from './data/userData';
+
+const dateTime = moment().format('YYYY-MM-DD h:m:s');
+
 
 config();
 
@@ -24,6 +30,8 @@ class User {
    * @returns {object} user object
    */
   create(queryData, data) {
+    const { admin } = queryData;
+  
     const newUser = {
       id: this.numberOfUsers + 1,
       email: data.email || '',
@@ -36,12 +44,11 @@ class User {
         postalCode: data.postalCode || '',
 
       },
-      createdDate: moment.now(),
-      modifiedDate: moment.now(),
-      isAdmin: queryData.admin || false,
+      createdDate: dateTime,
+      modifiedDate: null,
+      isAdmin: admin || false,
     };
     this.users.push(newUser);
-    console.log(this.users);
     return newUser;
   }
 
@@ -80,7 +87,7 @@ class User {
       town: user.address.town,
       postalCode: user.address.postalCode,
     };
-    this.users[index].modifiedDate = moment.now();
+    this.users[index].modifiedDate = dateTime;
     return this.users[index];
   }
 }

@@ -66,10 +66,10 @@ const getCarModels = () =>{
     const append = (make) =>{
         carModelSelect.options.length=0;
         carModelSelect.options[0] = new Option(`Select ${make} Model`, '');
-        makeOptions(carModels[make]);
-    }
+    makeOptions(carModels[make]);
+    };
           
-    append(carMakeSelectedValue);
+  append(carMakeSelectedValue);
 
     
 
