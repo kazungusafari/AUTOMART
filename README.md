@@ -30,6 +30,7 @@ Auto Mart is an online marketplace for automobiles of diverse makes, model or bo
 - User can view all unsold cars of a specific make (manufacturer).
 - User can view all used unsold cars.
 - User can view all new unsold cars.
+- User can add multiple pictures.
 
 
 ## Links
