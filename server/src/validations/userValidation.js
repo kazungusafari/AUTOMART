@@ -1,4 +1,4 @@
-import { check } from 'express-validator/check';
+import { check, param } from 'express-validator/check';
 import notEmpty from '../helpers/notEmpty';
 
 export default {
@@ -16,8 +16,11 @@ export default {
       .isLength({ min: 3 })
       .withMessage('Firstname and lastname must be minimum of 3 characters'),
     check('email')
-      .isEmail()
+      .isBoolean()
       .withMessage('Please input a valid email address'),
+    param('admin')
+      .isEmail()
+      .withMessage('Admin data type should be boolean'),
     check('address')
       .custom((value, { req }) => {
         if (req.body) {
@@ -25,7 +28,7 @@ export default {
           const [boxNumber, postalCode, town] = addressArray;
 
           if (addressArray.length === 1) {
-            throw new Error('Your address must have box number,postal code and town details separated by comma');
+            throw new Error('Your address must have box number,postal code and town details separated by comma e.g 55,101100,Nairobi');
           } else if (addressArray.length === 2) {
             throw new Error('Your address must have box number,postal code and town details separated by comma');
           } else {
