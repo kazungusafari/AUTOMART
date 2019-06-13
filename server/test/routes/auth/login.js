@@ -15,6 +15,28 @@ const {
 } = mockData.login;
 
 
+describe('adding a user', () => {
+  beforeEach(() => {
+    it('should add a new user', (done) => {
+      request(app)
+        .post('/api/v1/auth/signup')
+        .set('Accept', 'application/json')
+        .send({ ...validUserDetails })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(201);
+          expect(res.body).to.be.a('object');
+
+          done(err);
+        });
+    });
+  });
+});
+
+
+setTimeout(() => {
+
+ 
+
 describe('Auth routes: login', () => {
   it('should login a valid nominal user', (done) => {
     request(app)
@@ -34,6 +56,7 @@ describe('Auth routes: login', () => {
         done(err);
       });
   });
+
 
   it('should return login in an Admin User', (done) => {
     request(app)
@@ -103,4 +126,8 @@ it('should return error for invalid password format', (done) => {
 
       done(err);
     });
+
+
 });
+
+ }, 1000);

@@ -28,8 +28,8 @@ export default {
   },
   login: {
     validNormalUser: {
-      email: 'kazungu.safari@gmail.com',
-      password: 'kazungu100',
+      email: 'example@gmail.com',
+      password: 'password100',
     },
     validAdminUser: {
       email: 'lili@gmail.com',
@@ -61,8 +61,6 @@ export default {
         price: 1100000,
         offeredPrice: 1100000,
         owner: 1,
-
-
       },
     wrongCarId:
       {
