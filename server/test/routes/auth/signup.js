@@ -7,7 +7,8 @@ import app from '../../../src/app';
 
 const { validUserDetails, adminUserDetails, invalidUserDetails } = mockData.signup;
 
-describe('Auth routes:', () => {
+
+describe('Auth routes: Signup', () => {
   it('should add a new user', (done) => {
     request(app)
       .post('/api/v1/auth/signup')
@@ -90,3 +91,6 @@ describe('Auth routes:', () => {
       });
   });
 });
+
+
+

@@ -1,4 +1,4 @@
-
+/* eslint-disable no-shadow */
 /* eslint-disable no-undef */
 /* eslint-disable import/no-extraneous-dependencies */
 import request from 'supertest';
@@ -8,18 +8,48 @@ import tokens from '../../utils/tokens';
 
 const { userToken } = tokens;
 
-// eslint-disable-next-line no-unused-vars
+
 const validID = 5;
-// eslint-disable-next-line no-unused-vars
 const invalidID = 30;
 
 
-// eslint-disable-next-line no-undef
 describe('Get a specific sale Ad:', () => {
-  // eslint-disable-next-line no-undef
+  const normalUser = {
+    firstname: 'John',
+    lastname: 'Doe',
+    address: '100,11000,Nairobi',
+    email: 'gugu@gmail.com',
+    password: 'password100',
+    confirmPassword: 'password100',
+  };
+  const carToGet = {
+    state: 'used',
+    status: 'available',
+    price: 1550000,
+    manufacturer: 'BMW',
+    model: '1 series',
+    bodyType: 'saloon',
+  };
+  before((done) => {
+    request(app)
+      .post('/api/v1/auth/signup')
+      .send(normalUser)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        const { token } = res.body.data;
+        request(app)
+          .post('/api/v1/car/')
+          .set('authorization', `Bearer ${token}`)
+          .send(carToGet)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(201);
+            done();
+          });
+      });
+  });
   it('should get a car sale Ad by a valid ID', (done) => {
     request(app)
-      .get(`/api/v1/car/${validID}`)
+      .get('/api/v1/car/1')
       .set('Content-Type', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {

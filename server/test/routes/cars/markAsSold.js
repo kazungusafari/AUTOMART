@@ -1,3 +1,6 @@
+/* eslint-disable no-var */
+/* eslint-disable vars-on-top */
+/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-irregular-whitespace */
 /* eslint-disable no-undef */
@@ -10,14 +13,44 @@ import tokens from '../../utils/tokens';
 
 const { userToken } = tokens;
 
-const validId = 2;
-const invalidId = 40;
-const invalidDataType = 'jjjj';
 
 describe('Car Routes: Mark as sold', () => {
+  const normalUser = {
+    firstname: 'John',
+    lastname: 'Doe',
+    address: '100,11000,Nairobi',
+    email: 'zima@gmail.com',
+    password: 'password100',
+    confirmPassword: 'password100',
+  };
+  const carToDelete = {
+    state: 'used',
+    status: 'available',
+    price: 1550000,
+    manufacturer: 'BMW',
+    model: '1 series',
+    bodyType: 'saloon',
+  };
+  before((done) => {
+    request(app)
+      .post('/api/v1/auth/signup')
+      .send(normalUser)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        var { token, id } = res.body.data;
+        request(app)
+          .post('/api/v1/car/')
+          .set('authorization', `Bearer ${userToken}`)
+          .send(carToDelete)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(201);
+            done();
+          });
+      });
+  });
   it('should mark car as sold.', (done) => {
     request(app)
-      .patch(`/api/v1/car/${validId}/status`)
+      .patch('/api/v1/car/1/status')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
@@ -29,7 +62,7 @@ describe('Car Routes: Mark as sold', () => {
   it('should return error if the car is not found', (done) => {
     request(app)
       // eslint-disable-next-line no-irregular-whitespace
-      .patch(`/api/v1/car/${invalidId}/status`)
+      .patch('/api/v1/car/10/status')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
@@ -42,7 +75,7 @@ describe('Car Routes: Mark as sold', () => {
 
   it('should return error for unauthorized access', (done) => {
     request(app)
-      .patch(`/api/v1/car/${validId}/status`)
+      .patch('/api/v1/car/1/status')
       .set('Accept', 'application/json')
       .set('authorization', '')
       .end((err, res) => {
@@ -57,7 +90,7 @@ describe('Car Routes: Mark as sold', () => {
 
   it('should return error for if id is not an integer', (done) => {
     request(app)
-      .patch(`/api/v1/car/${invalidDataType}/status`)
+      .patch('/api/v1/car/llll/status')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {

@@ -4,7 +4,7 @@ export default {
     validUserDetails: {
       firstname: 'John',
       lastname: 'Doe',
-      address: '100,00100,Nairobi',
+      address: '100,11000,Nairobi',
       email: 'example@gmail.com',
       password: 'password100',
       confirmPassword: 'password100',
@@ -13,7 +13,7 @@ export default {
       firstname: 'John',
       lastname: 'Doe',
       email: 'admin@email.com',
-      address: '55,01025,Kisumu',
+      address: '55,11025,Kisumu',
       password: 'password100',
       confirmPassword: 'password100',
     },
@@ -32,8 +32,8 @@ export default {
       password: 'password100',
     },
     validAdminUser: {
-      email: 'lili@gmail.com',
-      password: 'pedrolili100',
+      email: 'admin@email.com',
+      password: 'password100',
     },
     invalidPasswordFormat: {
       email: 'kazungu.safari@gmail.com',
@@ -56,16 +56,17 @@ export default {
   createOrder: {
     validOrder:
       {
-        carId: 5,
-        status: 'availabe',
+        carId: 1,
+        status: 'pending',
         price: 1100000,
         offeredPrice: 1100000,
         owner: 1,
       },
+
     wrongCarId:
       {
         carId: 50,
-        status: 'availabe',
+        status: 'pending',
         price: 1100000,
         offeredPrice: 1100000,
         owner: 1,
@@ -75,8 +76,8 @@ export default {
     missingCarPrice:
       {
 
-        carId: 5,
-        status: 'availabe',
+        carId: 4,
+        status: 'pending',
         offeredPrice: 1100000,
 
 
@@ -86,7 +87,7 @@ export default {
       {
 
 
-        status: 'availabe',
+        status: 'pending',
         price: 110000,
         offeredPrice: 110000,
 
@@ -97,11 +98,41 @@ export default {
   },
 
   createSaleAd: {
-    validSaleAd:
+    validSaleAd1:
       {
         state: 'used',
         status: 'availabe',
         price: 1100000,
+        manufacturer: 'BMW',
+        model: 'i series',
+        bodyType: 'saloon',
+
+      },
+    validSaleAd2:
+      {
+        state: 'new',
+        status: 'availabe',
+        price: 1500000,
+        manufacturer: 'Honda',
+        model: 'mustang',
+        bodyType: 'saloon',
+
+      },
+    validSaleAd3:
+      {
+        state: 'new',
+        status: 'available',
+        price: 1600000,
+        manufacturer: 'Suzuki',
+        model: 'mustang',
+        bodyType: 'saloon',
+
+      },
+    validSaleAd4:
+      {
+        state: 'used',
+        status: 'available',
+        price: 1900000,
         manufacturer: 'ford',
         model: 'mustang',
         bodyType: 'saloon',
@@ -110,7 +141,7 @@ export default {
     missingCarPrice:
       {
         state: 'used',
-        status: 'availabe',
+        status: 'available',
         price: ' ',
         manufacturer: 'ford',
         model: 'mustang',
@@ -120,7 +151,7 @@ export default {
     missingCarState:
       {
         state: ' ',
-        status: 'availabe',
+        status: 'available',
         price: 1100000,
         manufacturer: 'toyota',
         model: 'mustang',
@@ -130,7 +161,7 @@ export default {
     missingCarBodyType:
       {
         state: 'used',
-        status: 'availabe',
+        status: 'available',
         price: 110000,
         manufacturer: 'bmw',
         model: '1 series',
