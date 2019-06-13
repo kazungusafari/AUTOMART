@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -23,7 +24,32 @@ const {
 } = mockData.createOrder;
 
 
-describe('Orders Routes: create purchase order', () => {
+describe('Orders Routes: Create purchase order', () => {
+  const normalUser = {
+    firstname: 'John',
+    lastname: 'Doe',
+    address: '100,11000,Nairobi',
+    email: 'updateorderee@gmail.com',
+    password: 'password100',
+    confirmPassword: 'password100',
+  };
+  const carToOrder = {
+    state: 'used',
+    status: 'available',
+    price: 1550000,
+    manufacturer: 'BMW',
+    model: '1 series',
+    bodyType: 'saloon',
+  };
+  before((done) => {
+    request(app)
+      .post('/api/v1/auth/signup')
+      .send(normalUser)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        done();
+      });
+  });
   it('should create a new purchase order', (done) => {
     request(app)
       .post('/api/v1/order/')
@@ -32,7 +58,6 @@ describe('Orders Routes: create purchase order', () => {
       .send({ ...validOrder })
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
-
         expect(res.body).to.be.a('object');
 
 

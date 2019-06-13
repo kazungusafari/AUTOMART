@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-irregular-whitespace */
 /* eslint-disable no-undef */
@@ -11,6 +12,40 @@ const { adminToken, userToken } = tokens;
 
 
 describe('Car Routes: All cars', () => {
+  const adminUser = {
+    firstname: 'John',
+    lastname: 'Doe',
+    address: '100,11000,Nairobi',
+    email: 'jiji@gmail.com',
+    password: 'password100',
+    confirmPassword: 'password100',
+  };
+  const carToDelete = {
+    state: 'used',
+    status: 'available',
+    price: 1550000,
+    manufacturer: 'BMW',
+    model: '1 series',
+    bodyType: 'saloon',
+  };
+  before((done) => {
+    request(app)
+      .post('/api/v1/auth/signup')
+      .send(adminUser)
+      .query({ admin: true })
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        const { token, id } = res.body.data;
+        request(app)
+          .post('/api/v1/car/')
+          .set('authorization', `Bearer ${token}`)
+          .send(carToDelete)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(201);
+            done();
+          });
+      });
+  });
   it('get all cars', (done) => {
     request(app)
       .get('/api/v1/car/')
