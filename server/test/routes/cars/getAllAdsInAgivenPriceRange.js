@@ -11,6 +11,7 @@ const { userToken } = tokens;
 
 
 describe('Car Routes: unsold cars within a price range', () => {
+
   it('get all  unsold cars within a price range.', (done) => {
     request(app)
       .get(encodeURI('/api/v1/car'))
@@ -26,7 +27,7 @@ describe('Car Routes: unsold cars within a price range', () => {
 
   it('should return error if no unsold cars within a given range is found', (done) => {
     request(app)
-      // eslint-disable-next-line no-irregular-whitespace
+    // eslint-disable-next-line no-irregular-whitespace
       .get(encodeURI('/api/v1/car'))
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)

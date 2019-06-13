@@ -1,82 +1,11 @@
-import moment from 'moment';
+//import moment from 'moment';
 
-const dateTime = moment().format('YYYY-MM-DD h:m:s');
+//const dateTime = moment().format('YYYY-MM-DD h:m:s');
 
 
 export default {
 
   registeredSaleAds: [
-    {
-      id: 1,
-      owner: 1,
-      createdOn: dateTime,
-      state: 'used',
-      status: 'available',
-      price: 1550000,
-      manufacturer: 'BMW',
-      model: '1 series',
-      bodyType: 'saloon',
-      modifiedDate: null,
-    },
-    {
-      id: 2,
-      owner: 1,
-      createdOn: dateTime,
-      state: 'new',
-      status: 'available',
-      price: 1910000,
-      manufacturer: 'BMW',
-      model: '1 series',
-      bodyType: 'saloon',
-      modifiedDate: null,
-    },
-    {
-      id: 3,
-      owner: 1,
-      createdOn: dateTime,
-      state: 'new',
-      status: 'available',
-      price: 2000000,
-      manufacturer: 'Ford',
-      model: 'Mustang',
-      bodyType: 'car',
-      modifiedDate: null,
-    },
-    {
-      id: 4,
-      owner: 1,
-      createdOn: dateTime,
-      state: 'used',
-      status: 'sold',
-      price: 1910000,
-      manufacturer: 'Ford',
-      model: 'Mustang',
-      bodyType: 'car',
-      modifiedDate: null,
-    },
-    {
-      id: 5,
-      owner: 1,
-      createdOn: dateTime,
-      state: 'new',
-      status: 'sold',
-      price: 3000000,
-      manufacturer: 'Honda',
-      model: '1300',
-      bodyType: 'car',
-      modifiedDate: null,
-    },
-    {
-      id: 6,
-      owner: 1,
-      createdOn: dateTime,
-      state: 'new',
-      status: 'available',
-      price: 1200000,
-      manufacturer: 'Toyota',
-      model: '86',
-      bodyType: 'car',
-      modifiedDate: null,
-    },
+   
   ],
 };

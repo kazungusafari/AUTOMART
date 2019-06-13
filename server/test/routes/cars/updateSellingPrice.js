@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-irregular-whitespace */
 /* eslint-disable no-undef */
@@ -17,9 +18,42 @@ const invalidDataType = 'jjjj';
 
 
 describe('Car Routes: Update sale Ad price', () => {
+  const normalUser = {
+    firstname: 'John',
+    lastname: 'Doe',
+    address: '100,11000,Nairobi',
+    email: 'updatesellingprice@gmail.com',
+    password: 'password100',
+    confirmPassword: 'password100',
+  };
+  const carToGet = {
+    state: 'used',
+    status: 'available',
+    price: 1550000,
+    manufacturer: 'BMW',
+    model: '1 series',
+    bodyType: 'saloon',
+  };
+  before((done) => {
+    request(app)
+      .post('/api/v1/auth/signup')
+      .send(normalUser)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(201);
+        const { token } = res.body.data;
+        request(app)
+          .post('/api/v1/car/')
+          .set('authorization', `Bearer ${token}`)
+          .send(carToGet)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(201);
+            done();
+          });
+      });
+  });
   it('should update price of the car.', (done) => {
     request(app)
-      .patch(`/api/v1/car/${validId}/price`)
+      .patch('/api/v1/car/1/price')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .send({ price: 15000000 })

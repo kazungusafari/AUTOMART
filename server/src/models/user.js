@@ -20,7 +20,7 @@ class User {
    *
    */
   constructor() {
-    this.users = registeredUsers;
+    this.users = [];
     this.numberOfUsers = registeredUsers.length;
   }
 
