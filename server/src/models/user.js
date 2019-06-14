@@ -21,7 +21,7 @@ class User {
    */
   constructor() {
     this.users = [];
-    this.numberOfUsers = registeredUsers.length;
+    
   }
 
   /**
@@ -33,7 +33,7 @@ class User {
     const { admin } = queryData;
   
     const newUser = {
-      id: this.numberOfUsers + 1,
+      id: registeredUsers.length + 1,
       email: data.email || '',
       firstname: data.firstname || '',
       lastname: data.lastname || '',

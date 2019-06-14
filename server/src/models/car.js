@@ -20,7 +20,7 @@ class Car {
    */
   constructor() {
     this.cars = registeredSaleAds;
-    this.numberOfCars = registeredSaleAds.length;
+    
   }
 
   /**
