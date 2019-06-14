@@ -19,7 +19,7 @@ class Car {
    */
   constructor() {
     this.cars = registeredSaleAds;
-    this.numberOfCars = registeredSaleAds.length;
+    
   }
 
   /**
@@ -29,7 +29,7 @@ class Car {
    */
   create(userId, data) {
     const newCar = {
-      id: this.numberOfCars + 1,
+      id: registeredSaleAds.length + 1,
       owner: userId || '',
       createdOn: dateTime || '',
       state: data.state || '',

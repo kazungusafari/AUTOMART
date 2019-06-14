@@ -19,8 +19,9 @@ class Order {
    *
    */
   constructor() {
+    
     this.orders = registeredSaleOrders;
-    this.numberOfOrders = registeredSaleOrders.length;
+    
   }
 
   /**
@@ -30,7 +31,7 @@ class Order {
    */
   create(userId, data) {
     const newOrder = {
-      id: this.numberOfOrders + 1,
+      id: registeredSaleOrders.length + 1,
       carId: data.carId || '',
       owner: userId,
       createdOn: dateTime || '',
