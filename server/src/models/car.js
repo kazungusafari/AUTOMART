@@ -9,7 +9,8 @@ const dateTime = moment().format('YYYY-MM-DD h:m:s');
 
 config();
 
-const { registeredSaleAds } = carData;
+const { registeredSaleAds} = carData;
+
 
 
 class Car {
@@ -29,7 +30,7 @@ class Car {
    */
   create(userId, data) {
     const newCar = {
-      id: this.numberOfCars + 1,
+      id: registeredSaleAds.length + 1,
       owner: userId || '',
       createdOn: dateTime || '',
       state: data.state || '',
