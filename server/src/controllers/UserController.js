@@ -3,6 +3,8 @@
 import { config } from 'dotenv';
 import bcrypt from 'bcrypt';
 import User from '../models/user';
+import Address from '../models/address';
+
 import Authorization from '../middlewares/Authorization';
 import Response from './utils/responseFormatter';
 
@@ -27,9 +29,10 @@ class UserController {
       let registeredUser = null;
       const { rows } = await User.create(req.query.admin, req.body);
       registeredUser = rows[0];
-      console.log(registeredUser);
       const token = Authorization.generateToken(registeredUser);
       registeredUser.token = token;
+      let address = null;
+      const response = await Address.create(registeredUser.id, req.body);
       return Response.customResponse(registeredUser, res, 201);
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
