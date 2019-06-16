@@ -1,133 +1,137 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-tabs */
 /* eslint-disable eqeqeq */
 import moment from 'moment';
 import { config } from 'dotenv';
-import carData from './data/carData';
+import db from './index';
 
 const dateTime = moment().format('YYYY-MM-DD h:m:s');
 
-
 config();
-
-const { registeredSaleAds } = carData;
-
 
 class Car {
   /**
-   * class constructor
-   *
-   */
-  constructor() {
-    this.cars = registeredSaleAds;
-    
-  }
-
-  /**
-   * @param {integer} userId
-   * @param {object} data
+   * Create a new car sale ad in the database
+   * @param {integer} userId the id of the user posting sale Ad
+   * @param {object} data the sale Ad details
    * @returns {object} car object
    */
   create(userId, data) {
-    const newCar = {
-      id: registeredSaleAds.length + 1,
-      owner: userId || '',
-      createdOn: dateTime || '',
-      state: data.state || '',
-      status: data.status || '',
-      price: data.price || '',
-      manufacturer: data.manufacturer || '',
-      model: data.model || '',
-      bodyType: data.bodyType || '',
-      modifiedDate: null,
-    };
-    this.cars.push(newCar);
-    return newCar;
+    const car = [
+      userId,
+      dateTime,
+      data.state,
+      data.status,
+      data.price,
+      data.manufacturer,
+      data.model,
+      data.bodyType,
+      null,
+    ];
+
+    const text = `INSERT INTO
+        cars(owner, createdDate, state,status,price,manufacturer,model,bodyType,modifiedDate)
+        VALUES ($1, $2, $3,$4,$5,$6,$7,$8,$9) returning *`;
+
+    const response = db.query(text, car);
+    return response;
   }
 
 
   /**
-   *
-   * @param {integer} id
+   * Get a specific sale ad in the database by id
+   * @param {integer} id the id of the car to find
    * @returns {object} car object
    */
   findOneCar(id) {
-    // eslint-disable-next-line radix
-    return this.cars.find(car => car.id === id);
+    const text = 'SELECT * FROM cars WHERE id = $1';
+    const response = db.query(text, [id]);
+    return response;
   }
 
   /**
+   * Return all sale ads in the database
    * @returns { Array } returns all cars
    */
   findAll() {
-    return this.cars;
+    const findAllQuery = 'SELECT * FROM cars';
+    const response = db.query(findAllQuery);
+    return response;
   }
 
   /**
-   * @param {string} status
+   * Get all sale ads in the database of a given status
+   * @param {string} status the car status
    * @returns {Array} returns an array of all unsold cars
    */
   findAllByStatus(status) {
-    return this.cars.filter(car => car.status === status);
+    const text = 'SELECT * FROM cars WHERE status = $1';
+    const response = db.query(text, [status]);
+    return response;
   }
 
   /**
-   * @param {integer} minPrice
-   * @param {integer} maxPrice
-   * @param {string} status
+   * Get all sale ads in the database within a given price range
+   * @param {integer} minPrice the minimum price of the car
+   * @param {integer} maxPrice the maximum price of the car
+   * @param {string} status the status of the car
    * @returns {array} returns all unsold cars within a given price range
    */
   findAllByPriceRange(minPrice, maxPrice, status) {
-    const cars = [];
-    this.cars.forEach((car) => {
-      // eslint-disable-next-line max-len
-      if ((car.status === status) && (car.price >= minPrice && car.price <= maxPrice)) cars.push(car);
-    });
-    return cars;
+    const details = [
+      status,
+      minPrice,
+      maxPrice,
+    ];
+    const text = 'SELECT * FROM cars WHERE status = $1 AND price BETWEEN $2 AND $3 ';
+    const response = db.query(text, [details]);
+    return response;
   }
 
   /**
-   *
-   * @param {integer} id
+   * Update status of a sale ad in the database
+   * @param {integer} id the id of the car
    * @returns {object} car object
    */
   updateStatus(id) {
-    const car = this.findOneCar(id);
-    const index = this.cars.indexOf(car);
-    this.cars[index].modifiedDate = dateTime;
-    this.cars[index].status = 'sold';
-    return this.cars[index];
+    const updateQuery = `UPDATE cars
+    SET status=$1, modifiedDate=$2 WHERE id=$3 returning *`;
+    const details = [
+      'sold',
+      dateTime,
+      id,
+    ];
+    const response = db.query(updateQuery, [details]);
+    return response;
   }
 
   /**
-   *
+   * Update the selling price of a sale ad in the database
    * @param {integer} id id of the car
    * @param {integer} price new selling price
    * @returns {object} car object
    */
   updateSellingPrice(id, price) {
-    const car = this.findOneCar(id);
-    const index = this.cars.indexOf(car);
-    this.cars[index].modifiedDate = dateTime;
-    this.cars[index].price = price;
-    return this.cars[index];
+    const updateQuery = `UPDATE cars
+    SET price=$1, modifiedDate=$2 WHERE id=$3 returning *`;
+    const details = [
+      price,
+      dateTime,
+      id,
+    ];
+    const response = db.query(updateQuery, [details]);
+    return response;
   }
 
   /**
-   *
+   * Delete a sale ad in the database
    * @param {integer} id id of the car
-   * @returns {boolean} true if success or false if not deleted
+   * @returns {Object} return deleted car object
    */
-  // eslint-disable-next-line consistent-return
   delete(id) {
-    const car = this.findOneCar(id);
-    if (car !== undefined) {
-      const index = this.cars.indexOf(car);
-      if (this.cars.splice(index, 1)) {
-        return true;
-      }
-      return false;
-    }
-    return false;
+    const deleteQuery = 'DELETE FROM cars WHERE id=$1 returning *';
+    const response = db.query(deleteQuery, [id]);
+    return response;
   }
 }
 

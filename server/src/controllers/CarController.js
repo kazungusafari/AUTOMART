@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable camelcase */
 /* eslint-disable class-methods-use-this */
 import { config } from 'dotenv';
@@ -16,16 +17,22 @@ class CarController {
   /**
    * Create a new sale AD
    * @static
-   * @param {object} req
-   * @param {object} res
-   * @returns { Object }
+   * @param {object} req the http request object
+   * @param {object} res the http response object
+   * @returns { Object } the posted sale Ad object
    * @memberof UserController
    */
   static async createSaleAd(req, res) {
-    const user = User.findOne(req.user.email);
-    if (user) {
-      const saleAd = Car.create(req.user.id, req.body);
-      return Response.customResponse(saleAd, res, 201);
+    let user = null;
+    const { rows } = await User.findOne(req.user.email);
+    user = rows[0];
+    if (user !== null) {
+      let saleAd = null;
+      const response = await Car.create(req.user.id, req.body);
+      saleAd = response.rows[0];
+      if (saleAd !== null) {
+        return Response.customResponse(saleAd, res, 201);
+      }
     }
     return Response.errorResponse(res, 'User is not registered', 404);
   }
