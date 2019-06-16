@@ -8,6 +8,8 @@ import app from '../../../src/app';
 
 
 const {
+  validNormalUser,
+  validAdminUser,
   noEmail,
   noPassword,
   invalidEmailFormat,
@@ -16,49 +18,11 @@ const {
 
 
 describe('Auth routes: login', () => {
-  const normalUser = {
-    firstname: 'John',
-    lastname: 'Doe',
-    address: '100,11000,Nairobi',
-    email: 'normal@gmail.com',
-    password: 'password100',
-    confirmPassword: 'password100',
-  };
-  const adminUser = {
-    firstname: 'John',
-    lastname: 'Doe',
-    address: '100,11000,Nairobi',
-    email: 'admin@gmail.com',
-    password: 'password100',
-    confirmPassword: 'password100',
-  };
-  before((done) => {
-    request(app)
-      .post('/api/v1/auth/signup')
-      .send({ ...normalUser })
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(201);
-        request(app)
-          .post('/api/v1/auth/signup')
-          .send({ ...adminUser })
-          .query({ admin: true })
-          .end((err, res) => {
-            expect(res.statusCode).to.equal(201);
-            done();
-          });
-      });
-  });
-
   it('should login a valid normal user', (done) => {
-    const normalUser = {
-      email: 'normal@gmail.com',
-      password: 'password100',
-
-    };
     request(app)
       .post('/api/v1/auth/login')
       .set('Accept', 'application/json')
-      .send(normalUser)
+      .send(validNormalUser)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.a('object');
@@ -74,15 +38,10 @@ describe('Auth routes: login', () => {
   });
 
   it('should return login in an Admin User', (done) => {
-    const adminUser = {
-      email: 'admin@gmail.com',
-      password: 'password100',
-
-    };
     request(app)
       .post('/api/v1/auth/login')
       .set('Accept', 'application/json')
-      .send(adminUser)
+      .send(validAdminUser)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body.data).to.include.keys('token');

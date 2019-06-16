@@ -1,3 +1,4 @@
+/* eslint-disable no-undef-init */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-shadow */
 import { config } from 'dotenv';
@@ -31,7 +32,7 @@ class UserController {
       registeredUser = rows[0];
       const token = Authorization.generateToken(registeredUser);
       registeredUser.token = token;
-      let address = null;
+      // eslint-disable-next-line no-unused-vars
       const response = await Address.create(registeredUser.id, req.body);
       return Response.customResponse(registeredUser, res, 201);
     } catch (error) {
@@ -48,17 +49,17 @@ class UserController {
    * Logs in a user
    * @method login
    * @memberof UserController
-   * @param {object} req
-   * @param {object} res
-   * @returns {(function|object)} Function next() or JSON object
+   * @param {object} req the http request object
+   * @param {object} res the http response object
+   * @returns {object} user login object
    */
 
   static async login(req, res) {
     const { email, password } = req.body;
-    const userFound = User.findOne(email);
-
-
-    if (!userFound) {
+    let userFound = undefined;
+    const { rows } = await User.findOne(email);
+    userFound = rows[0];
+    if (userFound === undefined) {
       return Response.errorResponse(res, 'Email is not registered', 404);
     }
     const isPasswordValid = UserController.verifyPassword(password, userFound.password);
