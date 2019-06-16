@@ -40,15 +40,16 @@ class CarController {
   /**
      * Get a car sale Ad by id
      * @static
-     * @param {*} req
-     * @param {*} res
+     * @param {*} req the http request object
+     * @param {*} res the http response object
      * @returns { Object } Returns a sale Ad object
      * @memberof CarController
    */
 
   static async getSaleAdById(req, res) {
-    // eslint-disable-next-line radix
-    const saleAd = await Car.findOneCar(req.params.id);
+    let saleAd = null;
+    const response = await Car.findOneCar(req.params.id);
+    saleAd = response.rows[0];
     if (saleAd) {
       return Response.customResponse(saleAd, res, 200);
     }
