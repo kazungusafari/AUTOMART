@@ -27,6 +27,20 @@ CREATE TABLE IF NOT EXISTS addresses(
     usedBy INTEGER REFERENCES users(id),
     createdDate TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS cars(
+  id SERIAL PRIMARY KEY,
+  owner INTEGER REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL,
+  price VARCHAR(128) NOT NULL,
+  model VARCHAR(128) NOT NULL,
+  manufacturer VARCHAR(128) NOT NULL,
+  state VARCHAR(128) NOT NULL,
+  status VARCHAR(128) NOT NULL,
+  bodyType VARCHAR(128) NOT NULL,
+  createdDate TIMESTAMP,
+  modifiedDate TIMESTAMP
+);
+
     CREATE TABLE IF NOT EXISTS orders(
       id SERIAL PRIMARY KEY,
       owner INTEGER REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL,
@@ -40,19 +54,7 @@ CREATE TABLE IF NOT EXISTS addresses(
 
     
     
-    CREATE TABLE IF NOT EXISTS cars(
-        id SERIAL PRIMARY KEY,
-        owner INTEGER REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL,
-        price VARCHAR(128) NOT NULL,
-        model VARCHAR(128) NOT NULL,
-        manufacturer VARCHAR(128) NOT NULL,
-        state VARCHAR(128) NOT NULL,
-        status VARCHAR(128) NOT NULL,
-        bodyType VARCHAR(128) NOT NULL,
-        createdDate TIMESTAMP,
-        modifiedDate TIMESTAMP
-    );
-
+    
     CREATE TABLE IF NOT EXISTS flags(
         id SERIAL PRIMARY KEY,
         client INTEGER REFERENCES users(id),
