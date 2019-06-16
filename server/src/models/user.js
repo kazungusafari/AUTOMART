@@ -1,94 +1,65 @@
-/* eslint-disable block-scoped-var */
-/* eslint-disable no-var */
-/* eslint-disable vars-on-top */
+/* eslint-disable class-methods-use-this */
 import moment from 'moment';
 import { config } from 'dotenv';
 import hashPassword from '../helpers/hashPassword';
-import userData from './data/userData';
+
+import db from './index';
 
 const dateTime = moment().format('YYYY-MM-DD h:m:s');
-
-
 config();
-
-const { registeredUsers } = userData;
-
 
 class User {
   /**
-   * class constructor
-   *
-   */
-  constructor() {
-    this.users = [];
-    
-  }
-
-  /**
-   * @param {object} queryData
-   * @param {object} data
+   * Create a new user in the database
+   * @param {boolean} isUserAdmin show if user is admin or not
+   * @param {object} userData the user data
    * @returns {object} user object
    */
-  create(queryData, data) {
-    const { admin } = queryData;
-  
-    const newUser = {
-      id: registeredUsers.length + 1,
-      email: data.email || '',
-      firstname: data.firstname || '',
-      lastname: data.lastname || '',
-      password: hashPassword(data.password, 10) || '',
-      address: {
-        boxNumber: data.boxNumber || '',
-        town: data.town || '',
-        postalCode: data.postalCode || '',
+  create(isUserAdmin = false, userData) {
+    const queryText = `INSERT INTO
+        users(firstname, lastname, email, isAdmin, password, createdOn) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8) returning *`;
+    const {
+      firstname, lastname, email, password,
+    } = userData;
 
-      },
-      createdDate: dateTime,
-      modifiedDate: null,
-      isAdmin: admin || false,
-    };
-    this.users.push(newUser);
-    return newUser;
+    const newPassword = hashPassword(password, 10);
+    const user = [
+      firstname, lastname, email, isUserAdmin,
+      newPassword, dateTime,
+    ];
+    const response = db.query(queryText, user);
+    return response;
   }
 
 
   /**
-   *
-   * @param {string} email
+   * Find user in the database by email
+   * @param {string} email the user email
    * @returns {object} user object
    */
   findOne(email) {
-    return this.users.find(user => user.email === email);
+    const query = 'SELECT * FROM users WHERE email=$1';
+    const response = db.query(query, [email]);
+    return response;
   }
 
   /**
-   * @returns {object} returns all users
+   * Update user password in the database
+   * @param {string} email the email of the user
+   * @param {object} password the password of the user
    */
-  findAll() {
-    return this.users;
-  }
-
-  /**
-   *
-   * @param {string} email
-   * @param {object} data
-   */
-  update(email, data) {
-    const user = this.findOne(email);
-    const index = this.users.indexOf(user);
-    this.users[index].firstname = user.firstname;
-    this.users[index].lastname = user.lastname;
-    this.users[index].email = user.email;
-    this.users[index].password = hashPassword(data.password, 10);
-    this.users[index].isAdmin = user.isAdmin;
-    this.users[index].address = {
-      boxNumber: user.address.address,
-      town: user.address.town,
-      postalCode: user.address.postalCode,
-    };
-    this.users[index].modifiedDate = dateTime;
-    return this.users[index];
+  update(email, password) {
+    const newPassword = hashPassword(password, 10);
+    const updateQuery = `UPDATE users
+      SET password=$1, modified_at=$2 WHERE email=$3 returning *`;
+    const details = [
+      newPassword,
+      dateTime,
+      email,
+    ];
+    const response = db.query(updateQuery, details);
+    return response;
   }
 }
 
