@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-shadow */
 import { config } from 'dotenv';
 import bcrypt from 'bcrypt';
@@ -16,21 +17,27 @@ class UserController {
   /**
    * Create a new User
    * @static
-   * @param {object} req
-   * @param {object} res
-   * @returns { Object }
+   * @param {object} req the http request object
+   * @param {object} res the http response object
+   * @returns { Object } the created user object
    * @memberof UserController
    */
   static async signup(req, res) {
-    const isUserRegistered = User.findOne(req.body.email);
+    try {
+      let registeredUser = null;
+      const { rows } = await User.create(req.query.admin, req.body);
+      registeredUser = rows[0];
+      console.log(registeredUser);
+      const token = Authorization.generateToken(registeredUser);
+      registeredUser.token = token;
+      return Response.customResponse(registeredUser, res, 201);
+    } catch (error) {
+      if (error.routine === '_bt_check_unique') {
+        return Response.errorResponse(res, 'Email is already registered', 400);
+      }
 
-    if (!isUserRegistered) {
-      const isUserRegistered = User.create(req.query, req.body);
-      const token = Authorization.generateToken(isUserRegistered);
-      isUserRegistered.token = token;
-      return Response.customResponse(isUserRegistered, res, 201);
+      return Response.errorResponse(res, error, 400);
     }
-    return Response.errorResponse(res, 'Email is already registered', 400);
   }
 
 

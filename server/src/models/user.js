@@ -17,8 +17,8 @@ class User {
    */
   create(isUserAdmin = false, userData) {
     const queryText = `INSERT INTO
-        users(firstname, lastname, email, isAdmin, password, createdOn) 
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8) returning *`;
+        users(firstname, lastname, email, isAdmin, password, createdDate) 
+        VALUES ($1, $2, $3, $4, $5, $6) returning *`;
     const {
       firstname, lastname, email, password,
     } = userData;
