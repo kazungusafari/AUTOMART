@@ -30,7 +30,7 @@ class Car {
     ];
 
     const text = `INSERT INTO
-        cars(owner, createdDate, state,status,price,manufacturer,model,bodyType,modifiedDate)
+        cars(owner, created_date, state,status,price,manufacturer,model,body_type,modified_date)
         VALUES ($1, $2, $3,$4,$5,$6,$7,$8,$9) returning *`;
 
     const response = db.query(text, car);
@@ -95,7 +95,7 @@ class Car {
    */
   updateStatus(id) {
     const updateQuery = `UPDATE cars
-    SET status=$1, modifiedDate=$2 WHERE id=$3 returning *`;
+    SET status=$1, modified_date=$2 WHERE id=$3 returning *`;
     const details = [
       'sold',
       dateTime,
@@ -113,7 +113,7 @@ class Car {
    */
   updateSellingPrice(id, price) {
     const updateQuery = `UPDATE cars
-    SET price=$1, modifiedDate=$2 WHERE id=$3 returning *`;
+    SET price=$1, modified_date=$2 WHERE id=$3 returning *`;
     const details = [
       price,
       dateTime,

@@ -32,7 +32,6 @@ class UserController {
       registeredUser = rows[0];
       const token = Authorization.generateToken(registeredUser);
       registeredUser.token = token;
-      // eslint-disable-next-line no-unused-vars
       const response = await Address.create(registeredUser.id, req.body);
       return Response.customResponse(registeredUser, res, 201);
     } catch (error) {
