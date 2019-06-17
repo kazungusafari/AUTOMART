@@ -161,16 +161,18 @@ class CarController {
   /**
      * Delete a specific car Ad
      * @static
-     * @param {*} req
-     * @param {*} res
+     * @param {*} req the http request object
+     * @param {*} res the http response object
      * @memberof CarController
    */
 
   static async deleteSaleAdById(req, res) {
     // eslint-disable-next-line radix
-    if (req.user.isAdmin === true) {
-      const isDeleted = await Car.delete(req.params.id);
-      if (isDeleted === true) {
+    if (req.user.isadmin === true) {
+      let deletedCar = null;
+      const { rows } = await Car.delete(req.params.id);
+      deletedCar = rows[0];
+      if (deletedCar) {
         return res.status(200).json({
           status: res.statusCode,
           data: 'Car Ad successfully deleted',
