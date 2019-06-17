@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS users(
 
 CREATE TABLE IF NOT EXISTS addresses(
     id SERIAL PRIMARY KEY,
-    box_number VARCHAR(128) UNIQUE NOT NULL,
+    box_number VARCHAR(128) NOT NULL,
     postal_code TEXT NOT NULL,
     town VARCHAR(128) NOT NULL,
     used_by INTEGER REFERENCES users(id),
@@ -43,12 +43,12 @@ CREATE TABLE IF NOT EXISTS cars(
 
     CREATE TABLE IF NOT EXISTS orders(
       id SERIAL PRIMARY KEY,
-      owner INTEGER REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL,
-      car_id INTEGER REFERENCES cars(id) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL,
+      owner INTEGER NOT NULL,
+      car_id INTEGER NOT NULL,
       price INTEGER NOT NULL,
       offered_price INTEGER NOT NULL,
       status VARCHAR(128) NOT NULL,
-      createda_date TIMESTAMP,
+      created_date TIMESTAMP,
       modified_date TIMESTAMP
     );
 

@@ -25,8 +25,13 @@ class OrderController {
     let car = null;
     const { rows } = await Car.findOneCar(req.body.carId);
     car = rows[0];
+    console.log(car.id);
+    console.log(req.user.id);
+    console.log(car.owner);
     console.log(car);
     console.log(req.body);
+
+
     if (car) {
       let order = null;
       const response = await Order.create(req.user.id, req.body);
