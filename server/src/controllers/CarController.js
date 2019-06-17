@@ -99,10 +99,14 @@ class CarController {
      * @memberof CarController
      */
   static async markAdAsSold(req, res) {
-    const car = await Car.findOneCar(req.params.id);
+    let car = null;
+    const { rows } = await Car.findOneCar(req.params.id);
+    car = rows[0];
     if (car) {
       if (car.owner === req.user.id) {
-        const updatedCar = Car.updateStatus(req.params.id);
+        let updatedCar = null;
+        const response = await Car.updateStatus(req.params.id);
+        updatedCar = response.rows[0];
         return Response.customResponse(updatedCar, res, 200);
       }
       return Response.errorResponse(res, 'Unauthorised User', 401);
@@ -139,7 +143,6 @@ class CarController {
     let car = null;
     const { rows } = await Car.findOneCar(req.params.id);
     car = rows[0];
-    console.log(car);
     if (car) {
       if (car.owner === req.user.id) {
         let updatedCar = null;
