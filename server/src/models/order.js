@@ -14,7 +14,7 @@ config();
 class Order {
   /**
    * Create a new order in the database
-   * @param {integer} orderId id of the car
+   * @param {integer} userId id of the  user
    * @param {object} data the order details
    * @returns {object} order object
    */
@@ -30,7 +30,7 @@ class Order {
     ];
 
     const text = `INSERT INTO
-      orders(owner, carId, price,offeredPrice,status,createdDate,modifiedDate)
+      orders(owner, car_id, price,offered_price,status,created_date,modified_date)
       VALUES ($1, $2, $3,$4,$5,$6,$7) returning *`;
 
     const response = db.query(text, order);
@@ -58,7 +58,7 @@ class Order {
    */
   update(id, price) {
     const updateQuery = `UPDATE orders
-      SET price=$1, modifiedOn=$2 WHERE id=$3 returning *`;
+      SET price=$1, modified_date=$2 WHERE id=$3 returning *`;
     const details = [
       price,
       dateTime,

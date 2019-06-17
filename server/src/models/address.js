@@ -17,7 +17,7 @@ class Address {
    */
   create(userId, addressData) {
     const queryText = `INSERT INTO
-        addresses(boxNumber, postalCode, town,usedBy, createdDate) 
+        addresses(box_number, postal_code, town,used_by, created_date) 
         VALUES ($1, $2, $3, $4, $5) returning *`;
     const {
       boxNumber, postalCode, town,

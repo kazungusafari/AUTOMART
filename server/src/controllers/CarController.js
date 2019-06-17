@@ -28,6 +28,7 @@ class CarController {
     user = rows[0];
     if (user !== null) {
       let saleAd = null;
+      console.log(req.user.id);
       const response = await Car.create(req.user.id, req.body);
       saleAd = response.rows[0];
       if (saleAd !== null) {

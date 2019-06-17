@@ -17,7 +17,7 @@ class User {
    */
   create(isUserAdmin = false, userData) {
     const queryText = `INSERT INTO
-        users(firstname, lastname, email, isAdmin, password, createdDate) 
+        users(firstname, lastname, email, is_admin, password, created_date) 
         VALUES ($1, $2, $3, $4, $5, $6) returning *`;
     const {
       firstname, lastname, email, password,
@@ -52,7 +52,7 @@ class User {
   update(email, password) {
     const newPassword = hashPassword(password, 10);
     const updateQuery = `UPDATE users
-      SET password=$1, modified_at=$2 WHERE email=$3 returning *`;
+      SET password=$1, modified_date=$2 WHERE email=$3 returning *`;
     const details = [
       newPassword,
       dateTime,

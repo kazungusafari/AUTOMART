@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import pool from './index';
 
-const queryText = 'DROP TABLE IF EXISTS users, cars, orders ,flags, address CASCADE';
+const queryText = 'DROP TABLE IF EXISTS users, cars, orders ,flags, addresses CASCADE';
 
 
 pool.query(queryText)

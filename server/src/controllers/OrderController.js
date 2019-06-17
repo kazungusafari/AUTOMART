@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable class-methods-use-this */
 import { config } from 'dotenv';
 import Order from '../models/order';
@@ -21,10 +22,18 @@ class OrderController {
    * @memberof UserController
    */
   static async createOrder(req, res) {
-    const car = await Car.findOneCar(req.body.carId);
+    let car = null;
+    const { rows } = await Car.findOneCar(req.body.carId);
+    car = rows[0];
+    console.log(car);
+    console.log(req.body);
     if (car) {
-      const order = await Order.create(req.user.id, req.body);
-      return Response.customResponse(order, res, 201);
+      let order = null;
+      const response = await Order.create(req.user.id, req.body);
+      order = response.rows[0];
+      if (order) {
+        return Response.customResponse(order, res, 201);
+      }
     }
     return Response.errorResponse(res, 'Car not found', 404);
   }
