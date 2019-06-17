@@ -78,8 +78,8 @@ class CarController {
     }
     if (queryLength === 1 && status) {
       if (req.query.status === 'available') {
-        const allUnsoldAds = Car.findAllByStatus(req.query.status);
-        return CarController.response(allUnsoldAds, res);
+        const { rows } = await Car.findAllByStatus(req.query.status);
+        return CarController.response(rows, res);
       }
       return Response.errorResponse(res, 'Forbidden', 403);
     }
