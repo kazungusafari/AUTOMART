@@ -60,8 +60,8 @@ class CarController {
   /**
      * Get all unsold car Ads
      * @static
-     * @param {*} req
-     * @param {*} res
+     * @param {*} req the http request object
+     * @param {*} res the http response object
      * @returns { Array } Returns an array of Objects
      * @memberof CarController
      */
@@ -84,8 +84,12 @@ class CarController {
       return Response.errorResponse(res, 'Forbidden', 403);
     }
     if (queryLength === 3 && min_price && max_price && status) {
-      const allUnsoldByPriceRange = Car.findAllByPriceRange(min_price, max_price, status);
-      return CarController.response(allUnsoldByPriceRange, res);
+      let allUnsoldByPriceRange = null;
+      const response = await Car.findAllByPriceRange(min_price, max_price, status);
+      allUnsoldByPriceRange = response.rows;
+      if (allUnsoldByPriceRange !== null) {
+        return CarController.response(allUnsoldByPriceRange, res);
+      }
     }
     return Response.errorResponse(res, 'Not Found', 404);
   }
