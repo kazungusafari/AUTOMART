@@ -25,13 +25,6 @@ class OrderController {
     let car = null;
     const { rows } = await Car.findOneCar(req.body.carId);
     car = rows[0];
-    console.log(car.id);
-    console.log(req.user.id);
-    console.log(car.owner);
-    console.log(car);
-    console.log(req.body);
-
-
     if (car) {
       let order = null;
       const response = await Order.create(req.user.id, req.body);
@@ -53,16 +46,19 @@ class OrderController {
      * @memberof CarController
      */
   static async UpdatePrice(req, res) {
-    const order = await Order.findOneOrder(req.params.id);
-
-    if (order) {
-      if (order.owner === req.user.id && order.status === 'pending') {
-        const updatedOrder = await Order.update(req.params.id, req.body.price);
+    let foundOrder = null;
+    const { rows } = await Order.findOneOrder(req.params.id);
+    foundOrder = rows[0];
+    if (foundOrder) {
+      if (foundOrder.owner === req.user.id && foundOrder.status === 'pending') {
+        let updatedOrder = null;
+        const response = await Order.update(req.params.id, req.body.price);
+        updatedOrder = response.rows[0];
         return Response.customResponse(updatedOrder, res, 200);
       }
       return Response.errorResponse(res, 'Forbidden', 403);
     }
-    return Response.errorResponse(res, 'Not Found', 404);
+    return Response.errorResponse(res, 'Order Not Found', 404);
   }
 }
 
