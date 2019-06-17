@@ -130,17 +130,24 @@ class CarController {
   /**
      * Update the price of a car.
      * @static
-     * @param {*} req
-     * @param {*} res
+     * @param {*} req the http request object
+     * @param {*} res the http response object
      * @returns { Object } Returns the updated car Object
      * @memberof CarController
      */
   static async UpdatePrice(req, res) {
-    const car = await Car.findOneCar(req.params.id);
+    let car = null;
+    const { rows } = await Car.findOneCar(req.params.id);
+    car = rows[0];
+    console.log(car);
     if (car) {
       if (car.owner === req.user.id) {
-        const updatedCar = Car.updateSellingPrice(req.params.id, req.body.price);
-        return Response.customResponse(updatedCar, res, 200);
+        let updatedCar = null;
+        const response = await Car.updateSellingPrice(req.params.id, req.body.price);
+        updatedCar = response.rows[0];
+        if (updatedCar !== null) {
+          return Response.customResponse(updatedCar, res, 200);
+        }
       }
       return Response.errorResponse(res, 'Unauthorised User', 401);
     }

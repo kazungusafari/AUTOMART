@@ -84,7 +84,7 @@ class Car {
       maxPrice,
     ];
     const text = 'SELECT * FROM cars WHERE status = $1 AND price BETWEEN $2 AND $3 ';
-    const response = db.query(text, [details]);
+    const response = db.query(text, details);
     return response;
   }
 
@@ -101,7 +101,7 @@ class Car {
       dateTime,
       id,
     ];
-    const response = db.query(updateQuery, [details]);
+    const response = db.query(updateQuery, details);
     return response;
   }
 
@@ -119,7 +119,7 @@ class Car {
       dateTime,
       id,
     ];
-    const response = db.query(updateQuery, [details]);
+    const response = db.query(updateQuery, details);
     return response;
   }
 
