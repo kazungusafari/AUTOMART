@@ -71,7 +71,7 @@ class CarController {
     // eslint-disable-next-line camelcase
     const { max_price, min_price, status } = req.query;
     if (queryLength === 0) {
-      if (req.user.isAdmin === true) {
+      if (req.user.isadmin === true) {
         return CarController.getAllCars(res);
       }
       return Response.errorResponse(res, 'Forbidden', 403);
@@ -113,14 +113,18 @@ class CarController {
   /**
      * Return all posted ads whether sold or available.
      * @static
-     * @param {*} req
-     * @param {*} res
+     * @param {*} req the http request object
+     * @param {*} res the http response object
      * @returns { Array } Returns an array of all posted ads
      * @memberof CarController
      */
   static async getAllCars(res) {
-    const allCars = await Car.findAll();
-    return CarController.response(allCars, res);
+    try {
+      const { rows } = await Car.findAll();
+      return CarController.response(rows, res);
+    } catch (error) {
+      return Response.errorResponse(res, error, 400);
+    }
   }
 
   /**
