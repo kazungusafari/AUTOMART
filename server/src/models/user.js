@@ -1,96 +1,139 @@
-/* eslint-disable block-scoped-var */
-/* eslint-disable no-var */
-/* eslint-disable vars-on-top */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-tabs */
+/* eslint-disable eqeqeq */
 import moment from 'moment';
 import { config } from 'dotenv';
-import hashPassword from '../helpers/hashPassword';
-import userData from './data/userData';
+import db from './index';
 
 const dateTime = moment().format('YYYY-MM-DD h:m:s');
 
-
 config();
 
-const { registeredUsers } = userData;
-
-
-class User {
+class Car {
   /**
-   * class constructor
-   *
+   * Create a new car sale ad in the database
+   * @param {integer} userId the id of the user posting sale Ad
+   * @param {object} data the sale Ad details
+   * @returns {object} car object
    */
-  constructor() {
-    this.users = [];
-    
-  }
+  create(userId, data) {
+    const car = [
+      userId,
+      dateTime,
+      data.state,
+      data.status,
+      data.price,
+      data.manufacturer,
+      data.model,
+      data.bodyType,
+      null,
+    ];
 
-  /**
-   * @param {object} queryData
-   * @param {object} data
-   * @returns {object} user object
-   */
-  create(queryData, data) {
-    const { admin } = queryData;
-  
-    const newUser = {
-      id: registeredUsers.length + 1,
-      email: data.email || '',
-      firstname: data.firstname || '',
-      lastname: data.lastname || '',
-      password: hashPassword(data.password, 10) || '',
-      address: {
-        boxNumber: data.boxNumber || '',
-        town: data.town || '',
-        postalCode: data.postalCode || '',
+    const text = `INSERT INTO
+        cars(owner, created_date, state,status,price,manufacturer,model,body_type,modified_date)
+        VALUES ($1, $2, $3,$4,$5,$6,$7,$8,$9) returning *`;
 
-      },
-      createdDate: dateTime,
-      modifiedDate: null,
-      isAdmin: admin || false,
-    };
-    this.users.push(newUser);
-    return newUser;
+    const response = db.query(text, car);
+    return response;
   }
 
 
   /**
-   *
-   * @param {string} email
-   * @returns {object} user object
+   * Get a specific sale ad in the database by id
+   * @param {integer} id the id of the car to find
+   * @returns {object} car object
    */
-  findOne(email) {
-    return this.users.find(user => user.email === email);
+  findOneCar(id) {
+    const text = 'SELECT * FROM cars WHERE id = $1';
+    const response = db.query(text, [id]);
+    return response;
   }
 
   /**
-   * @returns {object} returns all users
+   * Return all sale ads in the database
+   * @returns { Array } returns all cars
    */
   findAll() {
-    return this.users;
+    const findAllQuery = 'SELECT * FROM cars';
+    const response = db.query(findAllQuery);
+    return response;
   }
 
   /**
-   *
-   * @param {string} email
-   * @param {object} data
+   * Get all sale ads in the database of a given status
+   * @param {string} status the car status
+   * @returns {Array} returns an array of all unsold cars
    */
-  update(email, data) {
-    const user = this.findOne(email);
-    const index = this.users.indexOf(user);
-    this.users[index].firstname = user.firstname;
-    this.users[index].lastname = user.lastname;
-    this.users[index].email = user.email;
-    this.users[index].password = hashPassword(data.password, 10);
-    this.users[index].isAdmin = user.isAdmin;
-    this.users[index].address = {
-      boxNumber: user.address.address,
-      town: user.address.town,
-      postalCode: user.address.postalCode,
-    };
-    this.users[index].modifiedDate = dateTime;
-    return this.users[index];
+  findAllByStatus(status) {
+    const text = 'SELECT * FROM cars WHERE status = $1';
+    const response = db.query(text, [status]);
+    return response;
+  }
+
+  /**
+   * Get all sale ads in the database within a given price range
+   * @param {integer} minPrice the minimum price of the car
+   * @param {integer} maxPrice the maximum price of the car
+   * @param {string} status the status of the car
+   * @returns {array} returns all unsold cars within a given price range
+   */
+  findAllByPriceRange(minPrice, maxPrice, status) {
+    const details = [
+      status,
+      minPrice,
+      maxPrice,
+    ];
+    const text = 'SELECT * FROM cars WHERE status = $1 AND price BETWEEN $2 AND $3 ';
+    const response = db.query(text, details);
+    return response;
+  }
+
+  /**
+   * Update status of a sale ad in the database
+   * @param {integer} id the id of the car
+   * @returns {object} car object
+   */
+  updateStatus(id) {
+    const updateQuery = `UPDATE cars
+    SET status=$1, modified_date=$2 WHERE id=$3 returning *`;
+    const details = [
+      'sold',
+      dateTime,
+      id,
+    ];
+    const response = db.query(updateQuery, details);
+    return response;
+  }
+
+  /**
+   * Update the selling price of a sale ad in the database
+   * @param {integer} id id of the car
+   * @param {integer} price new selling price
+   * @returns {object} car object
+   */
+  updateSellingPrice(id, price) {
+    const updateQuery = `UPDATE cars
+    SET price=$1, modified_date=$2 WHERE id=$3 returning *`;
+    const details = [
+      price,
+      dateTime,
+      id,
+    ];
+    const response = db.query(updateQuery, details);
+    return response;
+  }
+
+  /**
+   * Delete a sale ad in the database
+   * @param {integer} id id of the car
+   * @returns {Object} return deleted car object
+   */
+  delete(id) {
+    const deleteQuery = 'DELETE FROM cars WHERE id=$1 returning *';
+    const response = db.query(deleteQuery, [id]);
+    return response;
   }
 }
 
 
-export default new User();
+export default new Car();
