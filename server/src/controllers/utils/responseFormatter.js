@@ -9,6 +9,7 @@ class Response {
      * @static
      * @param {Object} obj the car object
      * @param {object} res the HTTP response object
+     * @param {string} message the descriptive message on operation
      * @returns { Object } Returns a formatted Object
      * @memberof Response
      */
