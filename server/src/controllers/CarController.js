@@ -31,7 +31,7 @@ class CarController {
       const response = await Car.create(req.user.id, req.body);
       saleAd = response.rows[0];
       if (saleAd !== null) {
-        return Response.customResponse(saleAd, res, 201);
+        return Response.customResponse('Sale Ad created successfully', saleAd, res, 201);
       }
     }
     return Response.errorResponse(res, 'User is not registered', 404);
@@ -51,7 +51,7 @@ class CarController {
     const response = await Car.findOneCar(req.params.id);
     saleAd = response.rows[0];
     if (saleAd) {
-      return Response.customResponse(saleAd, res, 200);
+      return Response.customResponse('Sale Ad found successfully', saleAd, res, 200);
     }
     return Response.errorResponse(res, 'Sale Ad Not Found', 404);
   }
@@ -111,7 +111,7 @@ class CarController {
         let updatedCar = null;
         const response = await Car.updateStatus(req.params.id);
         updatedCar = response.rows[0];
-        return Response.customResponse(updatedCar, res, 200);
+        return Response.customResponse('Status updated successfully', updatedCar, res, 200);
       }
       return Response.errorResponse(res, 'Unauthorised User', 401);
     }
@@ -153,7 +153,7 @@ class CarController {
         const response = await Car.updateSellingPrice(req.params.id, req.body.price);
         updatedCar = response.rows[0];
         if (updatedCar !== null) {
-          return Response.customResponse(updatedCar, res, 200);
+          return Response.customResponse('Price updated successfully', updatedCar, res, 200);
         }
       }
       return Response.errorResponse(res, 'Unauthorised User', 401);
@@ -197,6 +197,7 @@ class CarController {
   static response(arr, res) {
     if (arr.length > 0) {
       return res.status(200).json({
+        message: 'Ads successfully found',
         status: res.statusCode,
         data: arr,
       });

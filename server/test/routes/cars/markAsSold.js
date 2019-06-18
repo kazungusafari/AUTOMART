@@ -54,7 +54,6 @@ describe('Car Routes: Mark as sold', () => {
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
-        console.log(res);
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.a('object');
         done();

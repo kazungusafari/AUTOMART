@@ -71,7 +71,6 @@ describe('Order Routes: Update purchase order price ', () => {
       .set('authorization', `Bearer ${userToken}`)
       .send({ price: 15000000 })
       .end((err, res) => {
-        console.log(res);
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.a('object');
         done();
