@@ -48,7 +48,7 @@ describe('Car Routes: All cars', () => {
   });
   it('get all cars', (done) => {
     request(app)
-      .get('/api/v1/car/')
+      .get('/api/v1/car')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${adminToken}`)
       .end((err, res) => {
@@ -60,7 +60,7 @@ describe('Car Routes: All cars', () => {
   it('should return error if user token is used', (done) => {
     request(app)
       // eslint-disable-next-line no-irregular-whitespace
-      .get('/api/v1/car/')
+      .get('/api/v1/car')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {

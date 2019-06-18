@@ -7,19 +7,19 @@ const dateTime = moment().format('YYYY-MM-DD h:m:s');
 
 
 const userToken = Authorization.generateToken({
-  id: 1,
+  id: 3,
   firstname: 'John',
   lastname: 'Doe',
   email: 'example@gmail.com',
   address: {
-    boxNumber: 100,
-    postalCode: 11000,
+    box_number: 100,
+    postal_code: 11000,
     town: 'Nairobi',
   },
-  isAdmin: false,
+  is_admin: false,
   password: hashPassword('password100', 10),
-  createdOn: dateTime,
-  modifiedOn: null,
+  created_date: dateTime,
+  modified_date: null,
 });
 const adminToken = Authorization.generateToken({
   id: 2,
@@ -27,14 +27,14 @@ const adminToken = Authorization.generateToken({
   lastname: 'Doe',
   email: 'admin@email.com',
   address: {
-    boxNumber: 55,
-    postalCode: 11025,
+    box_number: 55,
+    postal_code: 11025,
     town: 'Kisumu',
   },
-  isAdmin: true,
+  is_admin: true,
   password: hashPassword('password100', 10),
-  createdOn: dateTime,
-  modifiedOn: null,
+  created_date: dateTime,
+  modified_date: null,
 });
 
 

@@ -32,8 +32,9 @@ class UserController {
       registeredUser = rows[0];
       const token = Authorization.generateToken(registeredUser);
       registeredUser.token = token;
+      // eslint-disable-next-line no-unused-vars
       const response = await Address.create(registeredUser.id, req.body);
-      return Response.customResponse(registeredUser, res, 201);
+      return Response.customResponse('User registered successfully', registeredUser, res, 201);
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
         return Response.errorResponse(res, 'Email is already registered', 400);
@@ -68,7 +69,7 @@ class UserController {
     }
     const token = Authorization.generateToken(userFound);
     userFound.token = token;
-    return Response.customResponse(userFound, res, 200);
+    return Response.customResponse('Successful user login', userFound, res, 200);
   }
 
   /**

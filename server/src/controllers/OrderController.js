@@ -30,7 +30,7 @@ class OrderController {
       const response = await Order.create(req.user.id, req.body);
       order = response.rows[0];
       if (order) {
-        return Response.customResponse(order, res, 201);
+        return Response.customResponse('Order created successfully', order, res, 201);
       }
     }
     return Response.errorResponse(res, 'Car not found', 404);
@@ -43,7 +43,7 @@ class OrderController {
      * @param {*} req the HTTP request object
      * @param {*} res the HTTP response object
      * @returns { Object } Returns the updated order Object
-     * @memberof CarController
+     * @memberof OrderController
      */
   static async UpdatePrice(req, res) {
     let foundOrder = null;
@@ -54,7 +54,7 @@ class OrderController {
         let updatedOrder = null;
         const response = await Order.update(req.params.id, req.body.price);
         updatedOrder = response.rows[0];
-        return Response.customResponse(updatedOrder, res, 200);
+        return Response.customResponse('Price updated successfully', updatedOrder, res, 200);
       }
       return Response.errorResponse(res, 'Forbidden', 403);
     }

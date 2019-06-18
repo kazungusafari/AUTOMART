@@ -56,7 +56,7 @@ export default {
   createOrder: {
     validOrder:
       {
-        carId: 1,
+        carId: 5,
         status: 'pending',
         price: 1100000,
         offeredPrice: 1100000,

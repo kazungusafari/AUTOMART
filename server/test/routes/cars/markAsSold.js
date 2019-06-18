@@ -50,7 +50,7 @@ describe('Car Routes: Mark as sold', () => {
   });
   it('should mark car as sold.', (done) => {
     request(app)
-      .patch('/api/v1/car/1/status')
+      .patch('/api/v1/car/4/status')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
