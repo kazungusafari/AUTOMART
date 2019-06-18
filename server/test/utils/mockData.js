@@ -52,7 +52,54 @@ export default {
       password: '',
     },
   },
+  createFlag: {
+    validFlag:
+      {
+        carId: 4,
+        reason: 'weird pricing',
+        description: 'Too expensive.Dont buy',
+       
+      },
 
+    wrongCarId:
+      {
+        carId: 40,
+        reason: 'weird pricing',
+        description: 'Too expensive.Dont buy',
+       
+
+
+      },
+    missingReason:
+      {
+
+        carId: 4,
+        description: 'Too expensive.Dont buy',
+        client: 1,
+
+
+      },
+
+    missingCarId:
+      {
+
+        reason: 'weird pricing',
+        description: 'Too expensive.Dont buy',
+        client: 1,
+
+
+      },
+    normalUser: {
+      firstname: 'John',
+      lastname: 'Doe',
+      address: '100,11000,Nairobi',
+      email: 'createflag@gmail.com',
+      password: 'password100',
+      confirmPassword: 'password100',
+    },
+
+
+  },
   createOrder: {
     validOrder:
       {

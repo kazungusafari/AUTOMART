@@ -1,7 +1,7 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable class-methods-use-this */
 import { config } from 'dotenv';
-import Flag from '../models/order';
+import Flag from '../models/flag';
 import Car from '../models/car';
 import Response from './utils/responseFormatter';
 

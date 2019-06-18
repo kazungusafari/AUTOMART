@@ -1,7 +1,7 @@
 import express from 'express';
 import ValidationHandler from '../middlewares/ValidationHandler';
 import FlagController from '../controllers/FlagController';
-import FlagValidation from '../validations/orderValidation';
+import FlagValidation from '../validations/flagValidation';
 import Authorization from '../middlewares/Authorization';
 
 const flagRoute = express.Router();

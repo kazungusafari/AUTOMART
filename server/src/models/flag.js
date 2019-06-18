@@ -24,8 +24,8 @@ class Flag {
     ];
 
     const text = `INSERT INTO
-      flags(owner, car_id, reason,description,created_date)
-      VALUES ($1, $2, $3,$4,$5,$6,$7,$8) returning *`;
+      flags(client, car_id, reason,description,created_date)
+      VALUES ($1, $2, $3,$4,$5) returning *`;
 
     const response = db.query(text, flag);
     return response;
