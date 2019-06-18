@@ -28,7 +28,6 @@ class CarController {
     user = rows[0];
     if (user !== null) {
       let saleAd = null;
-      console.log(req.user.id);
       const response = await Car.create(req.user.id, req.body);
       saleAd = response.rows[0];
       if (saleAd !== null) {
@@ -72,7 +71,7 @@ class CarController {
     // eslint-disable-next-line camelcase
     const { max_price, min_price, status } = req.query;
     if (queryLength === 0) {
-      if (req.user.isadmin === true) {
+      if (req.user.is_admin === true) {
         return CarController.getAllCars(res);
       }
       return Response.errorResponse(res, 'Forbidden', 403);
@@ -173,7 +172,7 @@ class CarController {
 
   static async deleteSaleAdById(req, res) {
     // eslint-disable-next-line radix
-    if (req.user.isadmin === true) {
+    if (req.user.is_admin === true) {
       let deletedCar = null;
       const { rows } = await Car.delete(req.params.id);
       deletedCar = rows[0];

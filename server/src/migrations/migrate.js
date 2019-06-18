@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS cars(
     
     
     
+    
     CREATE TABLE IF NOT EXISTS flags(
         id SERIAL PRIMARY KEY,
         client INTEGER REFERENCES users(id),

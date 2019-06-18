@@ -10,7 +10,8 @@ import tokens from '../../utils/tokens';
 
 const { adminToken, userToken } = tokens;
 
-
+ 
+let adminTken = null
 describe('Car Routes: Delete Cars', () => {
   const adminUser = {
     firstname: 'John',
@@ -36,6 +37,7 @@ describe('Car Routes: Delete Cars', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
         const { token, id } = res.body.data;
+        adminTken = token;
         request(app)
           .post('/api/v1/car/')
           .set('authorization', `Bearer ${token}`)
@@ -51,7 +53,7 @@ describe('Car Routes: Delete Cars', () => {
     request(app)
       .delete('/api/v1/car/1')
       .set('Accept', 'application/json')
-      .set('authorization', `Bearer ${adminToken}`)
+      .set('authorization', `Bearer ${adminTken}`)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body.data).to.equal('Car Ad successfully deleted');

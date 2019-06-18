@@ -43,7 +43,7 @@ class OrderController {
      * @param {*} req the HTTP request object
      * @param {*} res the HTTP response object
      * @returns { Object } Returns the updated order Object
-     * @memberof CarController
+     * @memberof OrderController
      */
   static async UpdatePrice(req, res) {
     let foundOrder = null;
