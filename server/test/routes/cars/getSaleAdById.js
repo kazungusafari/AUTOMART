@@ -49,7 +49,7 @@ describe('Get a specific sale Ad:', () => {
   });
   it('should get a car sale Ad by a valid ID', (done) => {
     request(app)
-      .get('/api/v1/car/1')
+      .get('/api/v1/car/2')
       .set('Content-Type', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {

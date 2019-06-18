@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable camelcase */
 /* eslint-disable class-methods-use-this */
 import { config } from 'dotenv';
@@ -16,16 +17,22 @@ class CarController {
   /**
    * Create a new sale AD
    * @static
-   * @param {object} req
-   * @param {object} res
-   * @returns { Object }
+   * @param {object} req the http request object
+   * @param {object} res the http response object
+   * @returns { Object } the posted sale Ad object
    * @memberof UserController
    */
   static async createSaleAd(req, res) {
-    const user = User.findOne(req.user.email);
-    if (user) {
-      const saleAd = Car.create(req.user.id, req.body);
-      return Response.customResponse(saleAd, res, 201);
+    let user = null;
+    const { rows } = await User.findOne(req.user.email);
+    user = rows[0];
+    if (user !== null) {
+      let saleAd = null;
+      const response = await Car.create(req.user.id, req.body);
+      saleAd = response.rows[0];
+      if (saleAd !== null) {
+        return Response.customResponse('Sale Ad created successfully', saleAd, res, 201);
+      }
     }
     return Response.errorResponse(res, 'User is not registered', 404);
   }
@@ -33,17 +40,18 @@ class CarController {
   /**
      * Get a car sale Ad by id
      * @static
-     * @param {*} req
-     * @param {*} res
+     * @param {*} req the http request object
+     * @param {*} res the http response object
      * @returns { Object } Returns a sale Ad object
      * @memberof CarController
    */
 
   static async getSaleAdById(req, res) {
-    // eslint-disable-next-line radix
-    const saleAd = await Car.findOneCar(req.params.id);
+    let saleAd = null;
+    const response = await Car.findOneCar(req.params.id);
+    saleAd = response.rows[0];
     if (saleAd) {
-      return Response.customResponse(saleAd, res, 200);
+      return Response.customResponse('Sale Ad found successfully', saleAd, res, 200);
     }
     return Response.errorResponse(res, 'Sale Ad Not Found', 404);
   }
@@ -52,8 +60,8 @@ class CarController {
   /**
      * Get all unsold car Ads
      * @static
-     * @param {*} req
-     * @param {*} res
+     * @param {*} req the http request object
+     * @param {*} res the http response object
      * @returns { Array } Returns an array of Objects
      * @memberof CarController
      */
@@ -63,21 +71,25 @@ class CarController {
     // eslint-disable-next-line camelcase
     const { max_price, min_price, status } = req.query;
     if (queryLength === 0) {
-      if (req.user.isAdmin === true) {
+      if (req.user.is_admin === true) {
         return CarController.getAllCars(res);
       }
       return Response.errorResponse(res, 'Forbidden', 403);
     }
     if (queryLength === 1 && status) {
       if (req.query.status === 'available') {
-        const allUnsoldAds = Car.findAllByStatus(req.query.status);
-        return CarController.response(allUnsoldAds, res);
+        const { rows } = await Car.findAllByStatus(req.query.status);
+        return CarController.response(rows, res);
       }
       return Response.errorResponse(res, 'Forbidden', 403);
     }
     if (queryLength === 3 && min_price && max_price && status) {
-      const allUnsoldByPriceRange = Car.findAllByPriceRange(min_price, max_price, status);
-      return CarController.response(allUnsoldByPriceRange, res);
+      let allUnsoldByPriceRange = null;
+      const response = await Car.findAllByPriceRange(min_price, max_price, status);
+      allUnsoldByPriceRange = response.rows;
+      if (allUnsoldByPriceRange !== null) {
+        return CarController.response(allUnsoldByPriceRange, res);
+      }
     }
     return Response.errorResponse(res, 'Not Found', 404);
   }
@@ -91,11 +103,15 @@ class CarController {
      * @memberof CarController
      */
   static async markAdAsSold(req, res) {
-    const car = await Car.findOneCar(req.params.id);
+    let car = null;
+    const { rows } = await Car.findOneCar(req.params.id);
+    car = rows[0];
     if (car) {
       if (car.owner === req.user.id) {
-        const updatedCar = Car.updateStatus(req.params.id);
-        return Response.customResponse(updatedCar, res, 200);
+        let updatedCar = null;
+        const response = await Car.updateStatus(req.params.id);
+        updatedCar = response.rows[0];
+        return Response.customResponse('Status updated successfully', updatedCar, res, 200);
       }
       return Response.errorResponse(res, 'Unauthorised User', 401);
     }
@@ -105,30 +121,40 @@ class CarController {
   /**
      * Return all posted ads whether sold or available.
      * @static
-     * @param {*} req
-     * @param {*} res
+     * @param {*} req the http request object
+     * @param {*} res the http response object
      * @returns { Array } Returns an array of all posted ads
      * @memberof CarController
      */
   static async getAllCars(res) {
-    const allCars = await Car.findAll();
-    return CarController.response(allCars, res);
+    try {
+      const { rows } = await Car.findAll();
+      return CarController.response(rows, res);
+    } catch (error) {
+      return Response.errorResponse(res, error, 400);
+    }
   }
 
   /**
      * Update the price of a car.
      * @static
-     * @param {*} req
-     * @param {*} res
+     * @param {*} req the http request object
+     * @param {*} res the http response object
      * @returns { Object } Returns the updated car Object
      * @memberof CarController
      */
   static async UpdatePrice(req, res) {
-    const car = await Car.findOneCar(req.params.id);
+    let car = null;
+    const { rows } = await Car.findOneCar(req.params.id);
+    car = rows[0];
     if (car) {
       if (car.owner === req.user.id) {
-        const updatedCar = Car.updateSellingPrice(req.params.id, req.body.price);
-        return Response.customResponse(updatedCar, res, 200);
+        let updatedCar = null;
+        const response = await Car.updateSellingPrice(req.params.id, req.body.price);
+        updatedCar = response.rows[0];
+        if (updatedCar !== null) {
+          return Response.customResponse('Price updated successfully', updatedCar, res, 200);
+        }
       }
       return Response.errorResponse(res, 'Unauthorised User', 401);
     }
@@ -139,16 +165,18 @@ class CarController {
   /**
      * Delete a specific car Ad
      * @static
-     * @param {*} req
-     * @param {*} res
+     * @param {*} req the http request object
+     * @param {*} res the http response object
      * @memberof CarController
    */
 
   static async deleteSaleAdById(req, res) {
     // eslint-disable-next-line radix
-    if (req.user.isAdmin === true) {
-      const isDeleted = await Car.delete(req.params.id);
-      if (isDeleted === true) {
+    if (req.user.is_admin === true) {
+      let deletedCar = null;
+      const { rows } = await Car.delete(req.params.id);
+      deletedCar = rows[0];
+      if (deletedCar) {
         return res.status(200).json({
           status: res.statusCode,
           data: 'Car Ad successfully deleted',
@@ -169,6 +197,7 @@ class CarController {
   static response(arr, res) {
     if (arr.length > 0) {
       return res.status(200).json({
+        message: 'Ads successfully found',
         status: res.statusCode,
         data: arr,
       });

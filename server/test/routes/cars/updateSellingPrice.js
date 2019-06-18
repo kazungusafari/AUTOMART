@@ -9,7 +9,7 @@ import app from '../../../src/app';
 
 import tokens from '../../utils/tokens';
 
-const { userToken } = tokens;
+const { userToken , adminToken } = tokens;
 
 
 const validId = 2;
@@ -40,10 +40,9 @@ describe('Car Routes: Update sale Ad price', () => {
       .send(normalUser)
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
-        const { token } = res.body.data;
         request(app)
           .post('/api/v1/car/')
-          .set('authorization', `Bearer ${token}`)
+          .set('authorization', `Bearer ${userToken}`)
           .send(carToGet)
           .end((err, res) => {
             expect(res.statusCode).to.equal(201);
@@ -53,7 +52,7 @@ describe('Car Routes: Update sale Ad price', () => {
   });
   it('should update price of the car.', (done) => {
     request(app)
-      .patch('/api/v1/car/1/price')
+      .patch('/api/v1/car/5/price')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .send({ price: 15000000 })

@@ -31,7 +31,7 @@ describe('Auth routes: Signup', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
         expect(res.body).to.be.a('object');
-        expect(res.body.data.isAdmin).to.equal(true);
+        expect(res.body.data.is_admin).to.equal(true);
 
         done(err);
       });
@@ -91,6 +91,3 @@ describe('Auth routes: Signup', () => {
       });
   });
 });
-
-
-

@@ -12,7 +12,7 @@ class Response {
      * @returns { Object } Returns a formatted Object
      * @memberof Response
      */
-  static customResponse(obj, res, httpCode) {
+  static customResponse(message, obj, res, httpCode) {
     const data = {};
     // eslint-disable-next-line no-return-assign
     Object.keys(obj).forEach((e) => {
@@ -22,6 +22,7 @@ class Response {
     });
 
     return res.status(httpCode).json({
+      message,
       status: res.statusCode,
       data: {
         ...data,

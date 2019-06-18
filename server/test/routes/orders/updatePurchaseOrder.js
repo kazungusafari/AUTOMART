@@ -20,12 +20,12 @@ describe('Order Routes: Update purchase order price ', () => {
     firstname: 'John',
     lastname: 'Doe',
     address: '100,11000,Nairobi',
-    email: 'mimi@gmail.com',
+    email: 'orderpriceUpdate@gmail.com',
     password: 'password100',
     confirmPassword: 'password100',
   };
   const orderToGet = {
-    carId: 1,
+    carId: 6,
     status: 'pending',
     price: 1550000,
     offeredPrice: 5000000,
@@ -52,14 +52,12 @@ describe('Order Routes: Update purchase order price ', () => {
           .set('authorization', `Bearer ${token}`)
           .send(carToGet)
           .end((err, res) => {
-            console.log(res);
             expect(res.statusCode).to.equal(201);
             request(app)
               .post('/api/v1/order')
-              .set('authorization', `Bearer ${token}`)
+              .set('authorization', `Bearer ${userToken}`)
               .send(orderToGet)
               .end((err, res) => {
-                console.log(res);
                 expect(res.statusCode).to.equal(201);
                 done();
               });
@@ -68,12 +66,11 @@ describe('Order Routes: Update purchase order price ', () => {
   });
   it('should update purchase order price.', (done) => {
     request(app)
-      .patch('/api/v1/order/1/price')
+      .patch('/api/v1/order/2/price')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .send({ price: 15000000 })
       .end((err, res) => {
-        console.log(res);
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.a('object');
         done();
@@ -88,7 +85,7 @@ describe('Order Routes: Update purchase order price ', () => {
       .send({ price: 1500000 })
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
-        expect(res.body.error).to.equal('Not Found');
+        expect(res.body.error).to.equal('Order Not Found');
         done();
       });
   });

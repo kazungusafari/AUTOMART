@@ -65,9 +65,9 @@ describe('Auth routes: login', () => {
         expect(res.body.data).to.include.keys('firstname');
         expect(res.body.data).to.include.keys('lastname');
         expect(res.body.data).to.include.keys('email');
-        expect(res.body.data).to.include.keys('isAdmin');
+        expect(res.body.data).to.include.keys('is_admin');
         expect(res.body.data).to.include.keys('token');
-        expect(res.body.data.isAdmin).to.equal(false);
+        expect(res.body.data.is_admin).to.equal(false);
 
         done(err);
       });
@@ -89,8 +89,8 @@ describe('Auth routes: login', () => {
         expect(res.body.data).to.include.keys('firstname');
         expect(res.body.data).to.include.keys('lastname');
         expect(res.body.data).to.include.keys('email');
-        expect(res.body.data).to.include.keys('isAdmin');
-        expect(res.body.data.isAdmin).to.equal(true);
+        expect(res.body.data).to.include.keys('is_admin');
+        expect(res.body.data.is_admin).to.equal(true);
 
         done(err);
       });
