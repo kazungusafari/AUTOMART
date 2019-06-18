@@ -7,9 +7,13 @@ env:
     - NODE_ENV=test
     - CC_TEST_REPORTER_ID=2350f38ef19cbd38ee586f19440dc4541b657bf1348e184cce158f000ba5288d
 
+services:
+  - postgresql
+
 addons:
   code_climate:
     repo_token: 2350f38ef19cbd38ee586f19440dc4541b657bf1348e184cce158f000ba5288d
+
 
 script:
   - npm run test
@@ -20,6 +24,7 @@ cache:
     - node_modules
 
 before_script:
+  - psql -c 'create database automart_api_test ;' -U postgres 
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
