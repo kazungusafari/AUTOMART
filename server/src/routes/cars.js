@@ -240,6 +240,34 @@ export default carRoutes;
  *       - apiKey : []
  */
 
+ /**
+ * @swagger
+ * /api/v1/car?status=available&state=new:
+ *   get:
+ *     description: Returns a list of  all new unsold cars.
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           type: object
+ *           properties:
+ *             data:
+ *               type: array
+ *               description: all unsold new cars
+ *               items:
+ *                 type: object
+ *                 proprties:
+ *                     $ref: '#/definitions/Car'
+ *       404:
+ *         description: Not Found
+ *       400:
+ *         description: Bad Request
+ *       401:
+ *         description: Unauthorized
+ *     security:
+ *       - apiKey : []
+ */
+
 
 /**
  * @swagger
