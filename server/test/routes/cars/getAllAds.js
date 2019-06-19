@@ -21,7 +21,7 @@ describe('Car Routes: All cars', () => {
     confirmPassword: 'password100',
   };
   const carToDelete = {
-    state: 'used',
+    state: 'new',
     status: 'available',
     price: 1550000,
     manufacturer: 'BMW',

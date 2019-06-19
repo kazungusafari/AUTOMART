@@ -58,7 +58,7 @@ export default {
         carId: 4,
         reason: 'weird pricing',
         description: 'Too expensive.Dont buy',
-       
+
       },
 
     wrongCarId:
@@ -66,7 +66,7 @@ export default {
         carId: 40,
         reason: 'weird pricing',
         description: 'Too expensive.Dont buy',
-       
+
 
 
       },
@@ -147,7 +147,7 @@ export default {
   createSaleAd: {
     validSaleAd1:
       {
-        state: 'used',
+        state: 'new',
         status: 'availabe',
         price: 1100000,
         manufacturer: 'BMW',

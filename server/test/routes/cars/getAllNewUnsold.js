@@ -10,47 +10,14 @@ import tokens from '../../utils/tokens';
 const { userToken } = tokens;
 
 
-describe('Car Routes: unsold used cars', () => {
-  const adminUser = {
-    firstname: 'John',
-    lastname: 'Doe',
-    address: '100,11000,Nairobi',
-    email: 'mmmmmm@gmail.com',
-    password: 'password100',
-    confirmPassword: 'password100',
-  };
-  const carToDelete = {
-    state: 'used',
-    status: 'available',
-    price: 1550000,
-    manufacturer: 'BMW',
-    model: '1 series',
-    bodyType: 'saloon',
-  };
-  before((done) => {
+describe('Car Routes: unsold new cars', () => {
+  it('get all unsold new sale Ads', (done) => {
     request(app)
-      .post('/api/v1/auth/signup')
-      .send(adminUser)
-      .query({ admin: true })
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(201);
-        const { token, id } = res.body.data;
-        request(app)
-          .post('/api/v1/car/')
-          .set('authorization', `Bearer ${token}`)
-          .send(carToDelete)
-          .end((err, res) => {
-            expect(res.statusCode).to.equal(201);
-            done();
-          });
-      });
-  });
-  it('get all unsold used sale Ads', (done) => {
-    request(app)
-      .get('/api/v1/car?status=available&state=used')
+      .get('/api/v1/car?status=available&state=new')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
+        console.log(res);
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.a('object');
         done();
@@ -59,7 +26,7 @@ describe('Car Routes: unsold used cars', () => {
 
   it('should return errors for wrong car sale Ad status', (done) => {
     request(app)
-      .get('/api/v1/car?status=sold&state=used')
+      .get('/api/v1/car?status=sold&state=new')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
@@ -70,7 +37,7 @@ describe('Car Routes: unsold used cars', () => {
   });
   it('should return errors for unauthorized access', (done) => {
     request(app)
-      .get('/api/v1/car?status=available&state=used')
+      .get('/api/v1/car?status=available&state=new')
       .set('Accept', 'application/json')
       .set('authorization', '')
       .end((err, res) => {
