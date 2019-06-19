@@ -52,7 +52,7 @@ describe('Car Routes: Update sale Ad price', () => {
   });
   it('should update price of the car.', (done) => {
     request(app)
-      .patch('/api/v1/car/5/price')
+      .patch('/api/v1/car/7/price')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .send({ price: 15000000 })
