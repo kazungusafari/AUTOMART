@@ -115,6 +115,22 @@ class Car {
     return response;
   }
 
+  /**
+   * Get all sale ads in the database  of specific make
+   * @param {string} manufacturer the manufacturer of the cars
+   * @param { string} status the status of the cars
+   * @returns {array} returns all unsold cars of specific make
+   */
+  findAllByMake(status, manufacturer) {
+    const details = [
+      status,
+      manufacturer,
+    ];
+    const text = 'SELECT * FROM cars WHERE status = $1 AND manufacturer = $2';
+    const response = db.query(text, details);
+    return response;
+  }
+
 
   /**
    * Update status of a sale ad in the database

@@ -353,6 +353,33 @@ export default carRoutes;
  */
 /**
  * @swagger
+ * /api/v1/car?status=available&manufacturer=XXXValue​:
+ *   get:
+ *     description: Returns a list of all unsold cars of a specific make
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           type: object
+ *           properties:
+ *             data:
+ *               type: array
+ *               description: all unsold cars of specific make
+ *               items:
+ *                 type: object
+ *                 proprties:
+ *                     $ref: '#/definitions/Car'
+ *       404:
+ *         description: Not Found
+ *       400:
+ *         description: Bad Request
+ *       401:
+ *         description: Unauthorized
+ *     security:
+ *       - apiKey : []
+ */
+/**
+ * @swagger
  *
  * /api/v1/car/<:id>/price:
  *   patch:
@@ -372,7 +399,7 @@ export default carRoutes;
  *       - name : price
  *         description: New  price
  *         in : body
- *         type: int
+ *         type: object
  *         required: true
  *     responses:
  *       200:
