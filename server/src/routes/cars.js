@@ -296,7 +296,33 @@ export default carRoutes;
  *     security:
  *       - apiKey : []
  */
-
+/**
+ * @swagger
+ * /api/v1/car?body_type=​bodyType:
+ *   get:
+ *     description: Returns a list of cars of a specific body type
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           type: object
+ *           properties:
+ *             data:
+ *               type: array
+ *               description: all cars of a specific body type
+ *               items:
+ *                 type: object
+ *                 proprties:
+ *                     $ref: '#/definitions/Car'
+ *       404:
+ *         description: Not Found
+ *       400:
+ *         description: Bad Request
+ *       401:
+ *         description: Unauthorized
+ *     security:
+ *       - apiKey : []
+ */
 
 /**
  * @swagger
