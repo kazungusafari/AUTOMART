@@ -70,7 +70,7 @@ class CarController {
     const queryLength = parseInt(Object.keys(req.query).length);
     // eslint-disable-next-line camelcase
     const {
-      max_price, min_price, status, state,
+      max_price, min_price, status, state, body_type,
     } = req.query;
     if (queryLength === 0) {
       if (req.user.is_admin === true) {
@@ -80,11 +80,19 @@ class CarController {
     }
     if (queryLength === 1 && status) {
       if (status === 'available') {
-        const { rows } = await Car.findAllByStatus(req.query.status);
+        const { rows } = await Car.findAllByStatus(status);
         return CarController.response(rows, res);
       }
       return Response.errorResponse(res, 'Forbidden', 403);
     }
+    if (queryLength === 1 && body_type) {
+      let allBodyType = null;
+      const response = await Car.findAllByBodyType(body_type);
+      allBodyType = response.rows;
+      return CarController.response(allBodyType, res);
+    }
+
+
     if (queryLength === 2 && state && status) {
       if (status === 'available') {
         let unsoldByState = null;

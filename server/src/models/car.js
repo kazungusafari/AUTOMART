@@ -106,17 +106,12 @@ class Car {
 
   /**
    * Get all sale ads in the database by body_type
-   * @param {string} status the status of the car e.g available or sold
-   * @param {string} bodyType the bodyType of the car e.g new or old
+   * @param {string} bodyType the bodyType of the cars
    * @returns {array} returns all unsold cars of given bodyType
    */
-  findAllByBodyType(status, bodyType) {
-    const details = [
-      status,
-      bodyType,
-    ];
-    const text = 'SELECT * FROM cars WHERE status = $1 AND body_type = $2  ';
-    const response = db.query(text, details);
+  findAllByBodyType(bodyType) {
+    const text = 'SELECT * FROM cars WHERE body_type = $1  ';
+    const response = db.query(text, [bodyType]);
     return response;
   }
 
