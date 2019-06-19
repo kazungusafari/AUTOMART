@@ -10,8 +10,8 @@ import tokens from '../../utils/tokens';
 
 const { adminToken, userToken } = tokens;
 
- 
-let adminTken = null
+
+let adminTken = null;
 describe('Car Routes: Delete Cars', () => {
   const adminUser = {
     firstname: 'John',

@@ -104,6 +104,17 @@ class Car {
     return response;
   }
 
+  /**
+   * Get all sale ads in the database by body_type
+   * @param {string} bodyType the bodyType of the cars
+   * @returns {array} returns all unsold cars of given bodyType
+   */
+  findAllByBodyType(bodyType) {
+    const text = 'SELECT * FROM cars WHERE body_type = $1  ';
+    const response = db.query(text, [bodyType]);
+    return response;
+  }
+
 
   /**
    * Update status of a sale ad in the database
