@@ -70,7 +70,7 @@ class CarController {
     const queryLength = parseInt(Object.keys(req.query).length);
     // eslint-disable-next-line camelcase
     const {
-      max_price, min_price, status, state, body_type,
+      max_price, min_price, status, state, body_type, manufacturer,
     } = req.query;
     if (queryLength === 0) {
       if (req.user.is_admin === true) {
@@ -92,6 +92,15 @@ class CarController {
       return CarController.response(allBodyType, res);
     }
 
+    if (queryLength === 2 && manufacturer && status) {
+      if (status === 'available') {
+        let unsoldByMake = null;
+        const response = await Car.findAllByMake(status, manufacturer);
+        unsoldByMake = response.rows;
+        return CarController.response(unsoldByMake, res);
+      }
+      return Response.errorResponse(res, 'Forbidden', 403);
+    }
 
     if (queryLength === 2 && state && status) {
       if (status === 'available') {
@@ -209,6 +218,7 @@ class CarController {
   /**
      * Return a custom response
      * @static
+     * @param arr the array objects
      * @param {*} res the HTTP response object
      * @returns { Array } Returns an array of Objects
      * @memberof CarController

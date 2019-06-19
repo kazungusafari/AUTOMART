@@ -1,46 +1,44 @@
-/* eslint-disable no-var */
-/* eslint-disable vars-on-top */
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-irregular-whitespace */
 /* eslint-disable no-undef */
 /* eslint-disable import/no-extraneous-dependencies */
 import request from 'supertest';
 import { expect } from 'chai';
 import app from '../../../src/app';
-
 import tokens from '../../utils/tokens';
+
 
 const { userToken } = tokens;
 
 
-describe('Car Routes: Mark as sold', () => {
-  const normalUser = {
+describe('Car Routes: unsold cars of given make', () => {
+  const adminUser = {
     firstname: 'John',
     lastname: 'Doe',
     address: '100,11000,Nairobi',
-    email: 'zima@gmail.com',
+    email: 'BMW@gmail.com',
     password: 'password100',
     confirmPassword: 'password100',
   };
   const carToDelete = {
-    state: 'new',
+    state: 'used',
     status: 'available',
     price: 1550000,
-    manufacturer: 'Honda',
-    model: 'Honda Model',
+    manufacturer: 'BMW',
+    model: '1 series',
     bodyType: 'saloon',
   };
   before((done) => {
     request(app)
       .post('/api/v1/auth/signup')
-      .send(normalUser)
+      .send(adminUser)
+      .query({ admin: true })
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
-        var { token, id } = res.body.data;
+        const { token, id } = res.body.data;
         request(app)
           .post('/api/v1/car/')
-          .set('authorization', `Bearer ${userToken}`)
+          .set('authorization', `Bearer ${token}`)
           .send(carToDelete)
           .end((err, res) => {
             expect(res.statusCode).to.equal(201);
@@ -48,9 +46,9 @@ describe('Car Routes: Mark as sold', () => {
           });
       });
   });
-  it('should mark car as sold.', (done) => {
+  it('get all unsold used sale Ads of given make', (done) => {
     request(app)
-      .patch('/api/v1/car/6/status')
+      .get('/api/v1/car?status=available&manufacturer=BMW')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
@@ -59,23 +57,21 @@ describe('Car Routes: Mark as sold', () => {
         done();
       });
   });
-  it('should return error if the car is not found', (done) => {
+
+  it('should return errors for wrong car sale Ad status', (done) => {
     request(app)
-      // eslint-disable-next-line no-irregular-whitespace
-      .patch('/api/v1/car/10/status')
+      .get('/api/v1/car?status=sold&manufacturer=BMW')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
-        expect(res.statusCode).to.equal(404);
-        expect(res.body.error).to.equal('Not Found');
-
+        expect(res.statusCode).to.equal(403);
+        expect(res.body.error).to.equal('Forbidden');
         done();
       });
   });
-
-  it('should return error for unauthorized access', (done) => {
+  it('should return errors for unauthorized access', (done) => {
     request(app)
-      .patch('/api/v1/car/1/status')
+      .get('/api/v1/car?status=available&manufacturer=BMW')
       .set('Accept', 'application/json')
       .set('authorization', '')
       .end((err, res) => {
@@ -83,19 +79,6 @@ describe('Car Routes: Mark as sold', () => {
         expect(res.body).to.be.a('object');
         expect(res.body).to.include.keys('error');
         expect(res.body.error).to.equal('Unauthorized user');
-
-        done();
-      });
-  });
-
-  it('should return error for if id is not an integer', (done) => {
-    request(app)
-      .patch('/api/v1/car/llll/status')
-      .set('Accept', 'application/json')
-      .set('authorization', `Bearer ${userToken}`)
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(400);
-
 
         done();
       });
