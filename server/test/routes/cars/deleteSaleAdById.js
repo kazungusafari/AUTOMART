@@ -10,8 +10,8 @@ import tokens from '../../utils/tokens';
 
 const { adminToken, userToken } = tokens;
 
- 
-let adminTken = null
+
+let adminTken = null;
 describe('Car Routes: Delete Cars', () => {
   const adminUser = {
     firstname: 'John',
@@ -22,7 +22,7 @@ describe('Car Routes: Delete Cars', () => {
     confirmPassword: 'password100',
   };
   const carToDelete = {
-    state: 'used',
+    state: 'new',
     status: 'available',
     price: 1550000,
     manufacturer: 'BMW',

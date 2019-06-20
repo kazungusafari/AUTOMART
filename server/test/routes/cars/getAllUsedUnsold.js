@@ -1,6 +1,5 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-irregular-whitespace */
 /* eslint-disable no-undef */
 /* eslint-disable import/no-extraneous-dependencies */
 import request from 'supertest';
@@ -8,20 +7,21 @@ import { expect } from 'chai';
 import app from '../../../src/app';
 import tokens from '../../utils/tokens';
 
-const { adminToken, userToken } = tokens;
+
+const { userToken } = tokens;
 
 
-describe('Car Routes: All cars', () => {
+describe('Car Routes: unsold used cars', () => {
   const adminUser = {
     firstname: 'John',
     lastname: 'Doe',
     address: '100,11000,Nairobi',
-    email: 'jiji@gmail.com',
+    email: 'mmmmmm@gmail.com',
     password: 'password100',
     confirmPassword: 'password100',
   };
   const carToDelete = {
-    state: 'new',
+    state: 'used',
     status: 'available',
     price: 1550000,
     manufacturer: 'BMW',
@@ -46,21 +46,21 @@ describe('Car Routes: All cars', () => {
           });
       });
   });
-  it('get all cars', (done) => {
+  it('get all unsold used sale Ads', (done) => {
     request(app)
-      .get('/api/v1/car')
+      .get('/api/v1/car?status=available&state=used')
       .set('Accept', 'application/json')
-      .set('authorization', `Bearer ${adminToken}`)
+      .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.a('object');
         done();
       });
   });
-  it('should return error if user token is used', (done) => {
+
+  it('should return errors for wrong car sale Ad status', (done) => {
     request(app)
-      // eslint-disable-next-line no-irregular-whitespace
-      .get('/api/v1/car')
+      .get('/api/v1/car?status=sold&state=used')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
@@ -69,16 +69,17 @@ describe('Car Routes: All cars', () => {
         done();
       });
   });
-
-  it('should return error no token is provided', (done) => {
+  it('should return errors for unauthorized access', (done) => {
     request(app)
-      // eslint-disable-next-line no-irregular-whitespace
-      .get('/api/v1/car/')
+      .get('/api/v1/car?status=available&state=used')
       .set('Accept', 'application/json')
       .set('authorization', '')
       .end((err, res) => {
         expect(res.statusCode).to.equal(401);
+        expect(res.body).to.be.a('object');
+        expect(res.body).to.include.keys('error');
         expect(res.body.error).to.equal('Unauthorized user');
+
         done();
       });
   });

@@ -24,11 +24,11 @@ describe('Car Routes: Mark as sold', () => {
     confirmPassword: 'password100',
   };
   const carToDelete = {
-    state: 'used',
+    state: 'new',
     status: 'available',
     price: 1550000,
-    manufacturer: 'BMW',
-    model: '1 series',
+    manufacturer: 'Honda',
+    model: 'Honda Model',
     bodyType: 'saloon',
   };
   before((done) => {
@@ -50,7 +50,7 @@ describe('Car Routes: Mark as sold', () => {
   });
   it('should mark car as sold.', (done) => {
     request(app)
-      .patch('/api/v1/car/4/status')
+      .patch('/api/v1/car/6/status')
       .set('Accept', 'application/json')
       .set('authorization', `Bearer ${userToken}`)
       .end((err, res) => {
